@@ -1390,6 +1390,65 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- GPS Vectoriel - Nouveau concept clé -->
+            <div class="content-block" style="margin-top: var(--space-2xl); padding: var(--space-xl); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid rgba(245, 166, 35, 0.3);">
+                <h3 style="color: var(--gold); margin-bottom: var(--space-lg); text-align: center;">
+                    🧭 Le Vecteur Δ : GPS du Raisonnement
+                </h3>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-xl);">
+                    L'innovation clé de R-JEPA : il ne dit pas "vrai/faux" (binaire), il fournit une <strong style="color: var(--gold);">direction vectorielle</strong>.
+                </p>
+
+                <!-- Formule Δ -->
+                <div style="text-align: center; margin-bottom: var(--space-xl); padding: var(--space-lg); background: var(--bg-secondary); border-radius: var(--radius-md); font-family: var(--font-mono);">
+                    <span style="font-size: 1.5rem; color: var(--cyan);">Δ = z<sub>pred</sub> − z<sub>current</sub></span>
+                </div>
+
+                <!-- Tableau GPS -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);">
+                    <div style="text-align: center; padding: var(--space-md); background: rgba(245, 166, 35, 0.1); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🎯</div>
+                        <div style="font-weight: 600; color: var(--gold);">R-JEPA</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Destination</div>
+                    </div>
+                    <div style="text-align: center; padding: var(--space-md); background: rgba(34, 211, 238, 0.1); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🗺️</div>
+                        <div style="font-weight: 600; color: var(--cyan);">LLM</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Carte</div>
+                    </div>
+                    <div style="text-align: center; padding: var(--space-md); background: rgba(139, 92, 246, 0.1); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🧭</div>
+                        <div style="font-weight: 600; color: var(--purple);">Δ (delta)</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Itinéraire</div>
+                    </div>
+                    <div style="text-align: center; padding: var(--space-md); background: rgba(34, 197, 94, 0.1); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📍</div>
+                        <div style="font-weight: 600; color: var(--success);">Mémoire</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Trafic</div>
+                    </div>
+                    <div style="text-align: center; padding: var(--space-md); background: rgba(245, 158, 11, 0.1); border-radius: var(--radius-md);">
+                        <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🐜</div>
+                        <div style="font-weight: 600; color: var(--amber);">Stigmergie</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Waze</div>
+                    </div>
+                </div>
+
+                <!-- Exemple concret -->
+                <div style="background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--space-lg); border-left: 4px solid var(--gold);">
+                    <h4 style="color: var(--gold); margin-bottom: var(--space-md);">💼 Exemple : Négociation Salariale</h4>
+                    <div style="display: grid; gap: var(--space-sm); font-size: 0.95rem;">
+                        <div><span style="color: var(--text-muted);">LLM génère :</span> <span style="color: var(--error);">"Je vais menacer de partir si je n'ai pas +30%"</span></div>
+                        <div><span style="color: var(--text-muted);">R-JEPA calcule :</span> <span style="color: var(--warning);">Énergie = 0.89 (hors Manifold)</span></div>
+                        <div><span style="color: var(--text-muted);">Δ pointe vers :</span> <span style="color: var(--cyan);">"menace" → "collaboration"</span></div>
+                        <div><span style="color: var(--text-muted);">Nouvelle réponse :</span> <span style="color: var(--success);">"Je vais présenter mes réalisations et ouvrir une discussion sur mon évolution"</span></div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: var(--space-lg); color: var(--text-muted); font-style: italic;">
+                    Le LLM utilise son pré-training pour <strong>interpréter sémantiquement</strong> la direction Δ.
+                </p>
+            </div>
         </section>
 
         <!-- Section 4: Apprentissage Asymétrique -->
