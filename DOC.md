@@ -1763,3 +1763,694 @@ Read Paper →
 
 00:00 Porte-parole 1: Bienvenue dans cette nouvelle analyse où aujourd'hui on va s'attaquer à un projet qui s'appelle REJGEPA.Et franchement, en lisant les documents qu'on a reçus, on se rend compte très vite que ce n'est pas juste un nouveau modèle d'IA. 00:13 Porte-parole 2: Ah non, pas du tout. La vision est beaucoup, beaucoup plus large. 00:16 Porte-parole 1: Oui, c'est presque démesuré. On tombe sur des termes comme système nerveux planétaire. 00:22 Porte-parole 2: Architecture de résilience civilisationnelle. 00:24 Porte-parole 1: Ou même contrat social cybernétique.Le but aujourd'hui, ça va être de déchiffrer tout ça.On va partir de la technique, vraiment mettre les mains dans le cambouis,pour ensuite remonter et comprendre comment le code, la philo et le projet de société s'imbriquent. 00:39 Porte-parole 2: Exactement. Et pour comprendre, il faut déjà voir d'où ça part.L'inspiration, elle est très claire.Ce sont les travaux de Yann Le Cun chez Meta AI sur les architectures JEPA. 00:49 Porte-parole 1: Joint Embedding Predictive Architectures. 00:52 Porte-parole 2: C'est ça. Eux, ils appliquent ça à la vidéo pour que l'IA anticipe un mouvement, par exemple.Et là, RGPA, ça transpose l'idée au raisonnement, au texte.Et c'est un projet très personnel. C'est l'œuvre de Romain Provençal qui le décrit lui-même comme la cristallisation d'un rêve de 33 ans. 01:09 Porte-parole 2: Donc on n'est pas face à un simple produit, on est face à une conviction. 01:12 Porte-parole 1: D'accord, alors allons-y, plongeons dedans. On commence par le moteur.Le principe qui revient sans arrêt, c'est prédire les concepts, pas les tokens.Ça sonne bien, mais concrètement, qu'est-ce que ça veut dire ? 01:26 Porte-parole 2: C'est vraiment le cœur du réacteur.Pour faire simple, le mieux, c'est de prendre l'analogie de VJEPA, la version vidéo de méta.Imagine, on montre une vidéo au modèle, mais on cache un gros carré de l'image.Un modèle classique, il essaierait de deviner chaque pixel manquant.Là, c'est bleu, là, c'est un peu vert. 01:42 Porte-parole 1: Il essaierait de repeindre le trou. 01:44 Porte-parole 2: Voilà. VJEPA, lui, il s'en fiche des pixels.Il va essayer de prédire une représentation abstraite, une sorte de résumé conceptuel de ce qu'il y a dans la zone masquée. Pas les détails, mais l'idée. 01:56 Porte-parole 1: Et donc, RGPA fait exactement la même chose, mais avec du raisonnement, avec des phrases. 02:04 Porte-parole 2: Exactement. Au lieu de prédire le prochain mot, le fameux token, il va faire autre chose.Il lit une suite d'étapes de raisonnement, on en masque une, et le modèle doit prédire non pas les mots précis, mais...L'essence de l'étape manquante.C'est ça, sa signification, sous forme de vecteur mathématique. 02:20 Porte-parole 2: C'est pour ça qu'une des sources utilise une analogie que je trouve assez géniale.Le système serait comme un sourd-muet lisant le braille. 02:27 Porte-parole 1: Ah oui, c'est une image forte. 02:28 Porte-parole 2: Oui, parce qu'il ne voit pas les mots, la surface du langage.Il touche directement la structure du sens, les concepts purs. 02:35 Porte-parole 1: Et ces concepts purs, ce sont ces fameux vecteurs latents de 4096 dimensions dont parlent les papiers techniques ? 02:42 Porte-parole 2: C'est exactement ça, une signature mathématique du concept.Et ça, ça a une conséquence pratique qui est juste énorme et qu'ils mettent beaucoup en avant.La confidentialité. 02:52 Porte-parole 1: Comment ça ? 02:53 Porte-parole 2: Ben imagine, tu poses une question très privée à ton IA.Le texte de ta question ne quitte jamais ton appareil.Jamais.Seul ce vecteur abstrait, cette idée mathématique, est envoyé. 03:05 Porte-parole 1: Et on ne peut pas faire le chemin inverse ? 03:07 Porte-parole 2: Impossible.Mathématiquement, on ne peut pas reconstruire la phrase d'origine à partir du vecteur.La confidentialité, elle est donc garantie par le design même du système. 03:16 Porte-parole 1: D'accord. Alors passons à un autre point qui m'a vraiment interpellé,parce que ça va à l'encontre de tout ce qu'on sait sur l'entraînement des IA.Les sources martèlent que RGPA n'apprend que des succès,uniquement des exemples de raisonnements validés. 03:31 Porte-parole 2: Oui, que du positif. 03:33 Porte-parole 1: Mais c'est totalement contre-intuitif. 03:35 Porte-parole 2: Comment un système peut savoir qu'il fait une erreur s'il n'a jamais vu une seule ? C'est la question et c'est là que le projet est radicalement différent. La plupart des IA qu'on connaît, elles ont ce qu'elles appellent un world model descriptif. 03:49 Porte-parole 1: C'est-à-dire ? 03:50 Porte-parole 2: C'est-à-dire qu'elles avalent tout ce qu'elles trouvent. Le bon, le mauvais, le vrai, le faux, les articles scientifiques et les théories du complot.Elles décrivent le monde tel qu'il est avec ses erreurs.RGPA, lui, il est prescriptif. Il n'apprend que ce qui marche. 04:05 Porte-parole 1: D'accord, mais ça ne répond pas à ma question. Comment il détecte une erreur s'il ne connaît que la réussite ? 04:11 Porte-parole 2: Alors, l'idée c'est qu'au lieu d'apprendre l'erreur, il cartographie le succès.Les documents parlent du "manifold du vrai". Il faut s'imaginer ça comme une sorte de carte en relief.Chaque fois que le système apprend d'un raisonnement correct, les sources disent qu'il a commencé avec 21 456 problèmes de maths et de codes bien résolus, 04:30 Porte-parole 2: il ne mémorise pas la solution. Non, il trace un chemin sur cette carte. 04:35 Porte-parole 1: Et à force, ces milliers de chemins finissent par dessiner un territoire ? 04:40 Porte-parole 2: Précisément, une sorte de géométrie du raisonnement qui fonctionne.Et du coup, une hallucination, une erreur de logique, ce n'est pas détecté parce que c'est une erreur connue. 04:48 Porte-parole 1: C'est simplement parce que la trajectoire sort de ce territoire connu ? 04:52 Porte-parole 2: Voilà, c'est une sortie de route. Le système ressent ça comme une tension, une incohérence.C'est ce qu'ils nomment la GPO loss.L'analogie dans les sources, c'est celle de la carte d'un champ de mine.On ne te donne pas l'emplacement de toutes les mines. 05:06 Porte-parole 1: Non, on te donne juste la carte des chemins sûrs. 05:08 Porte-parole 2: Et si tu mets un pied en dehors de la carte ?Tu n'as pas besoin d'avoir déjà vu une mine exploser pour savoir que,là, il y a un problème.L'échec est défini par l'absence de succès. 05:17 Porte-parole 1: OK, l'analogie de la carte est puissante, je vois.Mais une carte n'est jamais parfaite.Qu'est-ce qui se passe si une nouvelle méthode,une solution géniale, mais totalement inédite,se trouve en dehors des chemins sûrs ?Est-ce que le système ne va pas la rejeter, la prendre pour une erreur, juste parce qu'elle est nouvelle ? 05:34 Porte-parole 2: C'est une excellente question et c'est un point crucial.En fait, la carte n'est pas du tout statique.Elle est faite pour s'étendre.Quand une nouvelle trajectoire de raisonnement est proposée,si elle aboutit à un résultat qu'on peut valider objectivement,genre un code qui compile et qui passe tous les tests, 05:49 Porte-parole 2: alors ce nouveau chemin est ajouté à la carte.Le manifold du vrai s'agrandit. 05:53 Porte-parole 1: Donc il ne rejette pas la nouveauté ? 05:55 Porte-parole 2: Non, il ne la rejette pas.Disons qu'il demande une preuve de son efficacité avant de l'adopter comme un nouveau chemin sûr.Il est curieux, mais prudent. 06:04 Porte-parole 1: D'accord, donc on a ce moteur, cette machine qui cartographie le succès.Mais c'est vraiment là que ça devient vertigineux.Parce que les documents ne s'arrêtent pas du tout à la technique.On bascule de l'informatique à la philosophie politique. 06:17 Porte-parole 2: Oui, complètement. 06:17 Porte-parole 1: L'objectif affiché, c'est de nous faire sortir de ce que les textes appellent une anti-économie.C'est un terme très, très fort. 06:24 Porte-parole 2: Oui, on change d'échelle. Pour les auteurs du projet, cette anti-économie, c'est notre système actuel fondé sur la compétition.Il le qualifie d'anthropique. C'est un mot qui vient de la physique. 06:38 Porte-parole 1: Ça veut dire qu'il tend vers le désordre, le chaos. 06:40 Porte-parole 2: Exactement, vers le gaspillage. L'idée, c'est que dans un système compétitif, pour une start-up qui réussit, tu en as mille qui échouent.Mais ces milles ont quand même consommé des ressources, de l'énergie, du temps humain.C'est une perte sèche, un gaspillage structurel immense. 06:57 Porte-parole 1: Et donc l'alternative proposée, ce serait un système négantropique. 07:01 Porte-parole 2: C'est le mot qu'ils emploient, oui.Un système qui, au contraire, crée de l'ordre.Et le mécanisme central pour y arriver, c'est un concept qu'ils vont chercher en biologie.La stigmergie. 07:12 Porte-parole 1: La stigmergie ? 07:13 Porte-parole 2: C'est une forme de coordination indirecte.L'exemple le plus connu, ce sont les fourmis.Elles ne font pas de réunion pour décider où aller chercher la nourriture. 07:22 Porte-parole 1: Non, bien sûr. 07:23 Porte-parole 2: Une fourmi trouve une source de nourriture et sur le chemin du retour, elle laisse une trace de ph. Des fourmis tombent sur cette trace, la suivent et la renforcent avec leur propre ph.Et très vite, une autoroute hyper efficace se crée. 07:37 Porte-parole 1: Sans qu'il y ait eu la moindre communication directe ni de chef. 07:41 Porte-parole 2: Voilà. C'est de l'intelligence collective qui émerge des actions individuelles. 07:45 Porte-parole 1: Ok. L'image des fourmis, c'est clair.Mais les humains, ce n'est pas des fourmis.Si on transpose ça à la société, chacun laisserait des traces de succès numérique.Est-ce qu'on ne risque pas de créer un conformisme géant,où tout le monde suit les autoroutes de la pensée déjà tracée, sans plus jamais oser innover ? 08:03 Porte-parole 2: C'est la critique la plus évidente, et les sources l'anticipent.La réponse qu'elle donne, c'est que la stigmergie n'est pas là pour dicter l'action humaine,mais pour fournir les meilleures conditions initiales possibles. 08:15 Porte-parole 1: C'est-à-dire ? 08:16 Porte-parole 2: Le système ne te dit pas « fais ça »,Il te dit, pour le problème que tu te poses, des milliers de personnes ont réussi en suivant ces pistes.Voici la synthèse, le meilleur point de départ qu'on connaisse.L'innovation humaine, c'est de trouver un chemin encore plus court, encore meilleur. 08:31 Porte-parole 1: Et si on y arrive, notre chemin devient une nouvelle trace pour les autres. 08:35 Porte-parole 2: Exactement. Il enrichit le savoir collectif.Il ne s'agit pas de tuer l'innovation, mais d'arrêter de réinventer la roue en permanence.Pour eux, la conséquence mécanique de ça, c'est l'abondance.Pas en produisant plus, mais en éliminant radicalement le gaspillage. 08:48 Porte-parole 1: D'un majordome AI. 08:50 Porte-parole 2: Le majordome, c'est la porte d'entrée. C'est l'unité de base du système. La cellule. C'est une IA personnelle qui vit sur nos appareils. 08:59 Porte-parole 1: Une sorte de super assistant personnel. 09:01 Porte-parole 2: Oui, mais en symbiose. L'humain est le capteur. C'est nous qui ressentons les besoins, les problèmes.On exprime ça au majordome et lui, en se connectant au grand réseau stigmergique, il propose des plans d'action, des trajectoires de succès basées sur l'intelligence de tous les autres.C'est l'interface entre l'individu et le collectif. 09:22 Porte-parole 1: D'accord, pour l'individu. Mais quid de l'échelle ? Comment on passe de la gestion de mon calendrier à la coordination du réseau électrique d'une ville ?C'est là qu'intervient cette idée d'invariance d'échelle. 09:34 Porte-parole 2: Exactement, et c'est peut-être l'idée la plus folle et en même temps la plus élégante du projet.Le principe, c'est que l'architecture mathématique qui fait tourner le système est la même à tous les niveaux. 09:45 Porte-parole 1: La même, pour un individu et pour une ville. 09:48 Porte-parole 2: La même, c'est inspiré directement du modèle de système viable d'un cybernéticien des années 70, Stafford Beer.Pour faire 5, la structure logique qui permet à un individu de bien s'organiser est la même que pour une équipe, une entreprise, une nation.C'est le même plan qui est répliqué à différentes échelles, comme une fractale. 10:08 Porte-parole 1: Attends, mais même si le plan est le même, la complexité, elle explose.Comment un système peut gérer les interactions de millions de majordomes sans juste griller sur place ? 10:17 Porte-parole 2: C'est là qu'entre en jeu des outils mathématiques très pointus,notamment les jeux à champ moyen ou minfield games en anglais. 10:23 Porte-parole 1: Ça a l'air compliqué. 10:24 Porte-parole 2: Ça l'est, mais l'idée de base est assez intuitive.Au lieu de modéliser chaque personne dans une foule et de calculer comment chacune interagit avec toutes les autres,ce qui est un cauchemar calculatoire, on va modéliser un individu moyenet on regarde comment cet individu réagit au comportement global de la foule. 10:42 Porte-parole 2: C'est un raccourci mathématique surpuissant pour comprendre des systèmes avec des millions d'agents. 10:46 Porte-parole 1: Ok, c'est très efficace. Mais ça peut aussi faire peur.On parle d'un système d'optimisation globale.Quels sont les garde-fous éthiques ?Qu'est-ce qui garantit qu'on n'optimise pas le bien-être de 99% de la population en sacrifiant les 1% restants ? 11:00 Porte-parole 2: La question est absolument centrale. Et la réponse n'est pas un comité externe, c'est une contrainte mathématique intégrée au cœur du système : l'optimisation lexicographique. Qu'est-ce que c'est ? C'est une règle très stricte qui oblige le système, avant même de chercher à améliorer la moyenne générale,à d'abord et avant tout améliorer la situation de l'individu le plus défavorisé dans un contexte donné. 11:23 Porte-parole 1: Donc si le système doit choisir entre donner 10 points de bien-être à quelqu'un qui en a déjà 1000ou un seul point à quelqu'un qui n'en a que 5,il choisira toujours la deuxième option ?Toujours. 11:33 Porte-parole 2: Le score global du système ne peut pas augmenter tant que le score le plus bas n'a pas été amélioré en premier.C'est un plancher mathématique qui remonte en permanence.Ce n'est pas de l'égalitarisme aveugle, c'est une justice contextuelle qui s'attaque aux inégalités par le bas. 11:47 Porte-parole 1: Une société coordonnée par un système cybernétique avec une justice mathématique ?On est en pleine science-fiction là.Mais ce qui est fascinant, c'est qu'un des documents en rattache ça à un précédent historique bien réel. 11:59 Porte-parole 2: Oui, le projet CyberSyn. 12:01 Porte-parole 1: Exactement, au Chili, au début des années 70. Ce n'est pas juste une théorie, ça a été essayé. 12:08 Porte-parole 2: Et c'est ce qui ancre tout le projet dans le réel, en fait.CyberSyn, c'était une tentative du gouvernement de Salvador Allende de gérer l'économie chilienne en temps réel.Et le cerveau derrière, c'était Stafford Beer, le même cybernéticien dont RGPAR reprend les modèles. 12:23 Porte-parole 1: Et comment ils faisaient à l'époque ? 12:25 Porte-parole 2: Ils avaient un réseau de 500 Télex, la technologie du moment,qui reliait les usines du pays à une salle de contrôle centrale à Santiago.Une salle de contrôle qui ressemblait à un décor de Star Trek d'ailleurs. 12:35 Porte-parole 1: Et ça a marché ? Avec des Télex ? 12:38 Porte-parole 2: Ça a fonctionné de manière spectaculaire.Le Grand Est a eu lieu en 1972,pendant une grève massive des camionneurs,financée par la CIA pour paralyser le pays.L'économie aurait dû s'effondrer.Et ?Et avec CyberSyn, en gérant en temps réel les quelques camions qui roulaient encore et les stocks, l'équipe de Bire a réussi à maintenir l'approvisionnement du pays. 13:00 Porte-parole 2: Ils ont fait échouer la grève. Le système a prouvé sa résilience avec une technologie primitive. 13:05 Porte-parole 1: Mais alors, si c'était si efficace, pourquoi on n'en a jamais entendu parler en amont ? Pourquoi ça s'est arrêté ? 13:11 Porte-parole 2: Parce que l'échec n'a pas été technique, il a été politique. C'est le coup d'État du général Pinochet en 1973 qui a mis fin au projet.La salle de contrôle a été détruite. 13:21 Porte-parole 1: Ah ! 13:22 Porte-parole 2: Et la leçon que les créateurs de RG pas en tirent est l'impibe.On peut concevoir la plus brillante des architectures de gouvernance,mais si le contexte social et politique la détruit, elle ne sert à rien.Le système ne peut pas fonctionner en vase clos. 13:35 Porte-parole 1: C'est fou ! Quand on prend du recul, on est parti d'une architecture de modèle d'IA de 678 millions de paramètrespour arriver à un plan de gouvernance planétaire inspiré des années 70.On a vu comment une philosophie peut être littéralement câblée dans le code. 13:53 Porte-parole 2: C'est ça qui est frappant, c'est la cohérence totale du projet.L'espace latent pour la confidentialité, l'apprentissage asymétrique pour ne garder que ce qui marche, la stigmergie pour coordonner.Chaque brique technique est au service de la vision d'ensemble. 14:06 Porte-parole 1: Une vision de gouvernance par la rétroaction, par l'écoute du réel, plutôt que par des dogmes. 14:12 Porte-parole 2: Exactement. C'est une tentative de passer d'une gouvernance par la loi, qui est rigide,à une gouvernance par l'optimisation constante, basée sur la preuve de ce qui fonctionne sur le terrain. 14:21 Porte-parole 1: Et ça nous laisse avec une dernière pensée, une dernière question à méditer.Ce projet propose de remplacer l'idée d'égalité, qui est de traiter tout le monde pareil,par une équité cybernétique qui consiste à calculer en permanence l'intervention optimalepour chaque situation, en commençant toujours par les plus démunis. 14:41 Porte-parole 1: Oui. Ce qui soulève une question fondamentale et peut-être un peu vertigineuse pour notre avenir. Que se passe-t-il lorsque la justice cesse d'être un principe abstrait, un idéal, pour devenir une fonction mathématique optimisée en temps réel par une machine ?
 
+# GOUVERNANCE CYBERNÉTIQUE PAR INTELLIGENCE COLLECTIVE
+# PARTIE 6 : Couche Identité et Économie des Traces
+
+**Architecture de Confiance Décentralisée pour la Stigmergie**
+
+Décembre 2025 — Document de Recherche
+
+---
+
+## Résumé Exécutif
+
+Les parties précédentes ont établi l'architecture R-JEPA : un world model prescriptif, une coordination stigmergique par traces anonymes, et une confidentialité garantie par l'irréversibilité des vecteurs latents. Cependant, une question fondamentale demeure : **comment garantir la légitimité des traces sans compromettre l'anonymat ?**
+
+Cette partie introduit la **Couche Identité** — une architecture cryptographique qui résout le paradoxe entre confidentialité et accountability, en permettant :
+- Une réputation persistante sans révéler l'identité réelle
+- Une protection contre les attaques Sybil
+- Des incitations économiques alignées avec le bien commun
+- Une gouvernance vérifiable et transparente
+
+---
+
+## 26. Le Paradoxe Identité / Confidentialité
+
+### 26.1 La Tension Fondamentale
+
+Le système R-JEPA promet deux propriétés apparemment contradictoires :
+
+| Propriété | Exigence | Implication |
+|-----------|----------|-------------|
+| **Confidentialité** | Le texte ne quitte jamais l'appareil | Pas de lien entre trace et contenu |
+| **Accountability** | Les traces doivent être légitimes | Besoin de savoir qui contribue |
+| **Anti-Gaming** | Empêcher la pollution du Manifold | Besoin de punir les mauvais acteurs |
+| **Incitation** | Motiver les bonnes contributions | Besoin de récompenser les bons acteurs |
+
+### 26.2 Pourquoi l'Anonymat Pur Ne Suffit Pas
+
+Sans aucune forme d'identité, le système est vulnérable à :
+
+**Attaque Sybil** : Un acteur malveillant crée des milliers de faux agents pour :
+- Polluer le Manifold du Vrai avec de fausses "traces de succès"
+- Manipuler les votes de gouvernance (Système 5)
+- Diluer la réputation des acteurs légitimes
+
+**Free-Riding** : Sans incitation, pourquoi partager ses meilleures découvertes ?
+
+**Gaming de Validation** : Collusion entre agents pour valider mutuellement de fausses traces.
+
+### 26.3 La Solution : Pseudonymat Cryptographique
+
+La clé est de distinguer trois concepts :
+
+```
+IDENTITÉ RÉELLE          IDENTITÉ PSEUDONYME         TRACE ANONYME
+(Qui vous êtes)          (Votre réputation)          (Votre contribution)
+      │                         │                          │
+      │                         │                          │
+   NE SORT                  PERSISTANTE                 CONTENU
+   JAMAIS                   VÉRIFIABLE                  INVISIBLE
+      │                         │                          │
+      ▼                         ▼                          ▼
+   Privée                  On-Chain (DID)              Off-Chain (Latent)
+```
+
+---
+
+## 27. Architecture de la Couche Identité
+
+### 27.1 Vue d'Ensemble
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         ARCHITECTURE IDENTITÉ R-JEPA                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  NIVEAU 1 : MAJORDOME LOCAL                                                 │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ • Clé privée Ed25519 (générée localement, jamais transmise)         │   │
+│  │ • DID (Decentralized Identifier) dérivé de la clé publique          │   │
+│  │ • Stockage sécurisé (HSM/Secure Enclave si disponible)              │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  NIVEAU 2 : RÉSEAU STIGMERGIQUE                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ • Latents 4096-dim (contenu anonyme, non traçable)                  │   │
+│  │ • Signature DID sur hash du latent (preuve d'origine)               │   │
+│  │ • Agrégation collective (champ de potentiel)                        │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                    │                                        │
+│                                    ▼                                        │
+│  NIVEAU 3 : REGISTRE BLOCKCHAIN                                            │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │ • Hash des traces (preuve d'existence, pas le contenu)              │   │
+│  │ • Score de réputation par DID (calculé par smart contract)          │   │
+│  │ • Tokens de gouvernance (votes pondérés par réputation)             │   │
+│  │ • Preuves Zero-Knowledge (vérification sans révélation)             │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 27.2 Flux de Données Détaillé
+
+```
+ALICE (Majordome)                RÉSEAU                      BLOCKCHAIN
+      │                            │                              │
+      │  1. Génère solution        │                              │
+      │     locale (texte)         │                              │
+      │                            │                              │
+      │  2. Extrait latent z       │                              │
+      │     (4096-dim)             │                              │
+      │                            │                              │
+      │  3. Calcule hash(z)        │                              │
+      │                            │                              │
+      │  4. Signe avec clé privée  │                              │
+      │     sig = Sign(hash(z))    │                              │
+      │                            │                              │
+      │  5. Publie {z, sig, DID}   │                              │
+      │─────────────────────────────►                             │
+      │                            │                              │
+      │                            │  6. Vérifie signature        │
+      │                            │     Verify(sig, DID)         │
+      │                            │                              │
+      │                            │  7. Enregistre preuve        │
+      │                            │─────────────────────────────►│
+      │                            │     {hash(z), DID, timestamp}│
+      │                            │                              │
+      │                            │  8. Agrège latent z          │
+      │                            │     dans champ collectif     │
+      │                            │                              │
+      │                            │  [Après validation externe]  │
+      │                            │                              │
+      │                            │  9. Update réputation DID    │
+      │                            │─────────────────────────────►│
+      │                            │     reputation[DID] += δ     │
+      │                            │                              │
+```
+
+### 27.3 Propriétés de Sécurité
+
+| Propriété | Garantie | Mécanisme |
+|-----------|----------|-----------|
+| **Confidentialité du contenu** | Le texte original est irrécupérable | Irréversibilité du latent 4096-dim |
+| **Intégrité de la trace** | La trace n'a pas été modifiée | Signature cryptographique |
+| **Non-répudiation** | L'auteur ne peut nier avoir contribué | Signature liée au DID |
+| **Pseudonymat** | L'identité réelle reste cachée | DID non lié à l'identité civile |
+| **Persistance réputation** | L'historique est conservé | Registre blockchain immuable |
+
+---
+
+## 28. Decentralized Identifiers (DID)
+
+### 28.1 Qu'est-ce qu'un DID ?
+
+Un DID (Decentralized Identifier) est un identifiant unique, auto-généré, et contrôlé par son propriétaire — sans autorité centrale.
+
+```
+Format DID:
+did:rjepa:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK
+     │      └──────────────────────────────────────────────┘
+     │                    Identifiant unique
+     │                    (dérivé de la clé publique)
+     │
+     └── Méthode (réseau R-JEPA)
+```
+
+### 28.2 Cycle de Vie du DID
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     CYCLE DE VIE DID R-JEPA                         │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  1. CRÉATION (Une seule fois, locale)                              │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Génération clé Ed25519 (256 bits)                     │    │
+│     │ • Dérivation DID depuis clé publique                    │    │
+│     │ • Stockage sécurisé clé privée                          │    │
+│     │ • Optionnel: Enregistrement on-chain du DID Document    │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  2. UTILISATION (À chaque trace)                                   │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Signature de la trace avec clé privée                 │    │
+│     │ • Publication {trace, signature, DID}                   │    │
+│     │ • Vérification par le réseau                            │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  3. RÉPUTATION (Évolution continue)                                │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Accumulation de traces validées → +réputation         │    │
+│     │ • Traces invalidées ou spam → -réputation               │    │
+│     │ • Score visible publiquement (pas l'identité)           │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  4. ROTATION (Si compromis)                                        │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Génération nouvelle clé                               │    │
+│     │ • Transfert réputation (avec preuve de contrôle)        │    │
+│     │ • Révocation ancienne clé                               │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 28.3 DID Document
+
+Chaque DID peut avoir un document associé (optionnel, on-chain) :
+
+```json
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:rjepa:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "verificationMethod": [{
+    "id": "did:rjepa:z6Mkha...#keys-1",
+    "type": "Ed25519VerificationKey2020",
+    "controller": "did:rjepa:z6Mkha...",
+    "publicKeyMultibase": "z6Mkha..."
+  }],
+  "created": "2025-12-29T12:00:00Z",
+  "reputation": {
+    "score": 847,
+    "traces_validated": 156,
+    "traces_rejected": 2,
+    "level": "trusted"
+  }
+}
+```
+
+---
+
+## 29. Système de Réputation
+
+### 29.1 Calcul du Score de Réputation
+
+Le score de réputation R(DID) est calculé par un smart contract transparent :
+
+```
+R(DID) = Σ(traces_validées × poids_validation)
+       - Σ(traces_rejetées × pénalité)
+       + bonus_ancienneté
+       - malus_inactivité
+```
+
+Où :
+- **poids_validation** dépend du type de validation (transactionnelle > réciprocité > outcome)
+- **pénalité** est exponentielle (spam répété = exclusion rapide)
+- **bonus_ancienneté** récompense les contributeurs de longue date
+- **malus_inactivité** évite les comptes dormants accumulant du pouvoir
+
+### 29.2 Niveaux de Réputation
+
+| Niveau | Score | Droits | Responsabilités |
+|--------|-------|--------|-----------------|
+| **Nouveau** | 0-99 | Publier traces (limité) | Validation croisée requise |
+| **Contributeur** | 100-499 | Publier traces (illimité) | - |
+| **Validateur** | 500-999 | Valider traces d'autres | Stake requis |
+| **Gardien** | 1000+ | Voter gouvernance S5 | Peut être slashé |
+
+### 29.3 Mécanismes Anti-Gaming
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    PROTECTION ANTI-GAMING                           │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  1. PROOF OF HUMANITY                                              │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Vérification unique par humain (Worldcoin-like)       │    │
+│     │ • ZK-proof : "Je suis humain vérifié" sans révéler qui  │    │
+│     │ • Empêche création massive de faux comptes              │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  2. STAKING (Skin in the Game)                                     │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Pour devenir Validateur : staker X tokens             │    │
+│     │ • Validation incorrecte → slashing (perte de stake)     │    │
+│     │ • Aligne les incitations économiques                    │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  3. ANALYSE DE GRAPHE SOCIAL                                       │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Détection de clusters suspects (Sybil)                │    │
+│     │ • Corrélation temporelle des validations                │    │
+│     │ • Diversité des validateurs (pas toujours les mêmes)    │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  4. DÉLAI DE MATURATION                                            │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Traces en "pending" pendant période d'observation     │    │
+│     │ • Réputation créditée seulement après confirmation      │    │
+│     │ • Permet détection retardée de fraude                   │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 30. Économie des Traces (Tokenomics)
+
+### 30.1 Le Token TRACE
+
+Pour aligner les incitations, le système introduit un token natif : **TRACE**
+
+| Propriété | Valeur |
+|-----------|--------|
+| **Nom** | TRACE |
+| **Supply** | Inflationnaire contrôlé (émission par contribution) |
+| **Utilité** | Gouvernance, Staking, Accès premium |
+| **Distribution** | 100% par contribution (pas de pre-mine) |
+
+### 30.2 Flux Économique
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    ÉCONOMIE DES TRACES                              │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  CRÉATION DE VALEUR                                                │
+│  ─────────────────                                                 │
+│  Contributeur publie trace validée                                 │
+│       │                                                            │
+│       ▼                                                            │
+│  Réseau émet TRACE (récompense)                                    │
+│       │                                                            │
+│       ├──► Contributeur (70%) : Récompense directe                 │
+│       │                                                            │
+│       ├──► Validateurs (20%) : Incitation à valider correctement   │
+│       │                                                            │
+│       └──► Trésorerie (10%) : Développement, infrastructure        │
+│                                                                     │
+│  CONSOMMATION DE VALEUR                                            │
+│  ──────────────────────                                            │
+│  Utilisateur veut :                                                │
+│       │                                                            │
+│       ├──► Accès prioritaire aux traces premium → Burn TRACE       │
+│       │                                                            │
+│       ├──► Vote gouvernance S5 → Lock TRACE                        │
+│       │                                                            │
+│       └──► Devenir Validateur → Stake TRACE                        │
+│                                                                     │
+│  ÉQUILIBRE                                                         │
+│  ─────────                                                         │
+│  Émission (contributions) ≈ Consommation (utilité)                 │
+│  = Système économiquement soutenable                               │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 30.3 Alignement des Incitations
+
+| Acteur | Action Positive | Récompense | Action Négative | Punition |
+|--------|-----------------|------------|-----------------|----------|
+| **Contributeur** | Trace validée | +TRACE, +Réputation | Spam/Fraude | Ban, -Réputation |
+| **Validateur** | Validation correcte | +TRACE (fee) | Validation incorrecte | Slashing |
+| **Gardien** | Vote bénéfique S5 | Influence accrue | Vote malveillant | Slashing massif |
+
+---
+
+## 31. Zero-Knowledge Proofs (ZKP)
+
+### 31.1 Pourquoi les ZKP ?
+
+Les Zero-Knowledge Proofs permettent de prouver une propriété **sans révéler l'information sous-jacente**.
+
+Applications dans R-JEPA :
+
+| Ce qu'on prouve | Ce qu'on NE révèle PAS |
+|-----------------|------------------------|
+| "Je suis un humain vérifié" | Qui je suis |
+| "Ma trace a été validée" | Le contenu de la trace |
+| "Ma réputation > 500" | Mon score exact |
+| "J'ai contribué au domaine X" | Quelles traces spécifiques |
+
+### 31.2 Circuits ZK Proposés
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    CIRCUITS ZERO-KNOWLEDGE                          │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  CIRCUIT 1 : ProofOfHumanity                                       │
+│  ─────────────────────────────                                     │
+│  Input privé : Credential biométrique hashé                        │
+│  Input public : Root Merkle des humains vérifiés                   │
+│  Output : Preuve "Je suis dans l'ensemble des humains vérifiés"    │
+│                                                                     │
+│  CIRCUIT 2 : ProofOfReputation                                     │
+│  ────────────────────────────                                      │
+│  Input privé : Mon score de réputation exact                       │
+│  Input public : Seuil minimum requis                               │
+│  Output : Preuve "Mon score ≥ seuil" (sans révéler le score)       │
+│                                                                     │
+│  CIRCUIT 3 : ProofOfContribution                                   │
+│  ───────────────────────────────                                   │
+│  Input privé : Liste de mes traces validées                        │
+│  Input public : Domaine concerné (énergie, santé, etc.)            │
+│  Output : Preuve "J'ai contribué au domaine X" (sans détails)      │
+│                                                                     │
+│  CIRCUIT 4 : ProofOfValidation                                     │
+│  ────────────────────────────                                      │
+│  Input privé : Trace + signatures des validateurs                  │
+│  Input public : Seuil de validations requises                      │
+│  Output : Preuve "Cette trace a été validée N fois"                │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 31.3 Stack Technique ZK
+
+| Composant | Technologie Recommandée | Raison |
+|-----------|------------------------|--------|
+| **Circuit Language** | Circom / Noir | Maturité, tooling |
+| **Proving System** | Groth16 / PLONK | Preuves courtes, vérification rapide |
+| **Verification** | Smart Contract Solidity | Composabilité blockchain |
+
+---
+
+## 32. Intégration Blockchain
+
+### 32.1 Choix de la Blockchain
+
+| Critère | Exigence | Options |
+|---------|----------|---------|
+| **Scalabilité** | >10K tx/sec | L2 (Arbitrum, Optimism) ou Alt-L1 |
+| **Coût** | <0.01$ par enregistrement | L2 ou Solana |
+| **Décentralisation** | Censure-resistant | Ethereum-based |
+| **ZK-Native** | Support natif ZKP | zkSync, StarkNet, Polygon zkEVM |
+
+**Recommandation** : **Polygon zkEVM** ou **Arbitrum** pour le mainnet, avec possibilité de migration vers une L3 dédiée R-JEPA.
+
+### 32.2 Smart Contracts
+
+```solidity
+// Pseudo-code simplifié
+
+contract RJEPARegistry {
+
+    // Registre des DIDs et leur réputation
+    mapping(bytes32 => uint256) public reputation;
+
+    // Enregistrer une trace validée
+    function registerTrace(
+        bytes32 traceHash,
+        bytes32 did,
+        bytes signature,
+        bytes zkProofHumanity
+    ) external {
+        // 1. Vérifier la signature
+        require(verifySignature(traceHash, did, signature));
+
+        // 2. Vérifier preuve d'humanité (anti-Sybil)
+        require(verifyZKProof(zkProofHumanity));
+
+        // 3. Enregistrer la trace
+        traces[traceHash] = TraceRecord(did, block.timestamp, PENDING);
+
+        emit TraceRegistered(traceHash, did);
+    }
+
+    // Valider une trace (par Validateurs)
+    function validateTrace(
+        bytes32 traceHash,
+        bool isValid
+    ) external onlyValidator {
+        // ... logique de validation
+
+        if (validationCount >= threshold) {
+            // Créditer réputation au contributeur
+            reputation[trace.did] += REPUTATION_REWARD;
+
+            // Émettre tokens TRACE
+            traceToken.mint(trace.did, TRACE_REWARD);
+        }
+    }
+
+    // Gouvernance S5 : voter sur les paramètres
+    function voteParameter(
+        bytes32 parameterId,
+        uint256 newValue
+    ) external onlyGuardian {
+        // Vote pondéré par réputation
+        uint256 votePower = reputation[msg.sender];
+        votes[parameterId][newValue] += votePower;
+    }
+}
+```
+
+### 32.3 Ce Qui Va / Ne Va Pas On-Chain
+
+| Données | On-Chain ? | Raison |
+|---------|------------|--------|
+| Hash des traces | ✅ Oui | Preuve d'existence, petit (32 bytes) |
+| Latents 4096-dim | ❌ Non | Trop gros (16KB), pas nécessaire |
+| Scores réputation | ✅ Oui | Transparence, vérifiabilité |
+| Votes gouvernance | ✅ Oui | Auditabilité |
+| Tokens TRACE | ✅ Oui | Standard ERC-20 |
+| DIDs | ✅ Oui | Registre décentralisé |
+| Contenu des traces | ❌ Non | Confidentialité |
+
+---
+
+## 33. Gouvernance S5 Décentralisée
+
+### 33.1 Rappel : Le Système 5 VSM
+
+Dans le modèle VSM (Viable System Model) de Stafford Beer, le **Système 5** définit l'identité et les valeurs de l'organisation. Dans R-JEPA, cela correspond aux **hyper-paramètres** de la fonction d'équité lexicographique.
+
+### 33.2 Paramètres Gouvernés par S5
+
+| Paramètre | Description | Impact |
+|-----------|-------------|--------|
+| **w_k (poids Lexi)** | Priorité des agents par rang | Qui est aidé en premier |
+| **Seuil validation** | Nombre de validateurs requis | Rigueur vs. Vitesse |
+| **Récompense TRACE** | Tokens émis par trace | Inflation, incitation |
+| **Seuil Gardien** | Réputation min pour voter S5 | Centralisation vs. Participation |
+
+### 33.3 Processus de Vote
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    GOUVERNANCE S5 DÉCENTRALISÉE                     │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  1. PROPOSITION                                                    │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Un Gardien (rep ≥ 1000) soumet une proposition        │    │
+│     │ • Stake de X TRACE requis (remboursé si vote passe)     │    │
+│     │ • Période de discussion : 7 jours                       │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                              │                                      │
+│                              ▼                                      │
+│  2. SIMULATION (Mode PLAN R-JEPA)                                  │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Le système simule l'impact du changement proposé      │    │
+│     │ • Projection sur données historiques                    │    │
+│     │ • Rapport d'impact publié                               │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                              │                                      │
+│                              ▼                                      │
+│  3. VOTE                                                           │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Période de vote : 7 jours                             │    │
+│     │ • Vote pondéré par réputation (pas 1 personne = 1 vote) │    │
+│     │ • Quorum : 30% des Gardiens doivent voter               │    │
+│     │ • Majorité : 66% pour passer                            │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                              │                                      │
+│                              ▼                                      │
+│  4. EXÉCUTION                                                      │
+│     ┌─────────────────────────────────────────────────────────┐    │
+│     │ • Si approuvé : changement appliqué automatiquement     │    │
+│     │ • Timelock : 48h avant application effective            │    │
+│     │ • Stake remboursé au proposant                          │    │
+│     └─────────────────────────────────────────────────────────┘    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 33.4 Protection Contre la Ploutocratie
+
+Risque : Les plus riches en TRACE dominent les votes.
+
+Mitigation :
+- **Vote quadratique** : Coût du vote = n² (voter 2x coûte 4x)
+- **Réputation ≠ Tokens** : La réputation se gagne, ne s'achète pas
+- **Conviction Voting** : Plus on vote tôt et longtemps, plus on pèse
+- **Délégation liquide** : Déléguer son vote à un expert de confiance
+
+---
+
+## 34. Diagramme d'Architecture Complète
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                     ARCHITECTURE COMPLÈTE R-JEPA + IDENTITÉ                      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│  UTILISATEUR                                                                    │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │  Texte privé ──► LLM ──► Latent 4096-dim ──► R-JEPA (score/guidance)    │   │
+│  │       │                        │                                         │   │
+│  │       │                        │  ┌──────────────────────────────────┐   │   │
+│  │       │                        └──│ Hash + Signature (DID local)     │   │   │
+│  │       │                           └──────────────┬───────────────────┘   │   │
+│  │       ▼                                          │                       │   │
+│  │  RESTE LOCAL                                     │                       │   │
+│  │  (Confidentialité)                               │                       │   │
+│  └──────────────────────────────────────────────────┼───────────────────────┘   │
+│                                                     │                           │
+│                                                     ▼                           │
+│  RÉSEAU STIGMERGIQUE (P2P)                                                     │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                         │   │
+│  │  ┌───────────────┐    ┌───────────────┐    ┌───────────────┐           │   │
+│  │  │ Latent z_1    │    │ Latent z_2    │    │ Latent z_n    │           │   │
+│  │  │ + sig_1       │    │ + sig_2       │    │ + sig_n       │           │   │
+│  │  └───────┬───────┘    └───────┬───────┘    └───────┬───────┘           │   │
+│  │          │                    │                    │                    │   │
+│  │          └────────────────────┴────────────────────┘                    │   │
+│  │                               │                                         │   │
+│  │                               ▼                                         │   │
+│  │                    ┌─────────────────────┐                              │   │
+│  │                    │  AGRÉGATION         │                              │   │
+│  │                    │  Champ de Potentiel │                              │   │
+│  │                    │  Collectif          │                              │   │
+│  │                    └─────────────────────┘                              │   │
+│  │                                                                         │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                          │                                      │
+│                                          │ Hashes + Signatures                  │
+│                                          ▼                                      │
+│  BLOCKCHAIN (L2 / zkEVM)                                                       │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │                                                                         │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐    │   │
+│  │  │ Registre    │  │ Réputation  │  │ Token       │  │ Gouvernance │    │   │
+│  │  │ Traces      │  │ DIDs        │  │ TRACE       │  │ S5          │    │   │
+│  │  │ (hashes)    │  │ (scores)    │  │ (ERC-20)    │  │ (votes)     │    │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘    │   │
+│  │                                                                         │   │
+│  │                    ┌─────────────────────┐                              │   │
+│  │                    │  ZK Verifiers       │                              │   │
+│  │                    │  (Humanity, Rep.)   │                              │   │
+│  │                    └─────────────────────┘                              │   │
+│  │                                                                         │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 35. Feuille de Route Implémentation
+
+### Phase 1 : Fondations (Q1 2026)
+- [ ] Implémentation DID method `did:rjepa`
+- [ ] Smart contracts de base (Registre, Réputation)
+- [ ] Intégration signature dans Majordome
+- [ ] Testnet deployment (Polygon Mumbai)
+
+### Phase 2 : Économie (Q2 2026)
+- [ ] Token TRACE (ERC-20)
+- [ ] Mécanisme de staking Validateurs
+- [ ] Système de récompenses
+- [ ] Audit sécurité smart contracts
+
+### Phase 3 : Zero-Knowledge (Q3 2026)
+- [ ] Circuit ProofOfHumanity
+- [ ] Circuit ProofOfReputation
+- [ ] Intégration Worldcoin ou équivalent
+- [ ] Déploiement verifiers on-chain
+
+### Phase 4 : Gouvernance (Q4 2026)
+- [ ] Module de vote S5
+- [ ] Vote quadratique
+- [ ] Délégation liquide
+- [ ] Mainnet deployment
+
+---
+
+## 36. Conclusion
+
+La Couche Identité répond au paradoxe fondamental de la stigmergie numérique : **comment coordonner sans centraliser, tout en empêchant l'abus ?**
+
+La solution repose sur trois piliers :
+
+1. **Pseudonymat Cryptographique (DID)** : Identité persistante sans lien à l'identité civile
+2. **Réputation On-Chain** : Historique transparent et non-manipulable
+3. **Zero-Knowledge Proofs** : Prouver des propriétés sans révéler des secrets
+
+Cette architecture complète la vision R-JEPA en transformant une utopie théorique en système implémentable, avec des incitations alignées et des protections contre l'abus.
+
+Le système nerveux planétaire nécessite non seulement des neurones (Majordomes) et des synapses (latents), mais aussi un système immunitaire (anti-Sybil) et un système endocrinien (économie des traces).
+
+---
+
+## Références
+
+- W3C. (2022). Decentralized Identifiers (DIDs) v1.0. https://www.w3.org/TR/did-core/
+- Buterin, V. (2017). Sybil-resistant voting mechanisms.
+- Worldcoin. (2023). Proof of Personhood protocol.
+- Ben-Sasson, E. et al. (2014). Succinct Non-Interactive Zero Knowledge for a von Neumann Architecture (SNARKs).
+- Lalley, S. & Weyl, E.G. (2018). Quadratic Voting.
+- Heylighen, F. (2016). Stigmergy as a Universal Coordination Mechanism.
+- Beer, S. (1972). Brain of the Firm - Viable System Model.
+
+---
+
+*— Fin de la Partie 6 —*

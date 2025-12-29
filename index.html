@@ -1201,6 +1201,7 @@
             <li><a href="#symbiose" data-i18n="nav.symbiosis">Symbiose</a></li>
             <li><a href="#stigmergie" data-i18n="nav.stigmergy">Stigmergie</a></li>
             <li><a href="#architecture" data-i18n="nav.architecture">Architecture</a></li>
+            <li><a href="#identite" data-i18n="nav.identity">Identité</a></li>
             <li><a href="#media" data-i18n="nav.media">Média</a></li>
         </ul>
         <div class="nav-actions">
@@ -1816,10 +1817,108 @@
             </div>
         </section>
 
+
+        <!-- Section 12: Couche Identité & Économie des Traces -->
+        <section id="identite">
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2 class="section-title" data-i18n="identity.title">Couche Identité</h2>
+                <p class="section-subtitle" data-i18n="identity.subtitle">
+                    Comment garantir la légitimité des traces sans compromettre l'anonymat ?
+                    Architecture de confiance décentralisée.
+                </p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🔐</div>
+                    <h3 class="card-title" data-i18n="identity.did.title">Identité Pseudonyme (DID)</h3>
+                    <p class="card-text" data-i18n="identity.did.text">
+                        Clé cryptographique persistante par appareil.
+                        Pas liée à l'identité réelle, mais permet une réputation traçable.
+                        Format : <code>did:rjepa:z6Mkha...</code>
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⭐</div>
+                    <h3 class="card-title" data-i18n="identity.reputation.title">Réputation On-Chain</h3>
+                    <p class="card-text" data-i18n="identity.reputation.text">
+                        Score calculé par smart contract transparent.
+                        4 niveaux : Nouveau → Contributeur → Validateur → Gardien.
+                        Les Gardiens votent sur la gouvernance S5.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3 class="card-title" data-i18n="identity.sybil.title">Protection Anti-Sybil</h3>
+                    <p class="card-text" data-i18n="identity.sybil.text">
+                        Proof of Humanity (ZK) empêche la création massive de faux comptes.
+                        Staking requis pour devenir Validateur.
+                        Analyse de graphe social pour détecter les clusters suspects.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🪙</div>
+                    <h3 class="card-title" data-i18n="identity.token.title">Token TRACE</h3>
+                    <p class="card-text" data-i18n="identity.token.text">
+                        Incitation économique alignée : 70% contributeur, 20% validateurs, 10% trésorerie.
+                        Émis par contribution validée.
+                        Utilisé pour gouvernance, staking, accès premium.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔮</div>
+                    <h3 class="card-title" data-i18n="identity.zk.title">Zero-Knowledge Proofs</h3>
+                    <p class="card-text" data-i18n="identity.zk.text">
+                        Prouver sans révéler : "Je suis humain vérifié", "Ma réputation > 500",
+                        "J'ai contribué au domaine X" — sans exposer l'identité ni le contenu.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⛓️</div>
+                    <h3 class="card-title" data-i18n="identity.blockchain.title">Blockchain (L2/zkEVM)</h3>
+                    <p class="card-text" data-i18n="identity.blockchain.text">
+                        On-chain : hash des traces, scores réputation, tokens, votes.
+                        Off-chain : latents 4096-dim, contenu des traces.
+                        Recommandation : Polygon zkEVM ou Arbitrum.
+                    </p>
+                </div>
+            </div>
+
+            <div class="architecture-diagram" style="margin-top: var(--space-xl); padding: var(--space-xl); background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,0.05);">
+                <h3 style="text-align: center; margin-bottom: var(--space-lg);" data-i18n="identity.flow.title">Flux de Données Sécurisé</h3>
+                <pre style="font-family: monospace; font-size: 0.85rem; line-height: 1.6; overflow-x: auto; color: var(--text-muted);">
+┌─────────────────────────────────────────────────────────────────────────┐
+│  MAJORDOME LOCAL           RÉSEAU STIGMERGIQUE        BLOCKCHAIN        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Texte privé ─────────────► RESTE LOCAL (jamais transmis)               │
+│       │                                                                 │
+│       ▼                                                                 │
+│  Latent 4096-dim ─────────► Agrégation ────────────────────────────────│
+│  (irréversible)             Champ Collectif                             │
+│       │                                                                 │
+│       ▼                                                                 │
+│  Hash + Signature ─────────────────────────────────► Registre Traces    │
+│  (DID local)                                         Réputation DIDs    │
+│                                                      Token TRACE        │
+│                                                      Votes S5           │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  ✅ Texte = JAMAIS transmis    ✅ Latent = anonyme    ✅ Hash = accountability
+                </pre>
+            </div>
+        </section>
+
         <!-- Media Section -->
         <section id="media">
             <div class="section-header">
-                <span class="section-number">12</span>
+                <span class="section-number">13</span>
                 <h2 class="section-title" data-i18n="media.title">Média</h2>
                 <p class="section-subtitle" data-i18n="media.subtitle">
                     Vidéo explicative et podcast complet pour approfondir la vision.
@@ -1861,7 +1960,7 @@
         <!-- Download Section -->
         <section id="download">
             <div class="section-header">
-                <span class="section-number">13</span>
+                <span class="section-number">14</span>
                 <h2 class="section-title" data-i18n="download.title">Téléchargement</h2>
                 <p class="section-subtitle" data-i18n="download.subtitle">
                     Obtenez le document de recherche complet au format PDF.
@@ -1946,6 +2045,7 @@
                     <li><a href="#diagnostic" data-i18n="footer.diagnostic">Diagnostic</a></li>
                     <li><a href="#paradigme" data-i18n="footer.paradigm">Paradigme</a></li>
                     <li><a href="#architecture" data-i18n="footer.architecture">Architecture</a></li>
+                    <li><a href="#identite" data-i18n="footer.identity">Identité</a></li>
                     <li><a href="#download" data-i18n="footer.download">Téléchargement</a></li>
                 </ul>
             </div>
@@ -2040,7 +2140,18 @@
                 'hero.cta1': 'Explorer',
                 'hero.cta2': 'Télécharger le PDF',
                 'download.slides': 'Télécharger les Slides',
-                'download.research': '📄 Papier de Recherche (PDF)'
+                'download.research': '📄 Papier de Recherche (PDF)',
+                'nav.identity': 'Identité',
+                'identity.title': 'Couche Identité',
+                'identity.subtitle': 'Comment garantir la légitimité des traces sans compromettre l\'anonymat ?',
+                'identity.did.title': 'Identité Pseudonyme (DID)',
+                'identity.reputation.title': 'Réputation On-Chain',
+                'identity.sybil.title': 'Protection Anti-Sybil',
+                'identity.token.title': 'Token TRACE',
+                'identity.zk.title': 'Zero-Knowledge Proofs',
+                'identity.blockchain.title': 'Blockchain (L2/zkEVM)',
+                'identity.flow.title': 'Flux de Données Sécurisé',
+                'footer.identity': 'Identité'
             },
             en: {
                 'intro.title': 'Cybernetic Civilization',
@@ -2060,7 +2171,18 @@
                 'hero.cta1': 'Explore',
                 'hero.cta2': 'Download PDF',
                 'download.slides': 'Download Slides',
-                'download.research': '📄 Research Paper (PDF)'
+                'download.research': '📄 Research Paper (PDF)',
+                'nav.identity': 'Identity',
+                'identity.title': 'Identity Layer',
+                'identity.subtitle': 'How to guarantee trace legitimacy without compromising anonymity?',
+                'identity.did.title': 'Pseudonymous Identity (DID)',
+                'identity.reputation.title': 'On-Chain Reputation',
+                'identity.sybil.title': 'Anti-Sybil Protection',
+                'identity.token.title': 'TRACE Token',
+                'identity.zk.title': 'Zero-Knowledge Proofs',
+                'identity.blockchain.title': 'Blockchain (L2/zkEVM)',
+                'identity.flow.title': 'Secure Data Flow',
+                'footer.identity': 'Identity'
             }
         };
 
