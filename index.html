@@ -839,13 +839,24 @@
             gap: var(--space-lg);
         }
 
-        .media-player.audio-player audio {
-            height: auto;
-            min-width: 250px;
+        .audio-container {
+            padding: 1.5rem;
+            background: var(--bg-card);
+        }
+
+        .audio-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .audio-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .audio-container audio {
+            width: 100%;
+            margin-top: 1rem;
         }
 
         .media-info {
@@ -1830,16 +1841,18 @@
                 </div>
 
                 <div class="media-item">
-                    <div class="media-player audio-player">
-                        <span class="audio-icon">🎧</span>
-                        <audio controls preload="metadata" style="flex: 1;">
+                    <div class="audio-container">
+                        <div class="audio-header">
+                            <span class="audio-icon">🎧</span>
+                            <div>
+                                <h3 class="media-title" data-i18n="media.podcast.title">Quand la Justice Devient une Fonction Mathématique</h3>
+                                <p class="media-duration" data-i18n="media.podcast.duration">14:56 • Podcast complet</p>
+                            </div>
+                        </div>
+                        <audio controls preload="metadata" style="width: 100%; display: block; margin-top: 1rem;">
                             <source src="assets/audio/podcast-justice-mathematique.mp3" type="audio/mpeg">
                             Votre navigateur ne supporte pas l'audio.
                         </audio>
-                    </div>
-                    <div class="media-info">
-                        <h3 class="media-title" data-i18n="media.podcast.title">Quand la Justice Devient une Fonction Mathématique</h3>
-                        <p class="media-duration" data-i18n="media.podcast.duration">14:56 • Podcast complet</p>
                     </div>
                 </div>
             </div>
