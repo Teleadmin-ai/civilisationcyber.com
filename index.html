@@ -2189,6 +2189,129 @@ flowchart TB
                     <strong>Anti-ploutocratie</strong> : Vote quadratique (coût = n²) + Réputation ≠ Tokens + Conviction Voting
                 </p>
             </div>
+            <!-- Schema Explicatif : Lien Identite Reelle - Blockchain -->
+            <div class="schema-explicatif" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(34,211,238,0.1)); border-radius: var(--radius-xl); padding: var(--space-xl); margin-top: var(--space-2xl); border: 1px solid rgba(139,92,246,0.3);">
+                <h3 style="color: #8b5cf6; margin-bottom: var(--space-lg); text-align: center;">🔐 Le Secret : Comment l'Identité Réelle Reste Locale</h3>
+                <p style="color: var(--text-muted); text-align: center; margin-bottom: var(--space-xl); max-width: 800px; margin-left: auto; margin-right: auto;">
+                    La blockchain <strong>ne sait jamais</strong> qui vous êtes. Elle sait seulement que vous êtes <em>quelqu'un de vérifié</em>.
+                    Le lien entre votre identité réelle et votre DID <strong>ne quitte jamais votre appareil</strong>.
+                </p>
+
+                <!-- Visual Architecture Diagram -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: var(--space-xl); position: relative;">
+
+                    <!-- Column 1: Real Identity -->
+                    <div style="background: rgba(34,197,94,0.1); padding: var(--space-lg); border-radius: var(--radius-lg) 0 0 var(--radius-lg); border: 2px solid rgba(34,197,94,0.3); text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-md);">👤</div>
+                        <h4 style="color: #22c55e; margin-bottom: var(--space-sm);">IDENTITÉ RÉELLE</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Toi, l'humain</p>
+                        <div style="margin-top: var(--space-md); padding: var(--space-sm); background: rgba(0,0,0,0.2); border-radius: var(--radius-sm);">
+                            <p style="color: var(--text); font-size: 0.8rem; margin: 0;">
+                                📍 Reste <strong>ICI</strong><br/>
+                                sur ton appareil
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Local Device (The Bridge) -->
+                    <div style="background: rgba(99,102,241,0.15); padding: var(--space-lg); border-top: 2px solid rgba(99,102,241,0.3); border-bottom: 2px solid rgba(99,102,241,0.3); text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-md);">🔐</div>
+                        <h4 style="color: #6366f1; margin-bottom: var(--space-sm);">APPAREIL LOCAL</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Secure Enclave / HSM</p>
+
+                        <div style="margin: var(--space-md) 0; padding: var(--space-md); background: rgba(0,0,0,0.3); border-radius: var(--radius-md);">
+                            <p style="color: var(--text); font-size: 0.9rem; margin-bottom: var(--space-sm);">
+                                <strong>Le Lien Secret</strong>
+                            </p>
+                            <div style="font-family: monospace; font-size: 0.75rem; color: var(--accent); background: rgba(0,0,0,0.2); padding: var(--space-sm); border-radius: var(--radius-sm);">
+                                Humain → 🔑 Clé Ed25519<br/>
+                                → DID:rjepa:z6Mk...
+                            </div>
+                            <p style="color: #ef4444; font-size: 0.75rem; margin-top: var(--space-sm); margin-bottom: 0;">
+                                ⚠️ Ce lien NE SORT JAMAIS
+                            </p>
+                        </div>
+
+                        <div style="display: flex; justify-content: center; gap: var(--space-sm); margin-top: var(--space-md);">
+                            <span style="background: rgba(34,197,94,0.2); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; color: #22c55e;">✅ Biométrie</span>
+                            <span style="background: rgba(34,197,94,0.2); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; color: #22c55e;">✅ PIN</span>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Blockchain -->
+                    <div style="background: rgba(34,211,238,0.1); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; border: 2px solid rgba(34,211,238,0.3); text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-md);">⛓️</div>
+                        <h4 style="color: #22d3ee; margin-bottom: var(--space-sm);">BLOCKCHAIN</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Registre Public</p>
+
+                        <div style="margin-top: var(--space-md); text-align: left;">
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="color: #22c55e;">✅</span>
+                                <span style="color: var(--text); font-size: 0.85rem;">DID existe</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="color: #22c55e;">✅</span>
+                                <span style="color: var(--text); font-size: 0.85rem;">Est un humain (ZK)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="color: #22c55e;">✅</span>
+                                <span style="color: var(--text); font-size: 0.85rem;">Score réputation</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+                                <span style="color: #22c55e;">✅</span>
+                                <span style="color: var(--text); font-size: 0.85rem;">Hash des traces</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                                <span style="color: #ef4444;">❌</span>
+                                <span style="color: #ef4444; font-size: 0.85rem;"><strong>QUI c'est</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow: Real to Device -->
+                    <div style="position: absolute; left: 33%; top: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; color: #22c55e;">→</div>
+
+                    <!-- Arrow: Device to Blockchain -->
+                    <div style="position: absolute; left: 67%; top: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; color: #22d3ee;">→</div>
+                </div>
+
+                <!-- ZK Proof Explanation -->
+                <div style="background: rgba(139,92,246,0.1); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px dashed rgba(139,92,246,0.3);">
+                    <h4 style="color: #8b5cf6; margin-bottom: var(--space-md); text-align: center;">🔮 La Magie du Zero-Knowledge Proof</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📜</div>
+                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;">
+                                <strong>Ce que tu prouves</strong><br/>
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">"Je suis un humain unique vérifié"</span>
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🙈</div>
+                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;">
+                                <strong>Ce que tu ne révèles PAS</strong><br/>
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">Ton nom, ta photo, ton email, ta localisation</span>
+                            </p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: var(--space-sm);">✨</div>
+                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;">
+                                <strong>Le Résultat</strong><br/>
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">Accountability sans surveillance</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Insight -->
+                <div style="margin-top: var(--space-lg); text-align: center; padding: var(--space-md); background: rgba(0,0,0,0.2); border-radius: var(--radius-md);">
+                    <p style="color: var(--text); font-size: 1.1rem; margin: 0;">
+                        💡 <strong>L'insight clé</strong> : La blockchain garantit qu'un DID = 1 humain unique,<br/>
+                        <span style="color: var(--text-muted);">mais elle ne saura <em>jamais</em> lequel. C'est la <strong>Privacy by Design</strong>.</span>
+                    </p>
+                </div>
+            </div>
+
 
         </section>
 
