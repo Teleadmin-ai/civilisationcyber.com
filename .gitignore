@@ -1,28 +1,22 @@
-# Secrets
+# Dependencies
+node_modules/
+
+# Environment
 .env
-.token
-*.pem
+*.env.local
 
-# Claude instructions (local only)
-CLAUDE.md
+# Claude
 .claude/
-
-# Original media files (copies in assets/)
-/Cybernetic_Civilization_OS.pdf
-/R-JEPA*.jpg
-/R-JEPA*.mp4
-/R-JEPA*.m4a
-/Vision_Cybernétique*.mp4
-
-# Large media files (host externally for production)
-# Uncomment to exclude from git:
-# assets/video/*.mp4
-# assets/audio/*.m4a
+CLAUDE.md
 
 # OS
 .DS_Store
 Thumbs.db
 
-# IDE
-.vscode/
-.idea/
+# Logs
+*.log
+npm-debug.log*
+
+# Build
+*.pyc
+__pycache__/

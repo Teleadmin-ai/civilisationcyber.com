@@ -1,0 +1,17 @@
+{
+  "name": "civilisationcyber.com",
+  "version": "1.0.0",
+  "description": "R-JEPA Cybernetics - Civilisation OS",
+  "scripts": {
+    "generate-pdf": "node generate-pdf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Teleadmin-ai/civilisationcyber.com.git"
+  },
+  "author": "Romain Provençal <contact@teleadmin.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
