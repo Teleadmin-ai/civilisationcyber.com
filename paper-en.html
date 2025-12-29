@@ -989,9 +989,9 @@
             <h3>4.1 Asymmetric Learning</h3>
 
             <p>
-                Soit $T$ l'ensemble des trajectoires de raisonnement et $V: T \rightarrow \{0, 1\}$
-                une fonction de validation objective. L'ensemble d'entraînement est restreint aux
-                succès validés :
+                Let $T$ be the set of reasoning trajectories and $V: T \rightarrow \{0, 1\}$
+                an objective validation function. The training set is restricted to
+                validated successes:
             </p>
 
             <div class="equation">
@@ -999,7 +999,7 @@
                 <span class="equation-number">(1)</span>
             </div>
 
-            <p>La fonction de perte R-JEPA est définie sur cet ensemble :</p>
+            <p>The R-JEPA loss function is defined on this set:</p>
 
             <div class="equation">
                 $$\mathcal{L}_{\text{RJEPA}}(\theta) = \mathbb{E}_{\tau \in T^+} \left[ \sum_t \| \text{Pred}_\theta(s_t, a_t) - \text{Enc}(s_{t+1}) \|^2 \right]$$
@@ -1007,134 +1007,134 @@
             </div>
 
             <p>
-                où $\text{Pred}_\theta$ est le prédicteur paramétré par $\theta$, $s_t$ l'état latent
-                au temps $t$, et $a_t$ l'action (ou transition) entre les états.
+                where $\text{Pred}_\theta$ is the predictor parameterized by $\theta$, $s_t$ the latent state
+                at time $t$, and $a_t$ the action (or transition) between states.
             </p>
 
             <h3>4.2 Dual-Encoder EMA Architecture</h3>
 
-            <p>L'architecture se compose de plusieurs modules :</p>
+            <p>The architecture consists of several modules:</p>
 
-            <p><strong>Encodeur de Contexte :</strong></p>
+            <p><strong>Context Encoder:</strong></p>
             <div class="equation">
                 $$s_t = \text{Enc}_\theta(x_t) \in \mathbb{R}^d$$
                 <span class="equation-number">(3)</span>
             </div>
 
-            <p><strong>Noyau Récurrent (mémoire d'état) :</strong></p>
+            <p><strong>Recurrent Core (state memory):</strong></p>
             <div class="equation">
                 $$h_t = f(h_{t-1}, s_t)$$
                 <span class="equation-number">(4)</span>
             </div>
 
-            <p><strong>Prédicteur Latent (capacité de "rêve") :</strong></p>
+            <p><strong>Latent Predictor ("dream" capability):</strong></p>
             <div class="equation">
                 $$\hat{s}_{t+k} = \text{Pred}_\phi(h_t, a_{t:t+k})$$
                 <span class="equation-number">(5)</span>
             </div>
 
-            <p><strong>Fonction de perte complète :</strong></p>
+            <p><strong>Complete loss function:</strong></p>
             <div class="equation">
                 $$\mathcal{L} = \mathcal{L}_1(z_{\text{pred}}, z_{\text{target}}) + \lambda_{\text{var}} \cdot \mathcal{L}_{\text{variance}} + \lambda_{\text{cont}} \cdot \mathcal{L}_{\text{contrastive}}$$
                 <span class="equation-number">(6)</span>
             </div>
 
             <p>
-                avec $\lambda_{\text{var}} = 0.01$, $\lambda_{\text{cont}} = 0.1$, et température
-                $\tau = 0.07$ pour le terme contrastif (InfoNCE).
+                with $\lambda_{\text{var}} = 0.01$, $\lambda_{\text{cont}} = 0.1$, and temperature
+                $\tau = 0.07$ for the contrastive term (InfoNCE).
             </p>
 
-            <p><strong>Régularisation isométrique :</strong></p>
+            <p><strong>Isometric regularization:</strong></p>
             <div class="equation">
                 $$\mathcal{L}_{\text{iso}} = \| J_f(x)^\top J_f(x) - cI \|$$
                 <span class="equation-number">(7)</span>
             </div>
 
             <p>
-                où $J_f$ est la jacobienne de l'encodeur, garantissant que les distances sont
-                préservées dans l'espace latent.
+                where $J_f$ is the encoder's Jacobian, ensuring that distances are
+                preserved in latent space.
             </p>
 
             <h3>4.3 Mean Field Games (MFG)</h3>
 
             <p>
-                Pour gérer la complexité de millions d'agents, le système utilise la théorie des
-                Jeux à Champ Moyen [4]. Au lieu de modéliser chaque interaction individuelle,
-                on modélise l'interaction d'un agent représentatif avec la distribution statistique
-                moyenne de la population.
+                To handle the complexity of millions of agents, the system uses Mean Field
+                Game theory [4]. Instead of modeling each individual interaction,
+                we model the interaction of a representative agent with the statistical
+                distribution of the population.
             </p>
 
-            <p>Les équations couplées HJB-Fokker-Planck sont :</p>
+            <p>The coupled HJB-Fokker-Planck equations are:</p>
 
-            <p><strong>Équation Hamilton-Jacobi-Bellman (backward) :</strong></p>
+            <p><strong>Hamilton-Jacobi-Bellman equation (backward):</strong></p>
             <div class="equation">
                 $$-\partial_t u - \nu \Delta u + H(x, \nabla u) = F(x, m)$$
                 <span class="equation-number">(8)</span>
             </div>
 
-            <p><strong>Équation Fokker-Planck (forward) :</strong></p>
+            <p><strong>Fokker-Planck equation (forward):</strong></p>
             <div class="equation">
                 $$\partial_t m - \nu \Delta m - \text{div}(m \nabla_p H(x, \nabla u)) = 0$$
                 <span class="equation-number">(9)</span>
             </div>
 
             <p>
-                où $u$ est la fonction valeur de l'agent, $m$ la distribution de la population,
-                $H$ l'Hamiltonien du problème de contrôle, et $F$ le terme de couplage.
+                where $u$ is the agent's value function, $m$ the population distribution,
+                $H$ the Hamiltonian of the control problem, and $F$ the coupling term.
             </p>
 
             <h3>4.4 Lexicographic Equity (SoftSort)</h3>
 
             <p>
-                L'équité lexicographique (Leximin), inspirée de la théorie de la justice de John Rawls [5],
-                impose la règle suivante :
+                Lexicographic equity (Leximin), inspired by John Rawls' theory of justice [5],
+                imposes the following rule:
             </p>
 
             <ol>
-                <li>Maximiser l'utilité du participant le plus défavorisé</li>
-                <li>Sous cette contrainte, maximiser l'utilité du deuxième plus défavorisé</li>
-                <li>Et ainsi de suite jusqu'à allocation complète</li>
+                <li>Maximize the utility of the most disadvantaged participant</li>
+                <li>Under this constraint, maximize the utility of the second most disadvantaged</li>
+                <li>And so on until complete allocation</li>
             </ol>
 
             <p>
-                Pour rendre cette optimisation différentiable et compatible avec le Deep Learning,
-                nous utilisons SoftSort [6], un algorithme de tri différentiable basé sur la projection
-                sur le permutaèdre.
+                To make this optimization differentiable and compatible with Deep Learning,
+                we use SoftSort [6], a differentiable sorting algorithm based on projection
+                onto the permutahedron.
             </p>
 
-            <p><strong>Fonction de perte d'équité lexicographique :</strong></p>
+            <p><strong>Lexicographic equity loss function:</strong></p>
             <div class="equation">
                 $$\mathcal{L}_{\text{Lexi}}(\theta) = \sum_{k=1}^{N} w_k \cdot \text{SoftSort}_k(R(\theta))$$
                 <span class="equation-number">(10)</span>
             </div>
 
             <p>
-                où $R(\theta)$ est le vecteur des récompenses/ressources allouées, $\text{SoftSort}_k$
-                extrait la valeur douce du $k$-ième élément le plus petit, et $w_k$ sont des poids
-                strictement décroissants ($w_1 \gg w_2 \gg \cdots \gg w_N$).
+                where $R(\theta)$ is the vector of allocated rewards/resources, $\text{SoftSort}_k$
+                extracts the soft value of the $k$-th smallest element, and $w_k$ are strictly
+                decreasing weights ($w_1 \gg w_2 \gg \cdots \gg w_N$).
             </p>
 
             <blockquote>
-                « Fairness by Design : l'équité n'est pas une contrainte externe, mais un objectif
-                structurel interne du modèle. »
+                "Fairness by Design: equity is not an external constraint, but an internal
+                structural objective of the model."
             </blockquote>
 
             <figure>
-                <img src="assets/slides/slide-08.jpg" alt="Équité par le code">
-                <figcaption>Figure 7 : Équité Lexicographique — "Soulever le plancher" avant "élever le plafond"</figcaption>
+                <img src="assets/slides/slide-08.jpg" alt="Equity by code">
+                <figcaption>Figure 7: Lexicographic Equity — "Raise the floor" before "raise the ceiling"</figcaption>
             </figure>
         </section>
 
         
 
-        <!-- Section 5: Symbiose Humain-Majordome -->
+        <!-- Section 5: Human-Majordomo Symbiosis -->
         <section>
             <h2>5. Human-Majordomo Symbiosis</h2>
 
             <p>
-                L'unité de base du système R-JEPA Cybernetics est le "Majordome AI". Il ne s'agit pas
-                d'un simple chatbot, mais d'une véritable extension cognitive conçue pour former un
-                couple symbiotique avec son utilisateur humain.
+                The base unit of the R-JEPA Cybernetics system is the "AI Majordomo". It's not
+                a simple chatbot, but a true cognitive extension designed to form a symbiotic
+                couple with its human user.
             </p>
 
             <h3>5.1 The Functional Trinity</h3>
@@ -1151,18 +1151,18 @@
                 <tbody>
                     <tr>
                         <td><strong>LLM</strong></td>
-                        <td>Langage</td>
-                        <td>Interface conversationnelle, comprend le contexte nuancé, formule des propositions claires</td>
+                        <td>Language</td>
+                        <td>Conversational interface, understands nuanced context, formulates clear proposals</td>
                     </tr>
                     <tr>
                         <td><strong>R-JEPA</strong></td>
-                        <td>Sens</td>
-                        <td>Boussole prescriptive, simule des trajectoires dans le Manifold du Vrai</td>
+                        <td>Meaning</td>
+                        <td>Prescriptive compass, simulates trajectories in the Manifold of Truth</td>
                     </tr>
                     <tr>
-                        <td><strong>Humain</strong></td>
-                        <td>Volonté</td>
-                        <td>Capteur final et acteur, fournit besoins, ressources, décision d'agir</td>
+                        <td><strong>Human</strong></td>
+                        <td>Will</td>
+                        <td>Final sensor and actor, provides needs, resources, decision to act</td>
                     </tr>
                 </tbody>
             </table>
@@ -1170,36 +1170,36 @@
             <h3>5.2 Main Feedback Loop</h3>
 
             <ol>
-                <li><strong>Acquisition</strong> : L'humain exprime un besoin. Le Majordome, via son module LLM, contextualise cette demande.</li>
-                <li><strong>Proposition</strong> : Le R-JEPA personnel simule des trajectoires basées sur des succès validés. Le LLM traduit la meilleure trajectoire en proposition claire.</li>
-                <li><strong>Action</strong> : L'humain, en tant que décideur final, choisit d'agir ou non.</li>
-                <li><strong>Validation & Apprentissage</strong> : Le résultat est évalué objectivement. S'il s'agit d'un succès, la trajectoire est utilisée pour mettre à jour le modèle.</li>
+                <li><strong>Acquisition</strong>: The human expresses a need. The Majordomo, via its LLM module, contextualizes this request.</li>
+                <li><strong>Proposal</strong>: The personal R-JEPA simulates trajectories based on validated successes. The LLM translates the best trajectory into a clear proposal.</li>
+                <li><strong>Action</strong>: The human, as final decision-maker, chooses whether to act or not.</li>
+                <li><strong>Validation & Learning</strong>: The result is objectively evaluated. If successful, the trajectory is used to update the model.</li>
             </ol>
 
             <h3>5.3 Objective Validation Types</h3>
 
             <ul>
-                <li><strong>Transactionnelle</strong> : Paiement effectué, contrat signé</li>
-                <li><strong>Réciprocité</strong> : Les deux parties confirment la satisfaction</li>
-                <li><strong>Outcome</strong> : Résultat mesurable (facture d'énergie baisse, code compile)</li>
-                <li><strong>Continuation</strong> : La collaboration se poursuit dans le temps</li>
+                <li><strong>Transactional</strong>: Payment made, contract signed</li>
+                <li><strong>Reciprocity</strong>: Both parties confirm satisfaction</li>
+                <li><strong>Outcome</strong>: Measurable result (energy bill decreases, code compiles)</li>
+                <li><strong>Continuation</strong>: Collaboration continues over time</li>
             </ul>
 
             <p>
-                <strong>Mécanismes anti-gaming</strong> : validation croisée entre sources indépendantes,
-                délai avant propagation, détection d'anomalies statistiques, pondération par coût de l'action.
+                <strong>Anti-gaming mechanisms</strong>: cross-validation between independent sources,
+                delay before propagation, statistical anomaly detection, weighting by action cost.
             </p>
 
             <figure>
-                <img src="assets/slides/slide-04.jpg" alt="Symbiose Humain-Majordome">
-                <figcaption>Figure 8 : Boucle de rétroaction Humain-Majordome</figcaption>
+                <img src="assets/slides/slide-04.jpg" alt="Human-Majordomo Symbiosis">
+                <figcaption>Figure 8: Human-Majordomo feedback loop</figcaption>
             </figure>
 
             <h3>5.4 Bicameral Majordomo Architecture</h3>
 
             <p>
-                Chaque Majordome est un système à deux "cerveaux" complémentaires qui collaborent
-                pour guider l'utilisateur :
+                Each Majordomo is a two-"brain" system with complementary components that collaborate
+                to guide the user:
             </p>
 
             <table>
@@ -1213,28 +1213,28 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Le Parleur</strong> (LLM Student)</td>
-                        <td>Interface humain</td>
-                        <td>Langage naturel, sémantique, dialogue</td>
+                        <td><strong>The Speaker</strong> (LLM Student)</td>
+                        <td>Human interface</td>
+                        <td>Natural language, semantics, dialogue</td>
                     </tr>
                     <tr>
-                        <td><strong>Le Penseur</strong> (R-JEPA Teacher)</td>
-                        <td>Logique / Stratégie</td>
-                        <td>Espace latent, prédiction, Manifold du Vrai</td>
+                        <td><strong>The Thinker</strong> (R-JEPA Teacher)</td>
+                        <td>Logic / Strategy</td>
+                        <td>Latent space, prediction, Manifold of Truth</td>
                     </tr>
                 </tbody>
             </table>
 
             <p>
-                Le LLM "voit" le monde entier (entraîné sur tout Internet, incluant erreurs et dangers).
-                R-JEPA ne "voit" que les chemins validés. La symbiose : le LLM décrit, R-JEPA prescrit.
+                The LLM "sees" the whole world (trained on all of Internet, including errors and dangers).
+                R-JEPA only "sees" validated paths. The symbiosis: LLM describes, R-JEPA prescribes.
             </p>
 
             <h3>5.5 The Exchange Object: The Trace</h3>
 
             <p>
-                Quand un agent réussit une action validée, il émet une <strong>Trace</strong> — l'unité
-                fondamentale d'échange dans le système stigmergique. Structure JSON :
+                When an agent succeeds in a validated action, it emits a <strong>Trace</strong> — the
+                fundamental unit of exchange in the stigmergic system. JSON structure:
             </p>
 
             <pre><code>{
@@ -1249,26 +1249,26 @@
     "outcome_embedding": [0.88, 0.04, ..., -0.21]  // z_success
   },
   "validation": {
-    "type": "transactional",  // ou "reciprocity", "outcome"
+    "type": "transactional",  // or "reciprocity", "outcome"
     "proof": "zk_snark_proof_base64",
     "validator_did": "did:rjepa:z6Mk..."
   },
   "privacy": {
-    "reversibility_score": 0.0001  // doit être < 0.001
+    "reversibility_score": 0.0001  // must be < 0.001
   }
 }</code></pre>
 
             <p>
-                <strong>Propriété critique</strong> : Les embeddings 4096-dim sont mathématiquement
-                irréversibles — impossible de reconstruire le texte original. Seule la "direction"
-                dans l'espace latent est capturée, pas le contenu.
+                <strong>Critical property</strong>: The 4096-dim embeddings are mathematically
+                irreversible — impossible to reconstruct the original text. Only the "direction"
+                in latent space is captured, not the content.
             </p>
 
             <h3>5.6 The Δ Vector: Reasoning GPS</h3>
 
             <p>
-                L'innovation clé de R-JEPA n'est pas de dire "vrai/faux" (binaire), mais de fournir
-                une <strong>direction vectorielle</strong>. Quand le LLM propose une action, R-JEPA calcule :
+                R-JEPA's key innovation is not saying "true/false" (binary), but providing
+                a <strong>vector direction</strong>. When the LLM proposes an action, R-JEPA computes:
             </p>
 
             <div class="equation">
@@ -1277,9 +1277,9 @@
             </div>
 
             <p>
-                où $z_{\text{pred}}$ est l'état latent prédit par R-JEPA (où devrait-on aller ?) et
-                $z_{\text{current}}$ est l'état actuel encodé. Ce vecteur Δ est ensuite projeté dans
-                l'espace vocabulaire via un MLP :
+                where $z_{\text{pred}}$ is the latent state predicted by R-JEPA (where should we go?) and
+                $z_{\text{current}}$ is the current encoded state. This Δ vector is then projected into
+                vocabulary space via an MLP:
             </p>
 
             <div class="equation">
@@ -1288,22 +1288,22 @@
             </div>
 
             <p>
-                Le LLM utilise son pré-training pour <strong>interpréter sémantiquement</strong> cette
-                direction. Exemple concret :
+                The LLM uses its pre-training to <strong>semantically interpret</strong> this
+                direction. Concrete example:
             </p>
 
             <blockquote>
-                <strong>Situation</strong> : L'utilisateur veut demander une augmentation.<br>
-                <strong>LLM génère</strong> : "Je vais menacer de partir si je n'ai pas +30%"<br>
-                <strong>R-JEPA calcule</strong> : Énergie = 0.89 (HAUTE → hors du Manifold)<br>
-                <strong>Mémoire trouve</strong> : Trace validée similaire = "Présenter ses réalisations + demander feedback"<br>
-                <strong>Δ pointe</strong> : de "menace" vers "collaboration"<br>
-                <strong>LLM interprète</strong> : "L'écart suggère : remplacer confrontation par valorisation"<br>
-                <strong>Nouvelle génération</strong> : "Je vais présenter mes réalisations de l'année et ouvrir une discussion sur mon évolution salariale"
+                <strong>Situation</strong>: The user wants to ask for a raise.<br>
+                <strong>LLM generates</strong>: "I'll threaten to leave if I don't get +30%"<br>
+                <strong>R-JEPA computes</strong>: Energy = 0.89 (HIGH → off the Manifold)<br>
+                <strong>Memory finds</strong>: Similar validated trace = "Present achievements + ask for feedback"<br>
+                <strong>Δ points</strong>: from "threat" toward "collaboration"<br>
+                <strong>LLM interprets</strong>: "The gap suggests: replace confrontation with appreciation"<br>
+                <strong>New generation</strong>: "I'll present my year's achievements and open a discussion about my salary evolution"
             </blockquote>
 
             <p>
-                C'est le <strong>"GPS Vectoriel"</strong> du système :
+                This is the system's <strong>"Vector GPS"</strong>:
             </p>
 
             <table>
@@ -1314,8 +1314,8 @@
                     <tr><td>R-JEPA</td><td>Success coordinates</td><td>Destination</td></tr>
                     <tr><td>LLM</td><td>Terrain understanding</td><td>Map</td></tr>
                     <tr><td>Δ (delta)</td><td>Correction direction</td><td>Route</td></tr>
-                    <tr><td>Mémoire</td><td>Contextual history</td><td>Trafic temps réel</td></tr>
-                    <tr><td>Stigmergie</td><td>Collective intelligence</td><td>Waze (signalements)</td></tr>
+                    <tr><td>Memory</td><td>Contextual history</td><td>Real-time traffic</td></tr>
+                    <tr><td>Stigmergy</td><td>Collective intelligence</td><td>Waze (reports)</td></tr>
                 </tbody>
             </table>
         </section>
