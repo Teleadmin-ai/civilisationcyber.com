@@ -343,26 +343,66 @@
             page-break-after: always;
         }
 
-        /* Print styles */
+        /* Print styles - optimized for PDF generation via Ctrl+P */
         @media print {
-            .controls {
+            .controls, .loading-overlay {
                 display: none !important;
             }
 
-            .paper {
-                margin-top: 0;
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                max-width: none;
             }
 
-            body {
+            .paper {
+                margin: 0;
                 padding: 15mm 20mm;
+            }
+
+            .title-page {
+                page-break-after: always;
             }
 
             h2 {
                 page-break-after: avoid;
+                page-break-before: auto;
             }
 
-            figure, table {
+            h3 {
+                page-break-after: avoid;
+            }
+
+            p {
+                orphans: 3;
+                widows: 3;
+            }
+
+            figure, table, blockquote, pre {
                 page-break-inside: avoid;
+            }
+
+            section {
+                page-break-before: auto;
+                page-break-inside: auto;
+            }
+
+            .abstract {
+                page-break-after: always;
+            }
+
+            nav {
+                page-break-after: always;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            a[href]:after {
+                content: none;
             }
         }
 
@@ -412,7 +452,7 @@
         <h1>📄 R-JEPA Cybernetics — Document de Recherche</h1>
         <div>
             <button id="download-btn" onclick="generatePDF()">
-                ⬇️ Télécharger le PDF
+                🖨️ Imprimer / PDF
             </button>
         </div>
     </div>
@@ -499,6 +539,7 @@
                 <li>Le Contrat Social Cybernétique</li>
                 <li>Précédent Historique : Cybersyn (1971-1973)</li>
                 <li>Implémentation et Déploiement</li>
+                <li>Couche Identité & Économie des Traces</li>
                 <li>Conclusion</li>
                 <li>Références</li>
             </ol>
@@ -1624,55 +1665,20 @@
 
         async function generatePDF() {
             const btn = document.getElementById('download-btn');
-            const loading = document.getElementById('loading');
-            const element = document.getElementById('paper-content');
 
-            // Show loading
+            // Wait for MathJax first
             btn.disabled = true;
-            btn.textContent = '⏳ Génération...';
-            loading.classList.add('active');
+            btn.textContent = '⏳ Préparation...';
 
-            try {
-                // Wait for MathJax to render all equations
-                await waitForMathJax();
+            await waitForMathJax();
+            await new Promise(resolve => setTimeout(resolve, 300));
 
-                // Small delay to ensure everything is rendered
-                await new Promise(resolve => setTimeout(resolve, 500));
+            btn.disabled = false;
+            btn.textContent = '🖨️ Imprimer / PDF';
 
-                // PDF options
-                const opt = {
-                    margin: [15, 15, 15, 15],
-                    filename: 'R-JEPA_Cybernetics_Research_Paper.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: {
-                        scale: 2,
-                        useCORS: true,
-                        letterRendering: true,
-                        logging: false
-                    },
-                    jsPDF: {
-                        unit: 'mm',
-                        format: 'a4',
-                        orientation: 'portrait'
-                    },
-                    pagebreak: {
-                        mode: ['avoid-all', 'css', 'legacy'],
-                        before: '.page-break'
-                    }
-                };
-
-                // Generate PDF
-                await html2pdf().set(opt).from(element).save();
-
-            } catch (error) {
-                console.error('PDF generation error:', error);
-                alert('Erreur lors de la génération du PDF. Essayez d\'utiliser Ctrl+P pour imprimer en PDF.');
-            } finally {
-                // Hide loading
-                loading.classList.remove('active');
-                btn.disabled = false;
-                btn.textContent = '⬇️ Télécharger le PDF';
-            }
+            // Use native browser print - much more reliable for long documents
+            // User can select "Save as PDF" in print dialog
+            window.print();
         }
 
         // Initialize MathJax rendering on page load
