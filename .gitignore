@@ -7,6 +7,18 @@
 CLAUDE.md
 .claude/
 
+# Original media files (copies in assets/)
+/Cybernetic_Civilization_OS.pdf
+/R-JEPA*.jpg
+/R-JEPA*.mp4
+/R-JEPA*.m4a
+/Vision_Cybernétique*.mp4
+
+# Large media files (host externally for production)
+# Uncomment to exclude from git:
+# assets/video/*.mp4
+# assets/audio/*.m4a
+
 # OS
 .DS_Store
 Thumbs.db

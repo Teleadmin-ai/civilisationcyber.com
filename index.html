@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civilisation Cybernétique - R-JEPA OS</title>
+    <meta name="description" content="R-JEPA Cybernetics : Architecture d'un Système Nerveux Planétaire pour la Résilience Civilisationnelle. Un OS sociétal basé sur la gouvernance par rétroaction.">
+    <meta name="keywords" content="R-JEPA, cybernétique, IA, gouvernance, stigmergie, transhumanisme, Romain Provençal, Teleadmin">
+    <meta name="author" content="Romain Provençal - Teleadmin">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Civilisation Cybernétique - R-JEPA OS">
+    <meta property="og:description" content="Système Nerveux Planétaire pour la Résilience Civilisationnelle">
+    <meta property="og:image" content="assets/images/intro-preview.jpg">
+    <meta property="og:url" content="https://civilisationcyber.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Civilisation Cybernétique - R-JEPA OS">
+    <meta name="twitter:description" content="Système Nerveux Planétaire pour la Résilience Civilisationnelle">
+    <meta name="twitter:image" content="assets/images/intro-preview.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Mermaid for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════
+           CSS Variables - Palette Futuriste Gold/Cyan
+           ═══════════════════════════════════════════════════════════════════ */
+        :root {
+            /* Primary - Gold/Amber (Vision céleste) */
+            --gold: #f5a623;
+            --gold-light: #ffd700;
+            --gold-dark: #d4920a;
+            --amber: #f59e0b;
+
+            /* Secondary - Cyan/Teal (Technologie) */
+            --cyan: #22d3ee;
+            --cyan-light: #67e8f9;
+            --cyan-dark: #0891b2;
+            --teal: #14b8a6;
+
+            /* Accent - Purple/Indigo (R-JEPA heritage) */
+            --indigo: #6366f1;
+            --purple: #8b5cf6;
+
+            /* Background - Deep Space */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: #1a1a24;
+            --bg-card-hover: #222230;
+
+            /* Text */
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+
+            /* Status */
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+
+            /* Gradients */
+            --gradient-gold: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+            --gradient-cyan: linear-gradient(135deg, var(--cyan) 0%, var(--teal) 100%);
+            --gradient-cosmic: linear-gradient(135deg, var(--gold) 0%, var(--cyan) 50%, var(--indigo) 100%);
+            --gradient-dark: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+            --shadow-glow-gold: 0 0 30px rgba(245, 166, 35, 0.3);
+            --shadow-glow-cyan: 0 0 30px rgba(34, 211, 238, 0.3);
+
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 500ms ease;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Reset & Base Styles
+           ═══════════════════════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hide body content until intro is dismissed */
+        body.intro-active {
+            overflow: hidden;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Video Intro Splash Screen
+           ═══════════════════════════════════════════════════════════════════ */
+        #intro-splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        #intro-splash.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #intro-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--space-2xl);
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            text-align: center;
+        }
+
+        #intro-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            background: var(--gradient-cosmic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-md);
+            text-shadow: 0 0 60px rgba(245, 166, 35, 0.5);
+        }
+
+        #intro-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        #enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            background: var(--gradient-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition-base);
+            animation: pulse 2s infinite;
+        }
+
+        #enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow-gold);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(245, 166, 35, 0); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Navigation
+           ═══════════════════════════════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: var(--space-md) var(--space-xl);
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform var(--transition-base);
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-lg);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: var(--space-xs);
+            background: var(--bg-card);
+            padding: var(--space-xs);
+            border-radius: var(--radius-full);
+        }
+
+        .lang-btn {
+            padding: var(--space-xs) var(--space-sm);
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-radius: var(--radius-full);
+            transition: var(--transition-fast);
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Main Content Container
+           ═══════════════════════════════════════════════════════════════════ */
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: var(--space-3xl) var(--space-xl);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Hero Section
+           ═══════════════════════════════════════════════════════════════════ */
+        #hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(245, 166, 35, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+            animation: cosmic-drift 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes cosmic-drift {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(245, 166, 35, 0.1);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-title .gradient {
+            background: var(--gradient-cosmic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto var(--space-2xl);
+            line-height: 1.7;
+        }
+
+        .hero-quote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .hero-quote cite {
+            display: block;
+            margin-top: var(--space-sm);
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-base);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-gold);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(34, 211, 238, 0.1);
+            box-shadow: var(--shadow-glow-cyan);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Section Styles
+           ═══════════════════════════════════════════════════════════════════ */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-number {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--gold);
+            background: rgba(245, 166, 35, 0.1);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            transition: var(--transition-base);
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(245, 166, 35, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-gold);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .card-icon.cyan {
+            background: var(--gradient-cyan);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Image + Text Layout */
+        .image-text {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3xl);
+            align-items: center;
+        }
+
+        .image-text.reverse {
+            direction: rtl;
+        }
+
+        .image-text.reverse > * {
+            direction: ltr;
+        }
+
+        .image-container {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            pointer-events: none;
+        }
+
+        .text-content h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .text-content p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+            line-height: 1.8;
+        }
+
+        .text-content ul {
+            list-style: none;
+            margin-bottom: var(--space-lg);
+        }
+
+        .text-content li {
+            position: relative;
+            padding-left: var(--space-xl);
+            margin-bottom: var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        .text-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 3px solid var(--gold);
+            padding-left: var(--space-lg);
+            margin: var(--space-xl) 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        blockquote cite {
+            display: block;
+            margin-top: var(--space-sm);
+            font-style: normal;
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-2xl) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-lg);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-cosmic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: var(--space-xs);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Specific Sections
+           ═══════════════════════════════════════════════════════════════════ */
+
+        /* Diagnostic Section - Dark/Warning theme */
+        #diagnostic {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(239, 68, 68, 0.05) 50%, var(--bg-primary) 100%);
+        }
+
+        .entropy-visual {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin: var(--space-2xl) 0;
+        }
+
+        .entropy-item {
+            text-align: center;
+            padding: var(--space-lg);
+        }
+
+        .entropy-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .entropy-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Paradigm Section */
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin: var(--space-2xl) 0;
+        }
+
+        .comparison-column {
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+        }
+
+        .comparison-column.old {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .comparison-column.new {
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+
+        .comparison-column h4 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .comparison-column.old h4 {
+            color: var(--error);
+        }
+
+        .comparison-column.new h4 {
+            color: var(--cyan);
+        }
+
+        /* Scale Levels */
+        .scale-levels {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin: var(--space-2xl) 0;
+        }
+
+        .scale-level {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .scale-level .icon {
+            font-size: 1.5rem;
+        }
+
+        .scale-level .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .scale-arrow {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        /* Timeline (Cybersyn) */
+        .timeline {
+            position: relative;
+            padding-left: var(--space-2xl);
+            margin: var(--space-2xl) 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-gold);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--space-xl);
+            padding-left: var(--space-lg);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-1 * var(--space-2xl) + 4px);
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: var(--space-xs);
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .timeline-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Media Section
+           ═══════════════════════════════════════════════════════════════════ */
+        #media .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-2xl);
+        }
+
+        .media-item {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .media-player {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: var(--bg-primary);
+        }
+
+        .media-player video,
+        .media-player audio {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .media-player.audio-player {
+            aspect-ratio: auto;
+            padding: var(--space-xl);
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .audio-icon {
+            font-size: 3rem;
+        }
+
+        .media-info {
+            padding: var(--space-lg);
+        }
+
+        .media-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .media-duration {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Download Section
+           ═══════════════════════════════════════════════════════════════════ */
+        #download {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(99, 102, 241, 0.05) 50%, var(--bg-primary) 100%);
+        }
+
+        .download-card {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            padding: var(--space-3xl);
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .download-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .download-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .download-text {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Donation Section
+           ═══════════════════════════════════════════════════════════════════ */
+        #donation {
+            background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(245, 166, 35, 0.05) 50%, var(--bg-primary) 100%);
+        }
+
+        .donation-options {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .donation-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg) var(--space-2xl);
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+
+        .donation-btn:hover {
+            border-color: var(--gold);
+            background: rgba(245, 166, 35, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .donation-btn img {
+            height: 24px;
+            width: auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Author Section
+           ═══════════════════════════════════════════════════════════════════ */
+        #author {
+            text-align: center;
+        }
+
+        .author-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto var(--space-lg);
+        }
+
+        .author-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .author-role {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .author-bio {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.8;
+        }
+
+        .author-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .author-link {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--bg-card);
+            border-radius: var(--radius-full);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+        }
+
+        .author-link:hover {
+            background: var(--bg-card-hover);
+            color: var(--cyan);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Footer
+           ═══════════════════════════════════════════════════════════════════ */
+        footer {
+            padding: var(--space-3xl) var(--space-xl);
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-2xl);
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: var(--space-2xl) auto 0;
+            padding-top: var(--space-xl);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .footer-legal a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .footer-legal a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Mermaid Diagram Container
+           ═══════════════════════════════════════════════════════════════════ */
+        .mermaid-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin: var(--space-2xl) 0;
+            overflow-x: auto;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Responsive Design
+           ═══════════════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .image-text {
+                grid-template-columns: 1fr;
+            }
+
+            .image-text.reverse {
+                direction: ltr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+
+            .scale-levels {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .scale-arrow {
+                transform: rotate(90deg);
+            }
+
+            #media .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           Animations
+           ═══════════════════════════════════════════════════════════════════ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Hidden class for animations */
+        .hidden-animate {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+    </style>
+</head>
+<body class="intro-active">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         Video Intro Splash Screen
+         ═══════════════════════════════════════════════════════════════════ -->
+    <div id="intro-splash">
+        <video id="intro-video" autoplay muted loop playsinline poster="assets/images/intro-preview.jpg">
+            <source src="assets/video/intro-vision-cybernetique.mp4" type="video/mp4">
+        </video>
+        <div id="intro-overlay">
+            <h1 id="intro-title" data-i18n="intro.title">Civilisation Cybernétique</h1>
+            <p id="intro-subtitle" data-i18n="intro.subtitle">Un système nerveux planétaire pour la résilience civilisationnelle</p>
+            <button id="enter-btn" data-i18n="intro.enter">
+                <span>Entrer</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         Navigation
+         ═══════════════════════════════════════════════════════════════════ -->
+    <nav class="hidden">
+        <a href="#" class="nav-logo">
+            <span>🧠</span>
+            <span>Civilisation Cybernétique</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#diagnostic" data-i18n="nav.diagnostic">Diagnostic</a></li>
+            <li><a href="#paradigme" data-i18n="nav.paradigm">Paradigme</a></li>
+            <li><a href="#symbiose" data-i18n="nav.symbiosis">Symbiose</a></li>
+            <li><a href="#stigmergie" data-i18n="nav.stigmergy">Stigmergie</a></li>
+            <li><a href="#architecture" data-i18n="nav.architecture">Architecture</a></li>
+            <li><a href="#media" data-i18n="nav.media">Média</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         Main Content
+         ═══════════════════════════════════════════════════════════════════ -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🧠</span>
+                    <span data-i18n="hero.badge">R-JEPA Cybernetics OS</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient" data-i18n="hero.title1">Système Nerveux</span><br>
+                    <span data-i18n="hero.title2">Planétaire</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">
+                    Architecture de résilience civilisationnelle. Un OS sociétal qui remplace
+                    l'anti-économie de la compétition par une cybernétique de coordination négentropique.
+                </p>
+                <div class="hero-quote">
+                    <p data-i18n="hero.quote">"La cristallisation d'un rêve de 33 ans, rendu possible par les architectures JEPA de Yann LeCun."</p>
+                    <cite>— Romain Provençal</cite>
+                </div>
+                <div class="hero-cta">
+                    <a href="#diagnostic" class="btn btn-primary" data-i18n="hero.cta1">
+                        <span>Explorer</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                    </a>
+                    <a href="#download" class="btn btn-secondary" data-i18n="hero.cta2">
+                        <span>Télécharger le PDF</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: Diagnostic - Anti-économie -->
+        <section id="diagnostic">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title" data-i18n="diagnostic.title">Le Diagnostic : Anti-Économie</h2>
+                <p class="section-subtitle" data-i18n="diagnostic.subtitle">
+                    Notre système économique actuel repose sur la compétition aveugle — un système entropique
+                    qui tend naturellement vers le désordre et le gaspillage.
+                </p>
+            </div>
+
+            <div class="image-text">
+                <div class="image-container">
+                    <img src="assets/slides/slide-02.jpg" alt="Diagnostic: Anti-économie" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="diagnostic.h3">Le Gaspillage Structurel</h3>
+                    <p data-i18n="diagnostic.p1">
+                        Pour qu'une start-up réussisse, mille autres doivent échouer. Mais ces mille entreprises
+                        ont consommé des ressources — du capital, de l'énergie, du temps humain.
+                        C'est une <strong>perte sèche</strong>, un gaspillage structurel immense.
+                    </p>
+                    <p data-i18n="diagnostic.p2">
+                        La compétition génère plusieurs types de friction destructrice :
+                    </p>
+                    <ul>
+                        <li data-i18n="diagnostic.li1"><strong>Duplication d'effort</strong> : Cent équipes travaillent sur le même problème sans partager</li>
+                        <li data-i18n="diagnostic.li2"><strong>Secret industriel</strong> : Les innovations sont cachées pour préserver un avantage temporaire</li>
+                        <li data-i18n="diagnostic.li3"><strong>Obsolescence programmée</strong> : Destruction volontaire de valeur pour forcer le renouvellement</li>
+                        <li data-i18n="diagnostic.li4"><strong>Externalités négatives</strong> : Les coûts réels externalisés sur la collectivité</li>
+                    </ul>
+                    <blockquote>
+                        <p data-i18n="diagnostic.quote">Comment concilier les besoins d'une humanité croissante avec des ressources finies ?</p>
+                        <cite data-i18n="diagnostic.cite">— L'équation impossible du XXIe siècle</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Changement de Paradigme -->
+        <section id="paradigme">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title" data-i18n="paradigm.title">Changement de Paradigme</h2>
+                <p class="section-subtitle" data-i18n="paradigm.subtitle">
+                    R-JEPA transpose l'innovation de V-JEPA (vidéo) au raisonnement textuel :
+                    prédire les concepts, pas les tokens.
+                </p>
+            </div>
+
+            <div class="image-text reverse">
+                <div class="image-container">
+                    <img src="assets/slides/slide-03.jpg" alt="Changement de paradigme" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="paradigm.h3">Concepts vs Tokens</h3>
+                    <p data-i18n="paradigm.p1">
+                        Les modèles classiques prédisent le prochain mot (token). R-JEPA prédit
+                        <strong>l'essence de l'étape manquante</strong> — sa signification sous forme
+                        de vecteur mathématique de 4096 dimensions.
+                    </p>
+
+                    <div class="comparison-table">
+                        <div class="comparison-column old">
+                            <h4 data-i18n="paradigm.old">❌ Modèle Descriptif</h4>
+                            <ul>
+                                <li data-i18n="paradigm.old1">Prédit le prochain token</li>
+                                <li data-i18n="paradigm.old2">Apprend tout (vrai + faux)</li>
+                                <li data-i18n="paradigm.old3">Génère des hallucinations</li>
+                                <li data-i18n="paradigm.old4">Cartographie le chaos</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-column new">
+                            <h4 data-i18n="paradigm.new">✅ R-JEPA Prescriptif</h4>
+                            <ul>
+                                <li data-i18n="paradigm.new1">Prédit les concepts</li>
+                                <li data-i18n="paradigm.new2">N'apprend que les succès</li>
+                                <li data-i18n="paradigm.new3">Détecte les incohérences</li>
+                                <li data-i18n="paradigm.new4">Cartographie le viable</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <blockquote>
+                        <p data-i18n="paradigm.quote">Comme un sourd-muet lisant le braille : il touche directement la structure du sens.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Symbiose Humain-Majordome -->
+        <section id="symbiose">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title" data-i18n="symbiosis.title">Symbiose Humain-Majordome</h2>
+                <p class="section-subtitle" data-i18n="symbiosis.subtitle">
+                    L'unité de base : un couple symbiotique où l'humain est capteur et acteur,
+                    le Majordome est extension cognitive.
+                </p>
+            </div>
+
+            <div class="image-text">
+                <div class="image-container">
+                    <img src="assets/slides/slide-04.jpg" alt="Symbiose Humain-Majordome" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="symbiosis.h3">La Trinité Fonctionnelle</h3>
+
+                    <div class="content-grid" style="grid-template-columns: 1fr;">
+                        <div class="card">
+                            <div class="card-icon">📝</div>
+                            <h4 class="card-title" data-i18n="symbiosis.llm">LLM → Langage</h4>
+                            <p class="card-text" data-i18n="symbiosis.llm.desc">
+                                Interface conversationnelle. Comprend le contexte humain et formule des propositions claires.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon cyan">🧠</div>
+                            <h4 class="card-title" data-i18n="symbiosis.rjepa">R-JEPA → Sens</h4>
+                            <p class="card-text" data-i18n="symbiosis.rjepa.desc">
+                                Boussole prescriptive. Simule des trajectoires dans le "Manifold du Vrai" basées sur des succès validés.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon" style="background: var(--gradient-cosmic);">👤</div>
+                            <h4 class="card-title" data-i18n="symbiosis.human">Humain → Volonté</h4>
+                            <p class="card-text" data-i18n="symbiosis.human.desc">
+                                Capteur final et acteur. Fournit besoins, ressources, décision d'agir et validation du résultat.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: var(--space-xl);" data-i18n="symbiosis.loop">Boucle de Rétroaction</h4>
+                    <ul>
+                        <li data-i18n="symbiosis.loop1"><strong>1. Acquisition</strong> : L'humain exprime un besoin</li>
+                        <li data-i18n="symbiosis.loop2"><strong>2. Proposition</strong> : R-JEPA simule, LLM traduit</li>
+                        <li data-i18n="symbiosis.loop3"><strong>3. Action</strong> : L'humain décide et agit</li>
+                        <li data-i18n="symbiosis.loop4"><strong>4. Validation</strong> : Succès encodé et partagé</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Apprentissage Asymétrique -->
+        <section id="manifold">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title" data-i18n="manifold.title">Le Manifold du Vrai</h2>
+                <p class="section-subtitle" data-i18n="manifold.subtitle">
+                    R-JEPA n'apprend que des succès validés. Les échecs sont détectés
+                    comme des déviations de la géométrie du succès.
+                </p>
+            </div>
+
+            <div class="image-text reverse">
+                <div class="image-container">
+                    <img src="assets/slides/slide-05.jpg" alt="Apprentissage Asymétrique" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="manifold.h3">Apprentissage Asymétrique</h3>
+                    <p data-i18n="manifold.p1">
+                        En apprenant massivement les trajectoires de succès (21 456 problèmes de maths et de code),
+                        R-JEPA construit une <strong>structure géométrique dense</strong> dans son espace latent.
+                    </p>
+                    <p data-i18n="manifold.p2">
+                        Les succès forment une surface continue (un manifold). Tout point qui s'éloigne
+                        de cette surface génère une "tension" mesurable — la <strong>JEPA Loss</strong>.
+                    </p>
+
+                    <blockquote>
+                        <p data-i18n="manifold.quote1">Le système n'a pas besoin de voir un échec pour savoir qu'il est faux.
+                        Il lui suffit de voir que la trajectoire sort de la géométrie des succès.</p>
+                    </blockquote>
+
+                    <h4 data-i18n="manifold.analogy">Analogie : La Carte du Champ de Mines</h4>
+                    <p data-i18n="manifold.analogy.p">
+                        Un modèle descriptif cartographie chaque mine ET chaque chemin sûr.
+                        R-JEPA cartographie <strong>uniquement les chemins sûrs</strong>.
+                        Si vous sortez de la carte, vous savez implicitement que vous êtes en danger.
+                    </p>
+
+                    <blockquote>
+                        <p data-i18n="manifold.quote2">L'échec est défini par l'absence de succès.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Stigmergie -->
+        <section id="stigmergie">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title" data-i18n="stigmergy.title">La Stigmergie</h2>
+                <p class="section-subtitle" data-i18n="stigmergy.subtitle">
+                    Coordination indirecte par traces de succès — comme les phéromones des fourmis,
+                    mais pour l'intelligence collective humaine.
+                </p>
+            </div>
+
+            <div class="image-text">
+                <div class="image-container">
+                    <img src="assets/slides/slide-06.jpg" alt="La Stigmergie" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="stigmergy.h3">Coordination Sans Communication</h3>
+                    <p data-i18n="stigmergy.p1">
+                        Les fourmis ne font pas de réunion pour décider où chercher la nourriture.
+                        Elles laissent des <strong>traces de phéromones</strong> que d'autres suivent et renforcent.
+                    </p>
+                    <p data-i18n="stigmergy.p2">
+                        Dans R-JEPA, les Majordomes n'échangent pas de texte (ce qui violerait la vie privée),
+                        mais des <strong>vecteurs latents de 4096 dimensions</strong> — mathématiquement irréversibles.
+                    </p>
+
+                    <div class="content-grid" style="grid-template-columns: 1fr 1fr; margin-top: var(--space-xl);">
+                        <div class="card">
+                            <div class="card-icon">🔒</div>
+                            <h4 class="card-title" data-i18n="stigmergy.privacy">Privacy-First</h4>
+                            <p class="card-text" data-i18n="stigmergy.privacy.desc">
+                                Votre texte brut reste local. Seuls les vecteurs abstraits remontent.
+                                L'architecture technique garantit la liberté politique.
+                            </p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon cyan">🌐</div>
+                            <h4 class="card-title" data-i18n="stigmergy.collective">Intelligence Collective</h4>
+                            <p class="card-text" data-i18n="stigmergy.collective.desc">
+                                L'effort d'un seul profite instantanément à tous.
+                                On capitalise au lieu de se battre — c'est la négentropie.
+                            </p>
+                        </div>
+                    </div>
+
+                    <blockquote>
+                        <p data-i18n="stigmergy.quote">On ne dépense plus l'effort humain pour se battre, mais pour capitaliser.
+                        L'effort d'un seul profite instantanément à tous.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Invariance d'Échelle -->
+        <section id="echelle">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title" data-i18n="scale.title">Invariance d'Échelle</h2>
+                <p class="section-subtitle" data-i18n="scale.subtitle">
+                    La même architecture mathématique s'applique de l'individu à la planète —
+                    comme une fractale organisationnelle.
+                </p>
+            </div>
+
+            <div class="image-text reverse">
+                <div class="image-container">
+                    <img src="assets/slides/slide-07.jpg" alt="Architecture invariante d'échelle" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="scale.h3">Du Majordome à la Planète</h3>
+                    <p data-i18n="scale.p1">
+                        Inspiré du <strong>Modèle de Système Viable (VSM)</strong> de Stafford Beer :
+                        la structure qui permet à un individu de bien s'organiser est la même que pour
+                        une équipe, une entreprise, une nation.
+                    </p>
+
+                    <div class="scale-levels">
+                        <div class="scale-level">
+                            <span class="icon">👤</span>
+                            <span class="label">L1: Individu</span>
+                        </div>
+                        <span class="scale-arrow">→</span>
+                        <div class="scale-level">
+                            <span class="icon">🏘️</span>
+                            <span class="label">L2: Communauté</span>
+                        </div>
+                        <span class="scale-arrow">→</span>
+                        <div class="scale-level">
+                            <span class="icon">🏙️</span>
+                            <span class="label">L3: Ville</span>
+                        </div>
+                        <span class="scale-arrow">→</span>
+                        <div class="scale-level">
+                            <span class="icon">🗺️</span>
+                            <span class="label">L4: Nation</span>
+                        </div>
+                        <span class="scale-arrow">→</span>
+                        <div class="scale-level">
+                            <span class="icon">🌍</span>
+                            <span class="label">L5: Planète</span>
+                        </div>
+                    </div>
+
+                    <h4 data-i18n="scale.vsm">Modèle VSM</h4>
+                    <ul>
+                        <li data-i18n="scale.s1"><strong>S1</strong> : Opérations (Agents locaux)</li>
+                        <li data-i18n="scale.s2"><strong>S2</strong> : Coordination (Protocoles stigmergiques)</li>
+                        <li data-i18n="scale.s3"><strong>S3</strong> : Optimisation (Agrégateur)</li>
+                        <li data-i18n="scale.s4"><strong>S4</strong> : Intelligence (R-JEPA Global)</li>
+                        <li data-i18n="scale.s5"><strong>S5</strong> : Politique (Équité Lexicographique)</li>
+                    </ul>
+
+                    <p data-i18n="scale.mfg">
+                        Les <strong>Jeux à Champ Moyen (MFG)</strong> permettent de gérer la complexité
+                        de millions d'agents en modélisant l'interaction avec la "densité moyenne" de la société.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Équité par le Code -->
+        <section id="equite">
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2 class="section-title" data-i18n="equity.title">Équité par le Code</h2>
+                <p class="section-subtitle" data-i18n="equity.subtitle">
+                    L'optimisation lexicographique : améliorer d'abord le sort du plus défavorisé,
+                    puis le deuxième, et ainsi de suite.
+                </p>
+            </div>
+
+            <div class="image-text">
+                <div class="image-container">
+                    <img src="assets/slides/slide-08.jpg" alt="Équité par le code" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="equity.h3">Justice Algorithmique</h3>
+                    <p data-i18n="equity.p1">
+                        L'optimisation standard (utilitarisme) sacrifie mécaniquement les cas limites
+                        pour améliorer le score global. L'<strong>équité lexicographique</strong> (Leximin)
+                        refuse mathématiquement de sacrifier une minorité.
+                    </p>
+
+                    <div class="card" style="margin: var(--space-xl) 0;">
+                        <h4 class="card-title" data-i18n="equity.principle">Principe Leximin</h4>
+                        <p class="card-text" data-i18n="equity.principle.desc">
+                            1. Maximiser l'utilité du participant <strong>le plus défavorisé</strong><br>
+                            2. Sous cette contrainte, maximiser le <strong>deuxième plus défavorisé</strong><br>
+                            3. Et ainsi de suite jusqu'à allocation complète
+                        </p>
+                    </div>
+
+                    <p data-i18n="equity.p2">
+                        Grâce à <strong>SoftSort</strong> (tri différentiable), cette priorité est encodée
+                        directement dans la fonction de perte du modèle. L'algorithme est mathématiquement
+                        contraint de "soulever le plancher" avant d'"élever le plafond".
+                    </p>
+
+                    <blockquote>
+                        <p data-i18n="equity.quote">Fairness by Design : l'équité n'est pas une contrainte externe,
+                        mais un objectif structurel interne du modèle.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Homéostasie Planétaire -->
+        <section id="homeostasie">
+            <div class="section-header">
+                <span class="section-number">08</span>
+                <h2 class="section-title" data-i18n="homeostasis.title">Homéostasie Planétaire</h2>
+                <p class="section-subtitle" data-i18n="homeostasis.subtitle">
+                    Un système nerveux qui s'auto-régule pour maintenir des conditions viables
+                    pour tous ses membres.
+                </p>
+            </div>
+
+            <div class="image-text reverse">
+                <div class="image-container">
+                    <img src="assets/slides/slide-09.jpg" alt="Homéostasie Planétaire" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="homeostasis.h3">Le Corps Humain comme Métaphore</h3>
+
+                    <div class="content-grid" style="grid-template-columns: 1fr;">
+                        <div class="card">
+                            <h4 class="card-title" data-i18n="homeostasis.cells">🔬 Les Cellules</h4>
+                            <p class="card-text" data-i18n="homeostasis.cells.desc">
+                                Citoyens + Majordomes. Autonomes, elles gèrent leurs besoins locaux
+                                et envoient des signaux chimiques (vecteurs latents).
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title" data-i18n="homeostasis.nerves">🧬 Le Système Nerveux</h4>
+                            <p class="card-text" data-i18n="homeostasis.nerves.desc">
+                                Réseau interconnecté. Transmet les signaux instantanément
+                                sans violer l'intégrité de la cellule (Privacy).
+                            </p>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title" data-i18n="homeostasis.brain">🧠 Le Cerveau</h4>
+                            <p class="card-text" data-i18n="homeostasis.brain.desc">
+                                Mitigation centrale. Détecte les déséquilibres (inflammation/injustice)
+                                et envoie des signaux correcteurs en priorisant les zones fragiles.
+                            </p>
+                        </div>
+                    </div>
+
+                    <blockquote>
+                        <p data-i18n="homeostasis.quote">Remplacer la "main invisible" du marché, souvent aveugle et cruelle,
+                        par une optimisation visible et mathématique.</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Architecture Technique -->
+        <section id="architecture">
+            <div class="section-header">
+                <span class="section-number">09</span>
+                <h2 class="section-title" data-i18n="tech.title">Architecture Technique</h2>
+                <p class="section-subtitle" data-i18n="tech.subtitle">
+                    678M paramètres, 4096 dimensions latentes, 7 services Docker —
+                    une implémentation concrète de la vision.
+                </p>
+            </div>
+
+            <div class="image-text">
+                <div class="image-container">
+                    <img src="assets/slides/slide-10.jpg" alt="Architecture technique R-JEPA" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="tech.h3">Spécifications R-JEPA</h3>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">678M</div>
+                            <div class="stat-label" data-i18n="tech.params">Paramètres</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4096</div>
+                            <div class="stat-label" data-i18n="tech.dims">Dimensions</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">21K</div>
+                            <div class="stat-label" data-i18n="tech.problems">Problèmes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">7</div>
+                            <div class="stat-label" data-i18n="tech.services">Services</div>
+                        </div>
+                    </div>
+
+                    <h4 data-i18n="tech.modes">3 Modes d'Inférence</h4>
+                    <ul>
+                        <li data-i18n="tech.rerank"><strong>RERANK</strong> : Génère K candidats, sélectionne le meilleur par JEPA-loss</li>
+                        <li data-i18n="tech.nudge"><strong>NUDGE</strong> : Guide la génération token-par-token en temps réel</li>
+                        <li data-i18n="tech.plan"><strong>PLAN</strong> : Complète les étapes manquantes — capacité de "rêve"</li>
+                    </ul>
+
+                    <h4 data-i18n="tech.components">Composants</h4>
+                    <ul>
+                        <li data-i18n="tech.encoder"><strong>Context Encoder</strong> : 12 couches, 1024-dim, 16 têtes</li>
+                        <li data-i18n="tech.target"><strong>Target Encoder</strong> : Copie EMA (τ=0.996→0.9999)</li>
+                        <li data-i18n="tech.predictor"><strong>Predictor</strong> : 8 couches, prédit les latents masqués</li>
+                        <li data-i18n="tech.loss"><strong>Loss</strong> : L1 + variance_reg + contrastive</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Leçons de Cybersyn -->
+        <section id="cybersyn">
+            <div class="section-header">
+                <span class="section-number">10</span>
+                <h2 class="section-title" data-i18n="cybersyn.title">Leçons de Cybersyn</h2>
+                <p class="section-subtitle" data-i18n="cybersyn.subtitle">
+                    Chili, 1971-1973 : quand Stafford Beer a tenté de gérer une économie
+                    en temps réel avec 500 Télex.
+                </p>
+            </div>
+
+            <div class="image-text reverse">
+                <div class="image-container">
+                    <img src="assets/slides/slide-11.jpg" alt="Leçons de Cybersyn" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="cybersyn.h3">Un Précédent Historique</h3>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">1971</div>
+                            <div class="timeline-title" data-i18n="cybersyn.1971.title">Création de Cybersyn</div>
+                            <div class="timeline-text" data-i18n="cybersyn.1971.text">
+                                Gouvernement Allende + Stafford Beer. 500 Télex relient les usines
+                                à une salle de contrôle "Star Trek" à Santiago.
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1972</div>
+                            <div class="timeline-title" data-i18n="cybersyn.1972.title">Le Test : Grève des Camionneurs</div>
+                            <div class="timeline-text" data-i18n="cybersyn.1972.text">
+                                Grève financée par la CIA pour paralyser le pays.
+                                Avec Cybersyn, l'approvisionnement est maintenu en temps réel.
+                                <strong>La grève échoue.</strong>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">1973</div>
+                            <div class="timeline-title" data-i18n="cybersyn.1973.title">Coup d'État de Pinochet</div>
+                            <div class="timeline-text" data-i18n="cybersyn.1973.text">
+                                L'échec n'est pas technique, il est politique.
+                                La salle de contrôle est détruite. Le projet s'arrête.
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2025</div>
+                            <div class="timeline-title" data-i18n="cybersyn.2025.title">R-JEPA Cybernetics</div>
+                            <div class="timeline-text" data-i18n="cybersyn.2025.text">
+                                Même vision, nouveaux outils. LLM + JEPA + MFG + SoftSort.
+                                La cybernétique enfin outillée.
+                            </div>
+                        </div>
+                    </div>
+
+                    <blockquote>
+                        <p data-i18n="cybersyn.quote">On peut concevoir la plus brillante des architectures,
+                        mais si le contexte politique la détruit, elle ne sert à rien.</p>
+                        <cite>— Leçon de Cybersyn</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Contrat Social Cybernétique -->
+        <section id="contrat">
+            <div class="section-header">
+                <span class="section-number">11</span>
+                <h2 class="section-title" data-i18n="contract.title">Contrat Social Cybernétique</h2>
+                <p class="section-subtitle" data-i18n="contract.subtitle">
+                    La transition : ne pas confisquer le stock (capital passé),
+                    mais réguler le flux (production future).
+                </p>
+            </div>
+
+            <div class="image-text">
+                <div class="image-container">
+                    <img src="assets/slides/slide-12.jpg" alt="Contrat social cybernétique" loading="lazy">
+                </div>
+                <div class="text-content">
+                    <h3 data-i18n="contract.h3">Transition Négentropique</h3>
+
+                    <h4 data-i18n="contract.simulation">Module de Simulation</h4>
+                    <p data-i18n="contract.simulation.p">
+                        Le mode PLAN permet de "voir le futur". Un citoyen peut demander :
+                        "Si je deviens ébéniste, que se passe-t-il dans 3 ans ?"
+                        Le système projette des trajectoires basées sur des succès validés.
+                    </p>
+
+                    <h4 data-i18n="contract.transition">Flux contre Flux</h4>
+                    <ul>
+                        <li data-i18n="contract.t1"><strong>Capital = Batterie</strong> : Le stock passé est conservé</li>
+                        <li data-i18n="contract.t2"><strong>Nouvelle règle</strong> : L'usage doit être validé "succès"</li>
+                        <li data-i18n="contract.t3"><strong>Échange</strong> : Vieux flux (fiat) → Nouveaux services optimisés</li>
+                    </ul>
+
+                    <h4 data-i18n="contract.argument">L'Argument Vital</h4>
+                    <p data-i18n="contract.argument.p">
+                        La richesse n'a de valeur que dans un système stable.
+                        Sans R-JEPA : le capital s'érode (entropie).
+                        Avec R-JEPA : survie luxueuse et stable (négentropie).
+                    </p>
+
+                    <blockquote>
+                        <p data-i18n="contract.quote">"Gardez votre passé, mais jouez selon nos règles pour le futur."</p>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Section -->
+        <section id="media">
+            <div class="section-header">
+                <span class="section-number">12</span>
+                <h2 class="section-title" data-i18n="media.title">Média</h2>
+                <p class="section-subtitle" data-i18n="media.subtitle">
+                    Vidéo explicative et podcast complet pour approfondir la vision.
+                </p>
+            </div>
+
+            <div class="media-grid">
+                <div class="media-item">
+                    <div class="media-player">
+                        <video controls poster="assets/images/video-thumbnail.jpg" preload="metadata">
+                            <source src="assets/video/rjepa-ia-guide-ia.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la vidéo.
+                        </video>
+                    </div>
+                    <div class="media-info">
+                        <h3 class="media-title" data-i18n="media.video.title">R-JEPA : Une IA pour Guider l'IA</h3>
+                        <p class="media-duration" data-i18n="media.video.duration">6:57 • Vidéo explicative</p>
+                    </div>
+                </div>
+
+                <div class="media-item">
+                    <div class="media-player audio-player">
+                        <span class="audio-icon">🎧</span>
+                        <audio controls preload="metadata" style="flex: 1;">
+                            <source src="assets/audio/podcast-justice-mathematique.m4a" type="audio/mp4">
+                            Votre navigateur ne supporte pas l'audio.
+                        </audio>
+                    </div>
+                    <div class="media-info">
+                        <h3 class="media-title" data-i18n="media.podcast.title">Quand la Justice Devient une Fonction Mathématique</h3>
+                        <p class="media-duration" data-i18n="media.podcast.duration">14:56 • Podcast complet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download">
+            <div class="section-header">
+                <span class="section-number">13</span>
+                <h2 class="section-title" data-i18n="download.title">Téléchargement</h2>
+                <p class="section-subtitle" data-i18n="download.subtitle">
+                    Obtenez le document de recherche complet au format PDF.
+                </p>
+            </div>
+
+            <div class="download-card">
+                <div class="download-icon">📄</div>
+                <h3 class="download-title" data-i18n="download.paper">R-JEPA Cybernetics</h3>
+                <p class="download-text" data-i18n="download.desc">
+                    Document de recherche : Architecture d'un Système Nerveux Planétaire
+                    pour la Résilience Civilisationnelle
+                </p>
+                <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="assets/docs/presentation-rjepa-cybernetics.pdf" class="btn btn-primary" download>
+                        <span data-i18n="download.pdf">Télécharger le PDF</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                    </a>
+                    <button id="generate-pdf-btn" class="btn btn-secondary">
+                        <span data-i18n="download.generate">Générer depuis le site</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Section -->
+        <section id="donation">
+            <div class="section-header">
+                <span class="section-number">14</span>
+                <h2 class="section-title" data-i18n="donation.title">Soutenir le Projet</h2>
+                <p class="section-subtitle" data-i18n="donation.subtitle">
+                    R-JEPA Cybernetics est un projet de recherche indépendant.
+                    Votre soutien permet de continuer le développement.
+                </p>
+            </div>
+
+            <div class="donation-options">
+                <a href="https://ko-fi.com/teleadmin" target="_blank" rel="noopener" class="donation-btn">
+                    <span>☕</span>
+                    <span>Ko-fi</span>
+                </a>
+                <a href="https://github.com/sponsors/Teleadmin-ai" target="_blank" rel="noopener" class="donation-btn">
+                    <span>💖</span>
+                    <span>GitHub Sponsors</span>
+                </a>
+                <a href="https://www.paypal.com/paypalme/teleadmin" target="_blank" rel="noopener" class="donation-btn">
+                    <span>💳</span>
+                    <span>PayPal</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Author Section -->
+        <section id="author">
+            <div class="author-avatar">👨‍💻</div>
+            <h2 class="author-name">Romain Provençal</h2>
+            <p class="author-role" data-i18n="author.role">CEO Teleadmin • Data Scientist • Sysadmin</p>
+            <p class="author-bio" data-i18n="author.bio">
+                Transhumaniste convaincu, je travaille sur une société cybernétique gouvernée par la raison
+                et la science. R-JEPA Cybernetics est la cristallisation d'un rêve de 33 ans —
+                rendu possible par les architectures JEPA de Yann LeCun et les LLM modernes.
+            </p>
+            <div class="author-links">
+                <a href="https://cognition4ai.com" target="_blank" rel="noopener" class="author-link">cognition4ai.com</a>
+                <a href="https://teleadmin.net" target="_blank" rel="noopener" class="author-link">teleadmin.net</a>
+                <a href="https://github.com/Teleadmin-ai" target="_blank" rel="noopener" class="author-link">GitHub</a>
+                <a href="mailto:contact@teleadmin.net" class="author-link">Contact</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         Footer
+         ═══════════════════════════════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 data-i18n="footer.project">Projet</h4>
+                <ul>
+                    <li><a href="#diagnostic" data-i18n="footer.diagnostic">Diagnostic</a></li>
+                    <li><a href="#paradigme" data-i18n="footer.paradigm">Paradigme</a></li>
+                    <li><a href="#architecture" data-i18n="footer.architecture">Architecture</a></li>
+                    <li><a href="#download" data-i18n="footer.download">Téléchargement</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer.ecosystem">Écosystème</h4>
+                <ul>
+                    <li><a href="https://cognition4ai.com" target="_blank" rel="noopener">Cognition4AI (R-JEPA)</a></li>
+                    <li><a href="https://cognition4chat.com" target="_blank" rel="noopener">Cognition4Chat</a></li>
+                    <li><a href="https://cyberplace.ai" target="_blank" rel="noopener">Cyberplace.AI</a></li>
+                    <li><a href="https://teleadmin.net" target="_blank" rel="noopener">Teleadmin.net</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer.resources">Ressources</h4>
+                <ul>
+                    <li><a href="https://github.com/Teleadmin-ai/world-txt-model" target="_blank" rel="noopener">GitHub R-JEPA</a></li>
+                    <li><a href="https://openreview.net/pdf?id=BZ5a1r-kVsf" target="_blank" rel="noopener">LeCun's JEPA Paper</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Viable_system_model" target="_blank" rel="noopener">VSM (Wikipedia)</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Project_Cybersyn" target="_blank" rel="noopener">Cybersyn (Wikipedia)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer.contact">Contact</h4>
+                <ul>
+                    <li><a href="mailto:contact@teleadmin.net">contact@teleadmin.net</a></li>
+                    <li><a href="https://github.com/Teleadmin-ai" target="_blank" rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                © 2025 Romain Provençal / Teleadmin. R-JEPA Cybernetics.
+            </p>
+            <div class="footer-legal">
+                <a href="#" data-i18n="footer.privacy">Confidentialité</a>
+                <a href="#" data-i18n="footer.terms">Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         JavaScript
+         ═══════════════════════════════════════════════════════════════════ -->
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // Intro Splash Handler
+        // ═══════════════════════════════════════════════════════════════════
+        const introSplash = document.getElementById('intro-splash');
+        const enterBtn = document.getElementById('enter-btn');
+        const nav = document.querySelector('nav');
+        const introVideo = document.getElementById('intro-video');
+
+        function dismissIntro() {
+            introSplash.classList.add('hidden');
+            document.body.classList.remove('intro-active');
+            nav.classList.remove('hidden');
+            introVideo.pause();
+            localStorage.setItem('introSeen', 'true');
+        }
+
+        // Click anywhere to dismiss
+        introSplash.addEventListener('click', dismissIntro);
+        enterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dismissIntro();
+        });
+
+        // Check if intro was already seen
+        if (localStorage.getItem('introSeen') === 'true') {
+            dismissIntro();
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // i18n - Internationalization
+        // ═══════════════════════════════════════════════════════════════════
+        const translations = {
+            fr: {
+                'intro.title': 'Civilisation Cybernétique',
+                'intro.subtitle': 'Un système nerveux planétaire pour la résilience civilisationnelle',
+                'intro.enter': 'Entrer',
+                'nav.diagnostic': 'Diagnostic',
+                'nav.paradigm': 'Paradigme',
+                'nav.symbiosis': 'Symbiose',
+                'nav.stigmergy': 'Stigmergie',
+                'nav.architecture': 'Architecture',
+                'nav.media': 'Média',
+                'hero.badge': 'R-JEPA Cybernetics OS',
+                'hero.title1': 'Système Nerveux',
+                'hero.title2': 'Planétaire',
+                'hero.subtitle': 'Architecture de résilience civilisationnelle. Un OS sociétal qui remplace l\'anti-économie de la compétition par une cybernétique de coordination négentropique.',
+                'hero.quote': '"La cristallisation d\'un rêve de 33 ans, rendu possible par les architectures JEPA de Yann LeCun."',
+                'hero.cta1': 'Explorer',
+                'hero.cta2': 'Télécharger le PDF',
+                // ... more translations
+            },
+            en: {
+                'intro.title': 'Cybernetic Civilization',
+                'intro.subtitle': 'A planetary nervous system for civilizational resilience',
+                'intro.enter': 'Enter',
+                'nav.diagnostic': 'Diagnosis',
+                'nav.paradigm': 'Paradigm',
+                'nav.symbiosis': 'Symbiosis',
+                'nav.stigmergy': 'Stigmergy',
+                'nav.architecture': 'Architecture',
+                'nav.media': 'Media',
+                'hero.badge': 'R-JEPA Cybernetics OS',
+                'hero.title1': 'Planetary',
+                'hero.title2': 'Nervous System',
+                'hero.subtitle': 'Civilizational resilience architecture. A societal OS that replaces the anti-economy of competition with a negentropic coordination cybernetics.',
+                'hero.quote': '"The crystallization of a 33-year dream, made possible by Yann LeCun\'s JEPA architectures."',
+                'hero.cta1': 'Explore',
+                'hero.cta2': 'Download PDF',
+                // ... more translations
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'fr';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+
+            // Update lang buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Language switch handlers
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        // Initialize language
+        setLanguage(currentLang);
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Scroll Animations
+        // ═══════════════════════════════════════════════════════════════════
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .image-container, .text-content').forEach(el => {
+            el.classList.add('hidden-animate');
+            observer.observe(el);
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Smooth scroll for nav links
+        // ═══════════════════════════════════════════════════════════════════
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // PDF Generation (placeholder)
+        // ═══════════════════════════════════════════════════════════════════
+        document.getElementById('generate-pdf-btn')?.addEventListener('click', () => {
+            alert('Génération PDF en cours de développement. Utilisez le téléchargement direct pour l\'instant.');
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // Mermaid initialization
+        // ═══════════════════════════════════════════════════════════════════
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1a1a2e',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#0f3460',
+                lineColor: '#e94560',
+                secondaryColor: '#16213e',
+                tertiaryColor: '#0f3460'
+            }
+        });
+    </script>
+</body>
+</html>
