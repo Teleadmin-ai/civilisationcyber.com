@@ -659,7 +659,16 @@
                         <li>Équité Lexicographique (SoftSort)</li>
                     </ol>
                 </li>
-                <li>La Symbiose Humain-Majordome</li>
+                <li>La Symbiose Humain-Majordome
+                    <ol>
+                        <li>La Trinité Fonctionnelle</li>
+                        <li>Boucle de Rétroaction</li>
+                        <li>Types de Validation</li>
+                        <li>Architecture Bicamérale</li>
+                        <li>L'Objet Trace</li>
+                        <li>Le Vecteur Δ (GPS du Raisonnement)</li>
+                    </ol>
+                </li>
                 <li>Invariance d'Échelle et Modèle VSM</li>
                 <li>Le Contrat Social Cybernétique</li>
                 <li>Précédent Historique : Cybersyn (1971-1973)</li>
@@ -1185,6 +1194,130 @@
                 <img src="assets/slides/slide-04.jpg" alt="Symbiose Humain-Majordome">
                 <figcaption>Figure 8 : Boucle de rétroaction Humain-Majordome</figcaption>
             </figure>
+
+            <h3>5.4 Architecture Bicamérale du Majordome</h3>
+
+            <p>
+                Chaque Majordome est un système à deux "cerveaux" complémentaires qui collaborent
+                pour guider l'utilisateur :
+            </p>
+
+            <table>
+                <caption>Tableau 3b : Les deux modules cognitifs du Majordome</caption>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Rôle</th>
+                        <th>Fonction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Le Parleur</strong> (LLM Student)</td>
+                        <td>Interface humain</td>
+                        <td>Langage naturel, sémantique, dialogue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Le Penseur</strong> (R-JEPA Teacher)</td>
+                        <td>Logique / Stratégie</td>
+                        <td>Espace latent, prédiction, Manifold du Vrai</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Le LLM "voit" le monde entier (entraîné sur tout Internet, incluant erreurs et dangers).
+                R-JEPA ne "voit" que les chemins validés. La symbiose : le LLM décrit, R-JEPA prescrit.
+            </p>
+
+            <h3>5.5 L'Objet d'Échange : La Trace</h3>
+
+            <p>
+                Quand un agent réussit une action validée, il émet une <strong>Trace</strong> — l'unité
+                fondamentale d'échange dans le système stigmergique. Structure JSON :
+            </p>
+
+            <pre><code>{
+  "trace_id": "sha256:a1b2c3d4...",
+  "context": {
+    "embedding": [0.12, -0.34, ..., 0.98],  // z_t (4096-dim)
+    "domain": "energy",
+    "intent_hash": "sha256:..."
+  },
+  "action": {
+    "code": "ACT_OPTIMIZE_LOAD",
+    "outcome_embedding": [0.88, 0.04, ..., -0.21]  // z_success
+  },
+  "validation": {
+    "type": "transactional",  // ou "reciprocity", "outcome"
+    "proof": "zk_snark_proof_base64",
+    "validator_did": "did:rjepa:z6Mk..."
+  },
+  "privacy": {
+    "reversibility_score": 0.0001  // doit être < 0.001
+  }
+}</code></pre>
+
+            <p>
+                <strong>Propriété critique</strong> : Les embeddings 4096-dim sont mathématiquement
+                irréversibles — impossible de reconstruire le texte original. Seule la "direction"
+                dans l'espace latent est capturée, pas le contenu.
+            </p>
+
+            <h3>5.6 Le Vecteur Δ : Le GPS du Raisonnement</h3>
+
+            <p>
+                L'innovation clé de R-JEPA n'est pas de dire "vrai/faux" (binaire), mais de fournir
+                une <strong>direction vectorielle</strong>. Quand le LLM propose une action, R-JEPA calcule :
+            </p>
+
+            <div class="equation">
+                $$\Delta = z_{\text{pred}} - z_{\text{current}}$$
+                <span class="equation-number">(11)</span>
+            </div>
+
+            <p>
+                où $z_{\text{pred}}$ est l'état latent prédit par R-JEPA (où devrait-on aller ?) et
+                $z_{\text{current}}$ est l'état actuel encodé. Ce vecteur Δ est ensuite projeté dans
+                l'espace vocabulaire via un MLP :
+            </p>
+
+            <div class="equation">
+                $$\text{guidance\_bias} = \text{MLP}(\Delta) \in \mathbb{R}^{|\mathcal{V}|}$$
+                <span class="equation-number">(12)</span>
+            </div>
+
+            <p>
+                Le LLM utilise son pré-training pour <strong>interpréter sémantiquement</strong> cette
+                direction. Exemple concret :
+            </p>
+
+            <blockquote>
+                <strong>Situation</strong> : L'utilisateur veut demander une augmentation.<br>
+                <strong>LLM génère</strong> : "Je vais menacer de partir si je n'ai pas +30%"<br>
+                <strong>R-JEPA calcule</strong> : Énergie = 0.89 (HAUTE → hors du Manifold)<br>
+                <strong>Mémoire trouve</strong> : Trace validée similaire = "Présenter ses réalisations + demander feedback"<br>
+                <strong>Δ pointe</strong> : de "menace" vers "collaboration"<br>
+                <strong>LLM interprète</strong> : "L'écart suggère : remplacer confrontation par valorisation"<br>
+                <strong>Nouvelle génération</strong> : "Je vais présenter mes réalisations de l'année et ouvrir une discussion sur mon évolution salariale"
+            </blockquote>
+
+            <p>
+                C'est le <strong>"GPS Vectoriel"</strong> du système :
+            </p>
+
+            <table>
+                <thead>
+                    <tr><th>Composant</th><th>Rôle</th><th>Analogie GPS</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>R-JEPA</td><td>Coordonnées du succès</td><td>Destination</td></tr>
+                    <tr><td>LLM</td><td>Compréhension du terrain</td><td>Carte</td></tr>
+                    <tr><td>Δ (delta)</td><td>Direction de correction</td><td>Itinéraire</td></tr>
+                    <tr><td>Mémoire</td><td>Historique contextuel</td><td>Trafic temps réel</td></tr>
+                    <tr><td>Stigmergie</td><td>Intelligence collective</td><td>Waze (signalements)</td></tr>
+                </tbody>
+            </table>
         </section>
 
         <!-- Section 6: Invariance d'Échelle -->
