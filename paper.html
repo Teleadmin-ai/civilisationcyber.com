@@ -444,6 +444,142 @@
             font-family: var(--font-sans);
             font-size: 1.1rem;
         }
+
+        /* ═══════════════════════════════════════════════════════════════════
+           A4 Page Container System for PDF
+           ═══════════════════════════════════════════════════════════════════ */
+
+        .a4-page {
+            width: 170mm;
+            min-height: 247mm;
+            max-height: 257mm;
+            margin: 0 auto 20px auto;
+            padding: 20mm;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .a4-page.title-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 257mm;
+        }
+
+        .a4-page.flexible {
+            min-height: auto;
+            max-height: none;
+        }
+
+        @media print {
+            .a4-page {
+                width: 100%;
+                min-height: auto;
+                max-height: none;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .a4-page:last-child {
+                page-break-after: auto;
+            }
+
+            .a4-page.no-break {
+                page-break-after: auto;
+            }
+
+            .a4-page.flexible {
+                page-break-inside: auto;
+            }
+
+            body {
+                background: white;
+            }
+        }
+
+        /* Compact styles for fitting content */
+        .a4-page h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .a4-page h3 {
+            font-size: 1.1rem;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .a4-page p {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .a4-page ul, .a4-page ol {
+            margin-bottom: 10px;
+            padding-left: 25px;
+        }
+
+        .a4-page li {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .a4-page figure {
+            margin: 15px 0;
+        }
+
+        .a4-page figure img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+        }
+
+        .a4-page figcaption {
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .a4-page table {
+            font-size: 0.85rem;
+            margin: 10px 0;
+        }
+
+        .a4-page blockquote {
+            margin: 10px 0;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+        }
+
+        .a4-page pre {
+            font-size: 0.8rem;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* Page number footer */
+        .page-footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media print {
+            .page-footer {
+                display: none; /* Browser handles page numbers */
+            }
+        }
     </style>
 </head>
 <body>
@@ -466,8 +602,9 @@
     <!-- Paper Content -->
     <article class="paper" id="paper-content">
 
-        <!-- Title Page -->
-        <header class="title-page">
+        <!-- Page 1: Title -->
+        <div class="a4-page title-page">
+        <header>
             <h1 class="paper-title">
                 R-JEPA Cybernetics :<br>
                 Architecture d'un Système Nerveux Planétaire<br>
@@ -482,8 +619,10 @@
             <p class="affiliation">contact@teleadmin.net</p>
             <p class="date">Décembre 2025 — Document de Recherche v1.0</p>
         </header>
+        </div>
 
-        <!-- Abstract -->
+        <!-- Page 2: Abstract -->
+        <div class="a4-page">
         <section class="abstract">
             <h2>Résumé</h2>
             <p>
@@ -505,8 +644,10 @@
                 Apprentissage Asymétrique, Négentropie
             </p>
         </section>
+        </div>
 
-        <!-- Table of Contents -->
+        <!-- Page 3: Table of Contents -->
+        <div class="a4-page">
         <nav>
             <h2>Table des Matières</h2>
             <ol>
@@ -544,9 +685,10 @@
                 <li>Références</li>
             </ol>
         </nav>
+        </div>
 
-        <div class="page-break"></div>
-
+        <!-- Page 4+: Content (flexible pages) -->
+        <div class="a4-page flexible">
         <!-- Section 1: Introduction -->
         <section>
             <h2>1. Introduction : La Crise et la Renaissance Cybernétique</h2>
@@ -682,7 +824,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 3: Architecture R-JEPA -->
         <section>
@@ -849,7 +991,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 4: Formalisme Mathématique -->
         <section>
@@ -994,7 +1136,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 5: Symbiose Humain-Majordome -->
         <section>
@@ -1125,7 +1267,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 7: Contrat Social -->
         <section>
@@ -1234,7 +1376,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 9: Implémentation -->
         <section>
@@ -1636,6 +1778,8 @@
                 <li>Prefect (orchestration)</li>
             </ul>
         </section>
+
+        </div>
 
         <!-- Footer -->
         <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9rem; color: #666;">
