@@ -1393,11 +1393,11 @@
 
             <!-- GPS Vectoriel - Nouveau concept clé -->
             <div class="content-block" style="margin-top: var(--space-2xl); padding: var(--space-xl); background: var(--bg-card); border-radius: var(--radius-lg); border: 1px solid rgba(245, 166, 35, 0.3);">
-                <h3 style="color: var(--gold); margin-bottom: var(--space-lg); text-align: center;">
+                <h3 style="color: var(--gold); margin-bottom: var(--space-lg); text-align: center;" data-i18n="delta.title">
                     🧭 Le Vecteur Δ : GPS du Raisonnement
                 </h3>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-xl);">
-                    L'innovation clé de R-JEPA : il ne dit pas "vrai/faux" (binaire), il fournit une <strong style="color: var(--gold);">direction vectorielle</strong>.
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-xl);" data-i18n="delta.subtitle">
+                    L'innovation clé de R-JEPA : il ne dit pas "vrai/faux" (binaire), il fournit une direction vectorielle.
                 </p>
 
                 <!-- Formule Δ -->
@@ -1410,43 +1410,43 @@
                     <div style="text-align: center; padding: var(--space-md); background: rgba(245, 166, 35, 0.1); border-radius: var(--radius-md);">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🎯</div>
                         <div style="font-weight: 600; color: var(--gold);">R-JEPA</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Destination</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="delta.destination">Destination</div>
                     </div>
                     <div style="text-align: center; padding: var(--space-md); background: rgba(34, 211, 238, 0.1); border-radius: var(--radius-md);">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🗺️</div>
                         <div style="font-weight: 600; color: var(--cyan);">LLM</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Carte</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="delta.map">Carte</div>
                     </div>
                     <div style="text-align: center; padding: var(--space-md); background: rgba(139, 92, 246, 0.1); border-radius: var(--radius-md);">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🧭</div>
                         <div style="font-weight: 600; color: var(--purple);">Δ (delta)</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Itinéraire</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="delta.route">Itinéraire</div>
                     </div>
                     <div style="text-align: center; padding: var(--space-md); background: rgba(34, 197, 94, 0.1); border-radius: var(--radius-md);">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📍</div>
-                        <div style="font-weight: 600; color: var(--success);">Mémoire</div>
-                        <div style="font-size: 0.85rem; color: var(--text-muted);">Trafic</div>
+                        <div style="font-weight: 600; color: var(--success);" data-i18n="delta.memory">Mémoire</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="delta.traffic">Trafic</div>
                     </div>
                     <div style="text-align: center; padding: var(--space-md); background: rgba(245, 158, 11, 0.1); border-radius: var(--radius-md);">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🐜</div>
-                        <div style="font-weight: 600; color: var(--amber);">Stigmergie</div>
+                        <div style="font-weight: 600; color: var(--amber);" data-i18n="delta.stigmergy">Stigmergie</div>
                         <div style="font-size: 0.85rem; color: var(--text-muted);">Waze</div>
                     </div>
                 </div>
 
                 <!-- Exemple concret -->
                 <div style="background: var(--bg-secondary); border-radius: var(--radius-md); padding: var(--space-lg); border-left: 4px solid var(--gold);">
-                    <h4 style="color: var(--gold); margin-bottom: var(--space-md);">💼 Exemple : Négociation Salariale</h4>
+                    <h4 style="color: var(--gold); margin-bottom: var(--space-md);" data-i18n="delta.example.title">💼 Exemple : Négociation Salariale</h4>
                     <div style="display: grid; gap: var(--space-sm); font-size: 0.95rem;">
-                        <div><span style="color: var(--text-muted);">LLM génère :</span> <span style="color: var(--error);">"Je vais menacer de partir si je n'ai pas +30%"</span></div>
-                        <div><span style="color: var(--text-muted);">R-JEPA calcule :</span> <span style="color: var(--warning);">Énergie = 0.89 (hors Manifold)</span></div>
-                        <div><span style="color: var(--text-muted);">Δ pointe vers :</span> <span style="color: var(--cyan);">"menace" → "collaboration"</span></div>
-                        <div><span style="color: var(--text-muted);">Nouvelle réponse :</span> <span style="color: var(--success);">"Je vais présenter mes réalisations et ouvrir une discussion sur mon évolution"</span></div>
+                        <div><span style="color: var(--text-muted);" data-i18n="delta.example.llm">LLM génère :</span> <span style="color: var(--error);" data-i18n="delta.example.threat">"Je vais menacer de partir si je n'ai pas +30%"</span></div>
+                        <div><span style="color: var(--text-muted);" data-i18n="delta.example.rjepa">R-JEPA calcule :</span> <span style="color: var(--warning);" data-i18n="delta.example.energy">Énergie = 0.89 (hors Manifold)</span></div>
+                        <div><span style="color: var(--text-muted);" data-i18n="delta.example.delta">Δ pointe vers :</span> <span style="color: var(--cyan);" data-i18n="delta.example.direction">"menace" → "collaboration"</span></div>
+                        <div><span style="color: var(--text-muted);" data-i18n="delta.example.new">Nouvelle réponse :</span> <span style="color: var(--success);" data-i18n="delta.example.result">"Je vais présenter mes réalisations et ouvrir une discussion sur mon évolution"</span></div>
                     </div>
                 </div>
 
-                <p style="text-align: center; margin-top: var(--space-lg); color: var(--text-muted); font-style: italic;">
-                    Le LLM utilise son pré-training pour <strong>interpréter sémantiquement</strong> la direction Δ.
+                <p style="text-align: center; margin-top: var(--space-lg); color: var(--text-muted); font-style: italic;" data-i18n="delta.interpret">
+                    Le LLM utilise son pré-training pour interpréter sémantiquement la direction Δ.
                 </p>
             </div>
         </section>
@@ -2582,6 +2582,7 @@ flowchart TB
         // ═══════════════════════════════════════════════════════════════════
         const translations = {
             fr: {
+                // Intro & Nav
                 'intro.title': 'Civilisation Cybernétique',
                 'intro.subtitle': 'Un système nerveux planétaire pour la résilience civilisationnelle',
                 'intro.enter': 'Entrer',
@@ -2591,6 +2592,8 @@ flowchart TB
                 'nav.stigmergy': 'Stigmergie',
                 'nav.architecture': 'Architecture',
                 'nav.media': 'Média',
+                'nav.identity': 'Identité',
+                // Hero
                 'hero.badge': 'R-JEPA Cybernetics OS',
                 'hero.title1': 'Système Nerveux',
                 'hero.title2': 'Planétaire',
@@ -2598,9 +2601,81 @@ flowchart TB
                 'hero.quote': '"La cristallisation d\'un rêve de 33 ans, rendu possible par les architectures JEPA de Yann LeCun."',
                 'hero.cta1': 'Explorer',
                 'hero.cta2': 'Télécharger le PDF',
-                'download.slides': 'Télécharger les Slides',
-                'download.research': '📄 Papier de Recherche (PDF)',
-                'nav.identity': 'Identité',
+                // Diagnostic
+                'diagnostic.title': 'Le Diagnostic : Anti-Économie',
+                'diagnostic.subtitle': 'Notre système actuel est un générateur de gaspillage structurel.',
+                'diagnostic.h3': 'Le Gaspillage Structurel',
+                // Paradigm
+                'paradigm.title': 'Changement de Paradigme',
+                'paradigm.subtitle': 'De la prédiction de tokens à la prédiction de concepts.',
+                'paradigm.h3': 'Concepts vs Tokens',
+                // Symbiosis
+                'symbiosis.title': 'Symbiose Humain-Majordome',
+                'symbiosis.subtitle': 'L\'unité de base : un couple symbiotique où l\'humain est capteur et acteur, le Majordome est extension cognitive.',
+                'symbiosis.h3': 'La Trinité Fonctionnelle',
+                'symbiosis.llm': 'LLM → Langage',
+                'symbiosis.llm.desc': 'Interface conversationnelle. Comprend le contexte humain et formule des propositions claires.',
+                'symbiosis.rjepa': 'R-JEPA → Sens',
+                'symbiosis.rjepa.desc': 'Boussole prescriptive. Simule des trajectoires dans le "Manifold du Vrai" basées sur des succès validés.',
+                'symbiosis.human': 'Humain → Volonté',
+                'symbiosis.human.desc': 'Capteur final et acteur. Fournit besoins, ressources, décision d\'agir et validation du résultat.',
+                'symbiosis.loop': 'Boucle de Rétroaction',
+                'symbiosis.loop1': '1. Acquisition : L\'humain exprime un besoin',
+                'symbiosis.loop2': '2. Proposition : R-JEPA simule, LLM traduit',
+                'symbiosis.loop3': '3. Action : L\'humain décide et agit',
+                'symbiosis.loop4': '4. Validation : Succès encodé et partagé',
+                // Delta Vector (NEW)
+                'delta.title': '🧭 Le Vecteur Δ : GPS du Raisonnement',
+                'delta.subtitle': 'L\'innovation clé de R-JEPA : il ne dit pas "vrai/faux" (binaire), il fournit une direction vectorielle.',
+                'delta.destination': 'Destination',
+                'delta.map': 'Carte',
+                'delta.route': 'Itinéraire',
+                'delta.memory': 'Mémoire',
+                'delta.traffic': 'Trafic',
+                'delta.stigmergy': 'Stigmergie',
+                'delta.example.title': '💼 Exemple : Négociation Salariale',
+                'delta.example.llm': 'LLM génère :',
+                'delta.example.threat': '"Je vais menacer de partir si je n\'ai pas +30%"',
+                'delta.example.rjepa': 'R-JEPA calcule :',
+                'delta.example.energy': 'Énergie = 0.89 (hors Manifold)',
+                'delta.example.delta': 'Δ pointe vers :',
+                'delta.example.direction': '"menace" → "collaboration"',
+                'delta.example.new': 'Nouvelle réponse :',
+                'delta.example.result': '"Je vais présenter mes réalisations et ouvrir une discussion sur mon évolution"',
+                'delta.interpret': 'Le LLM utilise son pré-training pour interpréter sémantiquement la direction Δ.',
+                // Manifold
+                'manifold.title': 'Le Manifold du Vrai',
+                'manifold.subtitle': 'R-JEPA n\'apprend que des succès validés. Les échecs sont détectés comme des déviations de la géométrie du succès.',
+                'manifold.h3': 'Apprentissage Asymétrique',
+                // Stigmergy
+                'stigmergy.title': 'La Stigmergie',
+                'stigmergy.subtitle': 'Coordination sans communication directe. Les agents laissent des traces que d\'autres peuvent suivre.',
+                'stigmergy.h3': 'Coordination Sans Communication',
+                // Scale
+                'scale.title': 'Invariance d\'Échelle',
+                'scale.subtitle': 'La même architecture fonctionne du Majordome personnel à la gouvernance planétaire.',
+                'scale.h3': 'Du Majordome à la Planète',
+                // Equity
+                'equity.title': 'Équité par le Code',
+                'equity.subtitle': 'La justice n\'est plus un concept abstrait, mais une fonction mathématique optimisée.',
+                'equity.h3': 'Justice Algorithmique',
+                // Homeostasis
+                'homeostasis.title': 'Homéostasie Planétaire',
+                'homeostasis.subtitle': 'Un système qui s\'auto-régule pour maintenir des conditions viables pour tous.',
+                'homeostasis.h3': 'Le Corps Humain comme Métaphore',
+                // Tech
+                'tech.title': 'Architecture Technique',
+                'tech.subtitle': 'Spécifications du modèle R-JEPA : 678M paramètres, 4096 dimensions latentes.',
+                'tech.h3': 'Spécifications R-JEPA',
+                // Cybersyn
+                'cybersyn.title': 'Leçons de Cybersyn',
+                'cybersyn.subtitle': 'Le projet chilien de 1971-73 : succès technique, échec politique.',
+                'cybersyn.h3': 'Un Précédent Historique',
+                // Contract
+                'contract.title': 'Contrat Social Cybernétique',
+                'contract.subtitle': 'Gardez votre passé, mais jouez selon nos règles pour le futur.',
+                'contract.h3': 'Transition Négentropique',
+                // Identity
                 'identity.title': 'Couche Identité',
                 'identity.subtitle': 'Comment garantir la légitimité des traces sans compromettre l\'anonymat ?',
                 'identity.did.title': 'Identité Pseudonyme (DID)',
@@ -2610,9 +2685,21 @@ flowchart TB
                 'identity.zk.title': 'Zero-Knowledge Proofs',
                 'identity.blockchain.title': 'Blockchain (L2/zkEVM)',
                 'identity.flow.title': 'Flux de Données Sécurisé',
-                'footer.identity': 'Identité'
+                'footer.identity': 'Identité',
+                // Media
+                'media.title': 'Média',
+                'media.video.title': 'R-JEPA : OS pour la Société',
+                'media.podcast.title': 'Quand la Justice Devient une Fonction Mathématique',
+                // Download
+                'download.title': 'Téléchargement',
+                'download.paper': 'R-JEPA Cybernetics',
+                'download.slides': 'Télécharger les Slides',
+                'download.research': '📄 Papier de Recherche (PDF)',
+                // Donation
+                'donation.title': 'Soutenir le Projet'
             },
             en: {
+                // Intro & Nav
                 'intro.title': 'Cybernetic Civilization',
                 'intro.subtitle': 'A planetary nervous system for civilizational resilience',
                 'intro.enter': 'Enter',
@@ -2622,6 +2709,8 @@ flowchart TB
                 'nav.stigmergy': 'Stigmergy',
                 'nav.architecture': 'Architecture',
                 'nav.media': 'Media',
+                'nav.identity': 'Identity',
+                // Hero
                 'hero.badge': 'R-JEPA Cybernetics OS',
                 'hero.title1': 'Planetary',
                 'hero.title2': 'Nervous System',
@@ -2629,9 +2718,81 @@ flowchart TB
                 'hero.quote': '"The crystallization of a 33-year dream, made possible by Yann LeCun\'s JEPA architectures."',
                 'hero.cta1': 'Explore',
                 'hero.cta2': 'Download PDF',
-                'download.slides': 'Download Slides',
-                'download.research': '📄 Research Paper (PDF)',
-                'nav.identity': 'Identity',
+                // Diagnostic
+                'diagnostic.title': 'The Diagnosis: Anti-Economy',
+                'diagnostic.subtitle': 'Our current system is a structural waste generator.',
+                'diagnostic.h3': 'Structural Waste',
+                // Paradigm
+                'paradigm.title': 'Paradigm Shift',
+                'paradigm.subtitle': 'From token prediction to concept prediction.',
+                'paradigm.h3': 'Concepts vs Tokens',
+                // Symbiosis
+                'symbiosis.title': 'Human-Majordomo Symbiosis',
+                'symbiosis.subtitle': 'The base unit: a symbiotic couple where the human is sensor and actor, the Majordomo is cognitive extension.',
+                'symbiosis.h3': 'The Functional Trinity',
+                'symbiosis.llm': 'LLM → Language',
+                'symbiosis.llm.desc': 'Conversational interface. Understands human context and formulates clear proposals.',
+                'symbiosis.rjepa': 'R-JEPA → Meaning',
+                'symbiosis.rjepa.desc': 'Prescriptive compass. Simulates trajectories in the "Manifold of Truth" based on validated successes.',
+                'symbiosis.human': 'Human → Will',
+                'symbiosis.human.desc': 'Final sensor and actor. Provides needs, resources, decision to act and result validation.',
+                'symbiosis.loop': 'Feedback Loop',
+                'symbiosis.loop1': '1. Acquisition: Human expresses a need',
+                'symbiosis.loop2': '2. Proposal: R-JEPA simulates, LLM translates',
+                'symbiosis.loop3': '3. Action: Human decides and acts',
+                'symbiosis.loop4': '4. Validation: Success encoded and shared',
+                // Delta Vector (NEW)
+                'delta.title': '🧭 The Δ Vector: Reasoning GPS',
+                'delta.subtitle': 'R-JEPA\'s key innovation: it doesn\'t say "true/false" (binary), it provides a vectorial direction.',
+                'delta.destination': 'Destination',
+                'delta.map': 'Map',
+                'delta.route': 'Route',
+                'delta.memory': 'Memory',
+                'delta.traffic': 'Traffic',
+                'delta.stigmergy': 'Stigmergy',
+                'delta.example.title': '💼 Example: Salary Negotiation',
+                'delta.example.llm': 'LLM generates:',
+                'delta.example.threat': '"I\'ll threaten to leave if I don\'t get +30%"',
+                'delta.example.rjepa': 'R-JEPA computes:',
+                'delta.example.energy': 'Energy = 0.89 (outside Manifold)',
+                'delta.example.delta': 'Δ points toward:',
+                'delta.example.direction': '"threat" → "collaboration"',
+                'delta.example.new': 'New response:',
+                'delta.example.result': '"I\'ll present my achievements and open a discussion about my career evolution"',
+                'delta.interpret': 'The LLM uses its pre-training to semantically interpret the Δ direction.',
+                // Manifold
+                'manifold.title': 'The Manifold of Truth',
+                'manifold.subtitle': 'R-JEPA only learns from validated successes. Failures are detected as deviations from the geometry of success.',
+                'manifold.h3': 'Asymmetric Learning',
+                // Stigmergy
+                'stigmergy.title': 'Stigmergy',
+                'stigmergy.subtitle': 'Coordination without direct communication. Agents leave traces that others can follow.',
+                'stigmergy.h3': 'Coordination Without Communication',
+                // Scale
+                'scale.title': 'Scale Invariance',
+                'scale.subtitle': 'The same architecture works from personal Majordomo to planetary governance.',
+                'scale.h3': 'From Majordomo to Planet',
+                // Equity
+                'equity.title': 'Equity Through Code',
+                'equity.subtitle': 'Justice is no longer an abstract concept, but an optimized mathematical function.',
+                'equity.h3': 'Algorithmic Justice',
+                // Homeostasis
+                'homeostasis.title': 'Planetary Homeostasis',
+                'homeostasis.subtitle': 'A system that self-regulates to maintain viable conditions for all.',
+                'homeostasis.h3': 'The Human Body as Metaphor',
+                // Tech
+                'tech.title': 'Technical Architecture',
+                'tech.subtitle': 'R-JEPA model specifications: 678M parameters, 4096 latent dimensions.',
+                'tech.h3': 'R-JEPA Specifications',
+                // Cybersyn
+                'cybersyn.title': 'Lessons from Cybersyn',
+                'cybersyn.subtitle': 'The Chilean project of 1971-73: technical success, political failure.',
+                'cybersyn.h3': 'A Historical Precedent',
+                // Contract
+                'contract.title': 'Cybernetic Social Contract',
+                'contract.subtitle': 'Keep your past, but play by our rules for the future.',
+                'contract.h3': 'Negentropic Transition',
+                // Identity
                 'identity.title': 'Identity Layer',
                 'identity.subtitle': 'How to guarantee trace legitimacy without compromising anonymity?',
                 'identity.did.title': 'Pseudonymous Identity (DID)',
@@ -2641,7 +2802,18 @@ flowchart TB
                 'identity.zk.title': 'Zero-Knowledge Proofs',
                 'identity.blockchain.title': 'Blockchain (L2/zkEVM)',
                 'identity.flow.title': 'Secure Data Flow',
-                'footer.identity': 'Identity'
+                'footer.identity': 'Identity',
+                // Media
+                'media.title': 'Media',
+                'media.video.title': 'R-JEPA: OS for Society',
+                'media.podcast.title': 'When Justice Becomes a Mathematical Function',
+                // Download
+                'download.title': 'Download',
+                'download.paper': 'R-JEPA Cybernetics',
+                'download.slides': 'Download Slides',
+                'download.research': '📄 Research Paper (PDF)',
+                // Donation
+                'donation.title': 'Support the Project'
             }
         };
 
