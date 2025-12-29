@@ -1881,8 +1881,8 @@
         <section id="identite">
             <div class="section-header">
                 <span class="section-number">12</span>
-                <h2 class="section-title">Couche Identité & Économie des Traces</h2>
-                <p class="section-subtitle">
+                <h2 class="section-title" data-i18n="identity.title.full">Couche Identité & Économie des Traces</h2>
+                <p class="section-subtitle" data-i18n="identity.subtitle.full">
                     Le paradoxe fondamental : garantir la légitimité des traces sans compromettre l'anonymat.
                     Une architecture de confiance décentralisée qui réconcilie confidentialité et accountability.
                 </p>
@@ -1890,25 +1890,25 @@
 
             <!-- Le Paradoxe -->
             <div class="paradox-intro" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(14, 165, 233, 0.1)); border-radius: var(--radius-xl); padding: var(--space-xl); margin-bottom: var(--space-2xl); border: 1px solid rgba(99, 102, 241, 0.2);">
-                <h3 style="color: var(--primary); margin-bottom: var(--space-md);">⚡ Le Paradoxe Identité / Confidentialité</h3>
+                <h3 style="color: var(--primary); margin-bottom: var(--space-md);" data-i18n="identity.paradox.title">⚡ Le Paradoxe Identité / Confidentialité</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg);">
                     <div style="background: rgba(0,0,0,0.2); padding: var(--space-lg); border-radius: var(--radius-lg);">
-                        <h4 style="color: var(--accent); margin-bottom: var(--space-sm);">🔒 Exigence de Confidentialité</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                        <h4 style="color: var(--accent); margin-bottom: var(--space-sm);" data-i18n="identity.privacy.title">🔒 Exigence de Confidentialité</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="identity.privacy.desc">
                             Le texte ne quitte <strong>jamais</strong> l'appareil. Seuls les vecteurs latents 4096-dim
                             (mathématiquement irréversibles) sont transmis. Aucun lien possible entre trace et contenu original.
                         </p>
                     </div>
                     <div style="background: rgba(0,0,0,0.2); padding: var(--space-lg); border-radius: var(--radius-lg);">
-                        <h4 style="color: var(--warning); margin-bottom: var(--space-sm);">⚠️ Exigence d'Accountability</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                        <h4 style="color: var(--warning); margin-bottom: var(--space-sm);" data-i18n="identity.account.title">⚠️ Exigence d'Accountability</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="identity.account.desc">
                             Comment distinguer 1000 traces légitimes de 1000 traces spam d'un seul acteur malveillant ?
                             Comment construire une réputation sans identité ? Comment punir les mauvais acteurs ?
                         </p>
                     </div>
                     <div style="background: rgba(0,0,0,0.2); padding: var(--space-lg); border-radius: var(--radius-lg);">
-                        <h4 style="color: var(--success); margin-bottom: var(--space-sm);">✅ La Solution : Pseudonymat Cryptographique</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">
+                        <h4 style="color: var(--success); margin-bottom: var(--space-sm);" data-i18n="identity.solution.title">✅ La Solution : Pseudonymat Cryptographique</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="identity.solution.desc">
                             Distinguer trois concepts : <strong>Identité Réelle</strong> (ne sort jamais),
                             <strong>Identité Pseudonyme</strong> (DID persistant, réputation traçable),
                             <strong>Trace Anonyme</strong> (contenu invisible).
@@ -1919,7 +1919,7 @@
 
             <!-- Architecture Mermaid -->
             <div class="mermaid-container" style="background: var(--bg-card); border-radius: var(--radius-xl); padding: var(--space-xl); margin-bottom: var(--space-2xl); border: 1px solid rgba(255,255,255,0.05);">
-                <h3 style="text-align: center; margin-bottom: var(--space-lg); color: var(--text);">🏗️ Architecture Complète de la Couche Identité</h3>
+                <h3 style="text-align: center; margin-bottom: var(--space-lg); color: var(--text);" data-i18n="identity.arch.title">🏗️ Architecture Complète de la Couche Identité</h3>
                 <div class="mermaid" style="display: flex; justify-content: center;">
 %%{init: {'theme': 'dark', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryTextColor': '#fff', 'primaryBorderColor': '#4f46e5', 'lineColor': '#22d3ee', 'secondaryColor': '#1e293b', 'tertiaryColor': '#0f172a'}}}%%
 flowchart TB
@@ -1974,7 +1974,7 @@ flowchart TB
             </div>
 
             <!-- Les 6 Piliers détaillés -->
-            <h3 style="text-align: center; margin-bottom: var(--space-xl); color: var(--text);">🏛️ Les 6 Piliers de l'Architecture</h3>
+            <h3 style="text-align: center; margin-bottom: var(--space-xl); color: var(--text);" data-i18n="identity.pillars.title">🏛️ Les 6 Piliers de l'Architecture</h3>
 
             <div class="pillars-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: var(--space-xl); margin-bottom: var(--space-2xl);">
 
@@ -1983,11 +1983,11 @@ flowchart TB
                     <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
                         <span style="font-size: 2.5rem;">🔐</span>
                         <div>
-                            <h4 style="color: var(--text); margin: 0;">Identité Pseudonyme (DID)</h4>
+                            <h4 style="color: var(--text); margin: 0;" data-i18n="identity.did.name">Identité Pseudonyme (DID)</h4>
                             <span style="color: var(--primary); font-size: 0.85rem;">Decentralized Identifier</span>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);" data-i18n="identity.did.desc">
                         Un DID est un identifiant unique, <strong>auto-généré</strong> et <strong>contrôlé par son propriétaire</strong> —
                         sans autorité centrale. Il permet une réputation persistante sans jamais révéler l'identité réelle.
                     </p>
@@ -2007,11 +2007,11 @@ flowchart TB
                     <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
                         <span style="font-size: 2.5rem;">⭐</span>
                         <div>
-                            <h4 style="color: var(--text); margin: 0;">Réputation On-Chain</h4>
-                            <span style="color: var(--warning); font-size: 0.85rem;">Score Transparent & Immuable</span>
+                            <h4 style="color: var(--text); margin: 0;" data-i18n="identity.rep.name">Réputation On-Chain</h4>
+                            <span style="color: var(--warning); font-size: 0.85rem;" data-i18n="identity.rep.sub">Score Transparent & Immuable</span>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);" data-i18n="identity.rep.desc">
                         Score calculé par <strong>smart contract transparent</strong>. L'historique est immuable,
                         le calcul est vérifiable par tous. La réputation se gagne, ne s'achète pas.
                     </p>
@@ -2047,11 +2047,11 @@ flowchart TB
                     <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
                         <span style="font-size: 2.5rem;">🛡️</span>
                         <div>
-                            <h4 style="color: var(--text); margin: 0;">Protection Anti-Sybil</h4>
-                            <span style="color: var(--accent); font-size: 0.85rem;">Défense Multi-Couches</span>
+                            <h4 style="color: var(--text); margin: 0;" data-i18n="identity.sybil.name">Protection Anti-Sybil</h4>
+                            <span style="color: var(--accent); font-size: 0.85rem;" data-i18n="identity.sybil.sub">Défense Multi-Couches</span>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);" data-i18n="identity.sybil.desc">
                         <strong>Attaque Sybil</strong> : Un acteur malveillant crée des milliers de faux agents pour polluer le Manifold.
                         La défense repose sur 4 mécanismes complémentaires.
                     </p>
@@ -2092,11 +2092,11 @@ flowchart TB
                     <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
                         <span style="font-size: 2.5rem;">🪙</span>
                         <div>
-                            <h4 style="color: var(--text); margin: 0;">Token TRACE</h4>
-                            <span style="color: var(--warning); font-size: 0.85rem;">Économie Alignée</span>
+                            <h4 style="color: var(--text); margin: 0;" data-i18n="identity.token.name">Token TRACE</h4>
+                            <span style="color: var(--warning); font-size: 0.85rem;" data-i18n="identity.token.sub">Économie Alignée</span>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);" data-i18n="identity.token.desc">
                         Token natif pour aligner les incitations économiques avec le bien commun.
                         <strong>100% émis par contribution</strong> — pas de pre-mine, pas de VC.
                     </p>
@@ -2134,11 +2134,11 @@ flowchart TB
                     <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
                         <span style="font-size: 2.5rem;">🔮</span>
                         <div>
-                            <h4 style="color: var(--text); margin: 0;">Zero-Knowledge Proofs</h4>
-                            <span style="color: #8b5cf6; font-size: 0.85rem;">Prouver Sans Révéler</span>
+                            <h4 style="color: var(--text); margin: 0;" data-i18n="identity.zk.name">Zero-Knowledge Proofs</h4>
+                            <span style="color: #8b5cf6; font-size: 0.85rem;" data-i18n="identity.zk.sub">Prouver Sans Révéler</span>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);" data-i18n="identity.zk.desc">
                         Les ZK Proofs permettent de prouver une propriété <strong>sans révéler l'information sous-jacente</strong>.
                         Magie cryptographique au service de la confidentialité.
                     </p>
@@ -2178,11 +2178,11 @@ flowchart TB
                     <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
                         <span style="font-size: 2.5rem;">⛓️</span>
                         <div>
-                            <h4 style="color: var(--text); margin: 0;">Blockchain L2/zkEVM</h4>
-                            <span style="color: var(--secondary); font-size: 0.85rem;">Registre Décentralisé</span>
+                            <h4 style="color: var(--text); margin: 0;" data-i18n="identity.chain.name">Blockchain L2/zkEVM</h4>
+                            <span style="color: var(--secondary); font-size: 0.85rem;" data-i18n="identity.chain.sub">Registre Décentralisé</span>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+                    <p style="color: var(--text-muted); margin-bottom: var(--space-md);" data-i18n="identity.chain.desc">
                         Pas tout sur la blockchain — seulement ce qui nécessite transparence et immuabilité.
                         Les latents restent off-chain pour scalabilité et confidentialité.
                     </p>
@@ -2769,17 +2769,53 @@ flowchart TB
                 'identity.blockchain.title': 'Blockchain (L2/zkEVM)',
                 'identity.flow.title': 'Flux de Données Sécurisé',
                 'footer.identity': 'Identité',
+                // Identity Section Full
+                'identity.title.full': 'Couche Identité & Économie des Traces',
+                'identity.subtitle.full': 'Le paradoxe fondamental : garantir la légitimité des traces sans compromettre l\'anonymat. Une architecture de confiance décentralisée qui réconcilie confidentialité et accountability.',
+                'identity.paradox.title': '⚡ Le Paradoxe Identité / Confidentialité',
+                'identity.privacy.title': '🔒 Exigence de Confidentialité',
+                'identity.privacy.desc': 'Le texte ne quitte <strong>jamais</strong> l\'appareil. Seuls les vecteurs latents 4096-dim (mathématiquement irréversibles) sont transmis. Aucun lien possible entre trace et contenu original.',
+                'identity.account.title': '⚠️ Exigence d\'Accountability',
+                'identity.account.desc': 'Comment distinguer 1000 traces légitimes de 1000 traces spam d\'un seul acteur malveillant ? Comment construire une réputation sans identité ? Comment punir les mauvais acteurs ?',
+                'identity.solution.title': '✅ La Solution : Pseudonymat Cryptographique',
+                'identity.solution.desc': 'Distinguer trois concepts : <strong>Identité Réelle</strong> (ne sort jamais), <strong>Identité Pseudonyme</strong> (DID persistant, réputation traçable), <strong>Trace Anonyme</strong> (contenu invisible).',
+                'identity.arch.title': '🏗️ Architecture Complète de la Couche Identité',
+                'identity.pillars.title': '🏛️ Les 6 Piliers de l\'Architecture',
+                // Identity Pillars
+                'identity.did.name': 'Identité Pseudonyme (DID)',
+                'identity.did.desc': 'Un DID est un identifiant unique, <strong>auto-généré</strong> et <strong>contrôlé par son propriétaire</strong> — sans autorité centrale. Il permet une réputation persistante sans jamais révéler l\'identité réelle.',
+                'identity.rep.name': 'Réputation On-Chain',
+                'identity.rep.sub': 'Score Transparent & Immuable',
+                'identity.rep.desc': 'Score calculé par <strong>smart contract transparent</strong>. L\'historique est immuable, le calcul est vérifiable par tous. La réputation se gagne, ne s\'achète pas.',
+                'identity.sybil.name': 'Protection Anti-Sybil',
+                'identity.sybil.sub': 'Défense Multi-Couches',
+                'identity.sybil.desc': '<strong>Attaque Sybil</strong> : Un acteur malveillant crée des milliers de faux agents pour polluer le Manifold. La défense repose sur 4 mécanismes complémentaires.',
+                'identity.token.name': 'Token TRACE',
+                'identity.token.sub': 'Économie Alignée',
+                'identity.token.desc': 'Token natif pour aligner les incitations économiques avec le bien commun. <strong>100% émis par contribution</strong> — pas de pre-mine, pas de VC.',
+                'identity.zk.name': 'Zero-Knowledge Proofs',
+                'identity.zk.sub': 'Prouver Sans Révéler',
+                'identity.zk.desc': 'Les ZK Proofs permettent de prouver une propriété <strong>sans révéler l\'information sous-jacente</strong>. Magie cryptographique au service de la confidentialité.',
+                'identity.chain.name': 'Blockchain L2/zkEVM',
+                'identity.chain.sub': 'Registre Décentralisé',
+                'identity.chain.desc': 'Pas tout sur la blockchain — seulement ce qui nécessite transparence et immuabilité. Les latents restent off-chain pour scalabilité et confidentialité.',
                 // Media
                 'media.title': 'Média',
+                'media.subtitle': 'Vidéo explicative et podcast complet pour approfondir la vision.',
                 'media.video.title': 'R-JEPA : OS pour la Société',
+                'media.video.duration': '6:22 • Vidéo explicative',
                 'media.podcast.title': 'Quand la Justice Devient une Fonction Mathématique',
+                'media.podcast.duration': '14:56 • Podcast complet',
                 // Download
                 'download.title': 'Téléchargement',
+                'download.subtitle': 'Obtenez le document de recherche complet au format PDF.',
                 'download.paper': 'R-JEPA Cybernetics',
+                'download.desc': 'Document de recherche : Architecture d\'un Système Nerveux Planétaire pour la Résilience Civilisationnelle',
                 'download.slides': 'Télécharger les Slides',
                 'download.research': '📄 Papier de Recherche (PDF)',
                 // Donation
-                'donation.title': 'Soutenir le Projet'
+                'donation.title': 'Soutenir le Projet',
+                'donation.subtitle': 'R-JEPA Cybernetics est un projet de recherche indépendant. Votre soutien permet de continuer le développement.'
             },
             en: {
                 // Intro & Nav
@@ -2969,17 +3005,53 @@ flowchart TB
                 'identity.blockchain.title': 'Blockchain (L2/zkEVM)',
                 'identity.flow.title': 'Secure Data Flow',
                 'footer.identity': 'Identity',
+                // Identity Section Full
+                'identity.title.full': 'Identity Layer & Trace Economy',
+                'identity.subtitle.full': 'The fundamental paradox: guaranteeing trace legitimacy without compromising anonymity. A decentralized trust architecture that reconciles privacy and accountability.',
+                'identity.paradox.title': '⚡ The Identity / Privacy Paradox',
+                'identity.privacy.title': '🔒 Privacy Requirement',
+                'identity.privacy.desc': 'Text <strong>never</strong> leaves the device. Only 4096-dim latent vectors (mathematically irreversible) are transmitted. No possible link between trace and original content.',
+                'identity.account.title': '⚠️ Accountability Requirement',
+                'identity.account.desc': 'How to distinguish 1000 legitimate traces from 1000 spam traces from a single malicious actor? How to build reputation without identity? How to punish bad actors?',
+                'identity.solution.title': '✅ The Solution: Cryptographic Pseudonymity',
+                'identity.solution.desc': 'Distinguish three concepts: <strong>Real Identity</strong> (never leaves), <strong>Pseudonymous Identity</strong> (persistent DID, traceable reputation), <strong>Anonymous Trace</strong> (invisible content).',
+                'identity.arch.title': '🏗️ Complete Identity Layer Architecture',
+                'identity.pillars.title': '🏛️ The 6 Architecture Pillars',
+                // Identity Pillars
+                'identity.did.name': 'Pseudonymous Identity (DID)',
+                'identity.did.desc': 'A DID is a unique identifier, <strong>self-generated</strong> and <strong>controlled by its owner</strong> — without central authority. It enables persistent reputation without ever revealing real identity.',
+                'identity.rep.name': 'On-Chain Reputation',
+                'identity.rep.sub': 'Transparent & Immutable Score',
+                'identity.rep.desc': 'Score calculated by <strong>transparent smart contract</strong>. History is immutable, calculation is verifiable by all. Reputation is earned, not bought.',
+                'identity.sybil.name': 'Anti-Sybil Protection',
+                'identity.sybil.sub': 'Multi-Layer Defense',
+                'identity.sybil.desc': '<strong>Sybil Attack</strong>: A malicious actor creates thousands of fake agents to pollute the Manifold. Defense relies on 4 complementary mechanisms.',
+                'identity.token.name': 'TRACE Token',
+                'identity.token.sub': 'Aligned Economy',
+                'identity.token.desc': 'Native token to align economic incentives with the common good. <strong>100% issued by contribution</strong> — no pre-mine, no VC.',
+                'identity.zk.name': 'Zero-Knowledge Proofs',
+                'identity.zk.sub': 'Prove Without Revealing',
+                'identity.zk.desc': 'ZK Proofs allow proving a property <strong>without revealing the underlying information</strong>. Cryptographic magic serving privacy.',
+                'identity.chain.name': 'Blockchain L2/zkEVM',
+                'identity.chain.sub': 'Decentralized Registry',
+                'identity.chain.desc': 'Not everything on blockchain — only what requires transparency and immutability. Latents stay off-chain for scalability and privacy.',
                 // Media
                 'media.title': 'Media',
+                'media.subtitle': 'Explanatory video and complete podcast to deepen the vision.',
                 'media.video.title': 'R-JEPA: OS for Society',
+                'media.video.duration': '6:22 • Explanatory video',
                 'media.podcast.title': 'When Justice Becomes a Mathematical Function',
+                'media.podcast.duration': '14:56 • Complete podcast',
                 // Download
                 'download.title': 'Download',
+                'download.subtitle': 'Get the complete research document in PDF format.',
                 'download.paper': 'R-JEPA Cybernetics',
+                'download.desc': 'Research document: Architecture of a Planetary Nervous System for Civilizational Resilience',
                 'download.slides': 'Download Slides',
                 'download.research': '📄 Research Paper (PDF)',
                 // Donation
-                'donation.title': 'Support the Project'
+                'donation.title': 'Support the Project',
+                'donation.subtitle': 'R-JEPA Cybernetics is an independent research project. Your support enables continued development.'
             }
         };
 
@@ -2999,7 +3071,7 @@ flowchart TB
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.dataset.i18n;
                 if (translations[lang] && translations[lang][key]) {
-                    el.textContent = translations[lang][key];
+                    el.innerHTML = translations[lang][key];
                 }
             });
         }
