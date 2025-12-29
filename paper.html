@@ -112,7 +112,7 @@
         .title-page {
             text-align: center;
             margin-bottom: 40px;
-            page-break-after: always;
+            /* page-break removed */
         }
 
         .paper-title {
@@ -338,9 +338,10 @@
             color: #666;
         }
 
-        /* Page breaks */
+        /* Page breaks - disabled for better html2pdf rendering */
         .page-break {
-            page-break-after: always;
+            display: none;
+            height: 0;
         }
 
         /* Print styles */
@@ -350,7 +351,13 @@
             }
 
             .paper {
-                margin-top: 0;
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+
+            .title-page {
+                margin-top: 0 !important;
+                padding-top: 20px;
             }
 
             body {
@@ -499,12 +506,24 @@
                 <li>Le Contrat Social Cybernétique</li>
                 <li>Précédent Historique : Cybersyn (1971-1973)</li>
                 <li>Implémentation et Déploiement</li>
+                <li>Couche Identité & Économie des Traces
+                    <ol>
+                        <li>Le Paradoxe Identité/Confidentialité</li>
+                        <li>Architecture DID</li>
+                        <li>Système de Réputation</li>
+                        <li>Protection Anti-Sybil</li>
+                        <li>Zero-Knowledge Proofs</li>
+                        <li>Token TRACE</li>
+                        <li>Blockchain L2/zkEVM</li>
+                        <li>Gouvernance S5</li>
+                    </ol>
+                </li>
                 <li>Conclusion</li>
                 <li>Références</li>
             </ol>
         </nav>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 1: Introduction -->
         <section>
@@ -641,7 +660,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 3: Architecture R-JEPA -->
         <section>
@@ -808,7 +827,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 4: Formalisme Mathématique -->
         <section>
@@ -953,7 +972,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 5: Symbiose Humain-Majordome -->
         <section>
@@ -1084,7 +1103,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 7: Contrat Social -->
         <section>
@@ -1193,7 +1212,7 @@
             </figure>
         </section>
 
-        <div class="page-break"></div>
+        
 
         <!-- Section 9: Implémentation -->
         <section>
@@ -1641,23 +1660,26 @@
 
                 // PDF options
                 const opt = {
-                    margin: [15, 15, 15, 15],
+                    margin: [10, 12, 10, 12],
                     filename: 'R-JEPA_Cybernetics_Research_Paper.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
+                    image: { type: 'jpeg', quality: 0.92 },
                     html2canvas: {
-                        scale: 2,
+                        scale: 1.5,
                         useCORS: true,
                         letterRendering: true,
-                        logging: false
+                        logging: false,
+                        scrollY: 0,
+                        windowWidth: 794
                     },
                     jsPDF: {
                         unit: 'mm',
                         format: 'a4',
-                        orientation: 'portrait'
+                        orientation: 'portrait',
+                        compress: true
                     },
                     pagebreak: {
-                        mode: ['avoid-all', 'css', 'legacy'],
-                        before: '.page-break'
+                        mode: ['css', 'legacy'],
+                        avoid: ['h2', 'h3', 'figure', 'table', 'pre', 'blockquote']
                     }
                 };
 
