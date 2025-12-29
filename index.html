@@ -217,6 +217,47 @@
             box-shadow: var(--shadow-glow-gold);
         }
 
+        #sound-toggle {
+            position: absolute;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-base);
+            z-index: 1001;
+        }
+
+        #sound-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        #sound-toggle svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        #sound-toggle .sound-on {
+            display: none;
+        }
+
+        #sound-toggle.unmuted .sound-off {
+            display: none;
+        }
+
+        #sound-toggle.unmuted .sound-on {
+            display: block;
+        }
+
         @keyframes pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.4); }
             50% { box-shadow: 0 0 0 15px rgba(245, 166, 35, 0); }
@@ -1175,6 +1216,21 @@
         <video id="intro-video" autoplay muted loop playsinline poster="assets/images/intro-preview.jpg">
             <source src="assets/video/intro-vision-cybernetique.mp4" type="video/mp4">
         </video>
+        <!-- Sound Toggle Button -->
+        <button id="sound-toggle" title="Activer le son">
+            <!-- Sound Off Icon (muted) -->
+            <svg class="sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <line x1="23" y1="9" x2="17" y2="15"/>
+                <line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+            <!-- Sound On Icon (unmuted) -->
+            <svg class="sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+        </button>
         <div id="intro-overlay">
             <h1 id="intro-title" data-i18n="intro.title">Civilisation Cybernétique</h1>
             <p id="intro-subtitle" data-i18n="intro.subtitle">Un système nerveux planétaire pour la résilience civilisationnelle</p>
@@ -2555,6 +2611,7 @@ flowchart TB
         const enterBtn = document.getElementById('enter-btn');
         const nav = document.querySelector('nav');
         const introVideo = document.getElementById('intro-video');
+        const soundToggle = document.getElementById('sound-toggle');
 
         function dismissIntro() {
             introSplash.classList.add('hidden');
@@ -2563,7 +2620,15 @@ flowchart TB
             introVideo.pause();
         }
 
-        // Click anywhere to dismiss
+        // Sound toggle
+        soundToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            introVideo.muted = !introVideo.muted;
+            soundToggle.classList.toggle('unmuted', !introVideo.muted);
+            soundToggle.title = introVideo.muted ? 'Activer le son' : 'Couper le son';
+        });
+
+        // Click anywhere to dismiss (except on sound toggle)
         introSplash.addEventListener('click', dismissIntro);
         enterBtn.addEventListener('click', (e) => {
             e.stopPropagation();
