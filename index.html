@@ -2561,7 +2561,6 @@ flowchart TB
             document.body.classList.remove('intro-active');
             nav.classList.remove('hidden');
             introVideo.pause();
-            localStorage.setItem('introSeen', 'true');
         }
 
         // Click anywhere to dismiss
@@ -2570,11 +2569,6 @@ flowchart TB
             e.stopPropagation();
             dismissIntro();
         });
-
-        // Check if intro was already seen
-        if (localStorage.getItem('introSeen') === 'true') {
-            dismissIntro();
-        }
 
         // ═══════════════════════════════════════════════════════════════════
         // i18n - Internationalization
