@@ -1858,14 +1858,14 @@
                     pour la Résilience Civilisationnelle
                 </p>
                 <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
-                    <a href="assets/docs/presentation-rjepa-cybernetics.pdf" class="btn btn-primary" download>
-                        <span data-i18n="download.pdf">Télécharger le PDF</span>
+                    <a href="assets/docs/presentation-rjepa-cybernetics.pdf" class="btn btn-secondary" download>
+                        <span data-i18n="download.slides">Télécharger les Slides</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
                         </svg>
                     </a>
-                    <button id="generate-pdf-btn" class="btn btn-secondary">
-                        <span data-i18n="download.generate">Générer depuis le site</span>
+                    <button id="generate-pdf-btn" class="btn btn-primary">
+                        <span data-i18n="download.research">📄 Papier de Recherche (PDF)</span>
                     </button>
                 </div>
             </div>
@@ -2021,7 +2021,8 @@
                 'hero.quote': '"La cristallisation d\'un rêve de 33 ans, rendu possible par les architectures JEPA de Yann LeCun."',
                 'hero.cta1': 'Explorer',
                 'hero.cta2': 'Télécharger le PDF',
-                // ... more translations
+                'download.slides': 'Télécharger les Slides',
+                'download.research': '📄 Papier de Recherche (PDF)'
             },
             en: {
                 'intro.title': 'Cybernetic Civilization',
@@ -2040,7 +2041,8 @@
                 'hero.quote': '"The crystallization of a 33-year dream, made possible by Yann LeCun\'s JEPA architectures."',
                 'hero.cta1': 'Explore',
                 'hero.cta2': 'Download PDF',
-                // ... more translations
+                'download.slides': 'Download Slides',
+                'download.research': '📄 Research Paper (PDF)'
             }
         };
 
@@ -2109,10 +2111,10 @@
         });
 
         // ═══════════════════════════════════════════════════════════════════
-        // PDF Generation (placeholder)
+        // PDF Generation - Ouvre le papier de recherche avec génération PDF
         // ═══════════════════════════════════════════════════════════════════
         document.getElementById('generate-pdf-btn')?.addEventListener('click', () => {
-            alert('Génération PDF en cours de développement. Utilisez le téléchargement direct pour l\'instant.');
+            window.open('paper.html', '_blank');
         });
 
         // ═══════════════════════════════════════════════════════════════════

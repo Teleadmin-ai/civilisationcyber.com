@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R-JEPA Cybernetics - Document de Recherche</title>
+
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+
+    <!-- html2pdf.js for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════
+           Academic Paper Stylesheet
+           ═══════════════════════════════════════════════════════════════════ */
+
+        :root {
+            --font-serif: 'Times New Roman', 'Liberation Serif', Georgia, serif;
+            --font-sans: 'Helvetica Neue', Arial, sans-serif;
+            --font-mono: 'Courier New', monospace;
+            --text-color: #1a1a1a;
+            --link-color: #0066cc;
+            --border-color: #cccccc;
+            --bg-light: #f5f5f5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 12pt;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            line-height: 1.6;
+            color: var(--text-color);
+            background: white;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm 25mm;
+        }
+
+        /* Header Controls (hidden in PDF) */
+        .controls {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a2e;
+            color: white;
+            padding: 15px 25mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .controls h1 {
+            font-size: 1rem;
+            font-family: var(--font-sans);
+        }
+
+        .controls button {
+            background: linear-gradient(135deg, #f5a623, #f59e0b);
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+        }
+
+        .controls button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Paper content with top margin for fixed header */
+        .paper {
+            margin-top: 60px;
+        }
+
+        /* Title Page */
+        .title-page {
+            text-align: center;
+            margin-bottom: 40px;
+            page-break-after: always;
+        }
+
+        .paper-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .paper-subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .authors {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .affiliation {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        /* Abstract */
+        .abstract {
+            background: var(--bg-light);
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 4px solid #333;
+        }
+
+        .abstract h2 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .abstract p {
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .keywords {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .keywords strong {
+            color: #333;
+        }
+
+        /* Sections */
+        h2 {
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-size: 1rem;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 12px;
+            text-indent: 1.5em;
+        }
+
+        p:first-of-type,
+        h2 + p,
+        h3 + p,
+        h4 + p {
+            text-indent: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 12px 0 12px 2em;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Figures */
+        figure {
+            margin: 20px 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-light);
+            font-weight: bold;
+        }
+
+        caption {
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        /* Equations */
+        .equation {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .equation-number {
+            float: right;
+            margin-right: 10px;
+        }
+
+        /* Code blocks */
+        pre, code {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            background: var(--bg-light);
+        }
+
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        code {
+            padding: 2px 4px;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-left: 3px solid #333;
+            background: var(--bg-light);
+            font-style: italic;
+        }
+
+        /* Definition lists */
+        dl {
+            margin: 15px 0;
+        }
+
+        dt {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        dd {
+            margin-left: 2em;
+            margin-bottom: 5px;
+        }
+
+        /* References */
+        .references {
+            font-size: 0.9rem;
+        }
+
+        .references ol {
+            margin-left: 0;
+            padding-left: 2em;
+        }
+
+        .references li {
+            margin-bottom: 8px;
+            text-indent: -2em;
+            padding-left: 2em;
+        }
+
+        /* Footnotes */
+        .footnote {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Page breaks */
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Print styles */
+        @media print {
+            .controls {
+                display: none !important;
+            }
+
+            .paper {
+                margin-top: 0;
+            }
+
+            body {
+                padding: 15mm 20mm;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            figure, table {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #f5a623;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Controls Header -->
+    <div class="controls">
+        <h1>📄 R-JEPA Cybernetics — Document de Recherche</h1>
+        <div>
+            <button id="download-btn" onclick="generatePDF()">
+                ⬇️ Télécharger le PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Génération du PDF en cours...</div>
+    </div>
+
+    <!-- Paper Content -->
+    <article class="paper" id="paper-content">
+
+        <!-- Title Page -->
+        <header class="title-page">
+            <h1 class="paper-title">
+                R-JEPA Cybernetics :<br>
+                Architecture d'un Système Nerveux Planétaire<br>
+                pour la Résilience Civilisationnelle
+            </h1>
+            <p class="paper-subtitle">
+                Gouvernance Socio-Technique par Architectures Prédictives Latentes<br>
+                et Équité Lexicographique
+            </p>
+            <p class="authors">Romain Provençal</p>
+            <p class="affiliation">Teleadmin</p>
+            <p class="affiliation">contact@teleadmin.net</p>
+            <p class="date">Décembre 2025 — Document de Recherche v1.0</p>
+        </header>
+
+        <!-- Abstract -->
+        <section class="abstract">
+            <h2>Résumé</h2>
+            <p>
+                Ce document présente R-JEPA Cybernetics, une architecture de gouvernance intégrale
+                conçue pour remplacer l'anti-économie actuelle — fondée sur une compétition entropique
+                génératrice de gaspillage — par une cybernétique de coordination négentropique.
+                En combinant les architectures prédictives à enchâssement conjoint (JEPA), les Jeux à
+                Champ Moyen (MFG), et l'optimisation lexicographique différentiable (SoftSort), nous
+                proposons un cadre théorique et technique pour une gouvernance par rétroaction plutôt
+                que par dogme. Le système repose sur une symbiose Humain-Majordome où des assistants IA
+                personnels coordonnent les ressources collectives via stigmergie, sans compromettre la
+                vie privée. L'équité lexicographique, encodée directement dans la fonction de perte du
+                modèle, garantit mathématiquement qu'aucune minorité ne sera sacrifiée pour le bien de
+                la majorité.
+            </p>
+            <p class="keywords">
+                <strong>Mots-clés :</strong> R-JEPA, Cybernétique, Stigmergie, World Model,
+                Équité Lexicographique, Jeux à Champ Moyen, VSM, Gouvernance Algorithmique,
+                Apprentissage Asymétrique, Négentropie
+            </p>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav>
+            <h2>Table des Matières</h2>
+            <ol>
+                <li>Introduction : La Crise et la Renaissance Cybernétique</li>
+                <li>Fondements Théoriques
+                    <ol>
+                        <li>L'Anti-Économie : Diagnostic d'un Système Entropique</li>
+                        <li>L'Alternative Négentropique</li>
+                        <li>La Stigmergie comme Mécanisme de Coordination</li>
+                    </ol>
+                </li>
+                <li>Architecture R-JEPA
+                    <ol>
+                        <li>Du Descriptif au Prescriptif</li>
+                        <li>Le Manifold du Vrai</li>
+                        <li>Spécifications Techniques</li>
+                        <li>Modes d'Inférence</li>
+                    </ol>
+                </li>
+                <li>Formalisme Mathématique
+                    <ol>
+                        <li>Apprentissage Asymétrique</li>
+                        <li>Architecture Dual-Encoder EMA</li>
+                        <li>Jeux à Champ Moyen (MFG)</li>
+                        <li>Équité Lexicographique (SoftSort)</li>
+                    </ol>
+                </li>
+                <li>La Symbiose Humain-Majordome</li>
+                <li>Invariance d'Échelle et Modèle VSM</li>
+                <li>Le Contrat Social Cybernétique</li>
+                <li>Précédent Historique : Cybersyn (1971-1973)</li>
+                <li>Implémentation et Déploiement</li>
+                <li>Conclusion</li>
+                <li>Références</li>
+            </ol>
+        </nav>
+
+        <div class="page-break"></div>
+
+        <!-- Section 1: Introduction -->
+        <section>
+            <h2>1. Introduction : La Crise et la Renaissance Cybernétique</h2>
+
+            <p>
+                Le paysage actuel de l'intelligence artificielle est dominé par le paradigme des Grands
+                Modèles de Langage (LLMs), qui fonctionnent sur un principe probabiliste autorégressif :
+                prédire le prochain élément d'une séquence (token) en se basant sur les précédents.
+                Si cette approche a permis des prouesses remarquables dans la manipulation syntaxique
+                et sémantique du langage, elle rencontre des limitations structurelles majeures
+                lorsqu'elle est appliquée à la gouvernance de systèmes physiques ou sociaux réels.
+            </p>
+
+            <p>
+                Les modèles autorégressifs souffrent d'une accumulation d'erreurs exponentielle lors
+                de la génération de longues séquences d'actions, un défaut critique pour la planification
+                stratégique. De plus, ils opèrent souvent dans l'espace des observations brutes (pixels
+                ou tokens), qui est intrinsèquement bruité et riche en détails non pertinents pour la
+                prise de décision de haut niveau.
+            </p>
+
+            <p>
+                Pour pallier ces déficits architecturaux, la recherche contemporaine opère un retour
+                théorique vers la <strong>cybernétique</strong>, discipline fondée par Norbert Wiener
+                au milieu du XXe siècle [1]. La cybernétique, définie comme l'étude du contrôle et de
+                la communication chez l'animal et la machine, fournit les primitives conceptuelles
+                nécessaires pour concevoir des systèmes capables de régulation autonome.
+            </p>
+
+            <p>
+                Ce document présente R-JEPA Cybernetics, la réalisation technologique d'une
+                <strong>gouvernance homéostatique</strong> — un système qui s'auto-régule pour
+                maintenir des conditions viables pour tous ses membres, comme un corps maintient
+                sa température interne.
+            </p>
+
+            <figure>
+                <img src="assets/slides/slide-01.jpg" alt="R-JEPA Cybernetics - Page de titre">
+                <figcaption>Figure 1 : R-JEPA Cybernetics — "La cristallisation d'un rêve de 33 ans"</figcaption>
+            </figure>
+        </section>
+
+        <!-- Section 2: Fondements Théoriques -->
+        <section>
+            <h2>2. Fondements Théoriques</h2>
+
+            <h3>2.1 L'Anti-Économie : Diagnostic d'un Système Entropique</h3>
+
+            <p>
+                Notre système économique actuel repose sur la compétition aveugle. Les sources le
+                qualifient d'« anti-économie » — un terme qui mérite explication. Le principe :
+                pour qu'une start-up réussisse, mille autres doivent échouer. Mais ces mille entreprises
+                ont consommé des ressources — du capital, de l'énergie, du temps humain, des talents.
+                C'est une perte sèche, un <strong>gaspillage structurel</strong> immense.
+            </p>
+
+            <p>
+                Ce système est dit « entropique » — un terme de physique signifiant qu'il tend
+                naturellement vers le désordre, le chaos, la dispersion de l'énergie.
+            </p>
+
+            <p>La compétition génère plusieurs types de friction destructrice :</p>
+            <ul>
+                <li><strong>Duplication d'effort</strong> : Cent équipes travaillent sur le même problème sans partager leurs découvertes</li>
+                <li><strong>Secret industriel</strong> : Les innovations sont cachées pour préserver un avantage compétitif temporaire</li>
+                <li><strong>Marketing de manipulation</strong> : Des ressources massives investies non pour créer de la valeur, mais pour capturer l'attention</li>
+                <li><strong>Obsolescence programmée</strong> : Destruction volontaire de valeur pour forcer le renouvellement</li>
+                <li><strong>Externalités négatives</strong> : Les coûts réels (pollution, santé, social) externalisés sur la collectivité</li>
+            </ul>
+
+            <figure>
+                <img src="assets/slides/slide-02.jpg" alt="Le diagnostic : anti-économie">
+                <figcaption>Figure 2 : Le diagnostic — Un système entropique qui tend vers le chaos</figcaption>
+            </figure>
+
+            <h3>2.2 L'Alternative Négentropique</h3>
+
+            <p>
+                La <strong>néguentropie</strong> (ou entropie négative) est le contraire de l'entropie :
+                c'est la tendance à créer de l'ordre, de la structure, de l'organisation. C'est ce que
+                fait la vie elle-même — elle organise la matière contre la tendance naturelle au désordre.
+            </p>
+
+            <p>
+                Un système négentropique est un système qui, au lieu de gaspiller l'énergie en friction
+                compétitive, capitalise immédiatement chaque découverte pour le bénéfice collectif.
+                R-JEPA Cybernetics propose deux mécanismes complémentaires :
+            </p>
+
+            <dl>
+                <dt>La Stigmergie</dt>
+                <dd>Quand un agent trouve une solution qui fonctionne, il laisse une « trace de succès »
+                dans l'environnement partagé. Les autres agents peuvent suivre ces traces sans avoir
+                à réinventer la roue.</dd>
+
+                <dt>L'Apprentissage Asymétrique</dt>
+                <dd>Le système n'apprend que des succès validés. Les échecs ne sont pas propagés,
+                ils ne laissent pas de traces négatives. Cela crée une « carte des chemins viables »
+                qui s'enrichit continuellement.</dd>
+            </dl>
+
+            <blockquote>
+                « On ne dépense plus l'effort humain pour se battre, mais pour capitaliser.
+                L'effort d'un seul profite instantanément à tous. »
+            </blockquote>
+
+            <h3>2.3 La Stigmergie comme Mécanisme de Coordination</h3>
+
+            <p>
+                La stigmergie est une forme de coordination indirecte et asynchrone, théorisée par
+                Pierre-Paul Grassé pour décrire le comportement des termites, puis généralisée par
+                Francis Heylighen [2]. Plutôt que de communiquer directement, les agents laissent
+                des traces dans un environnement partagé.
+            </p>
+
+            <p>
+                Dans la nature, les fourmis ne se parlent pas — elles suivent des traces de phéromones.
+                Une fourmi trouve une source de nourriture et sur le chemin du retour, elle laisse une
+                trace. D'autres fourmis tombent sur cette trace, la suivent et la renforcent avec leur
+                propre phéromone. Très vite, une autoroute hyper efficace se crée — sans qu'il y ait
+                eu la moindre communication directe ni de chef.
+            </p>
+
+            <p>
+                Cette propriété est cruciale : la stigmergie est <strong>intrinsèquement scale-invariante</strong>.
+                Elle ne nécessite ni planification centrale, ni présence simultanée des agents,
+                ni même conscience mutuelle de leur existence.
+            </p>
+
+            <figure>
+                <img src="assets/slides/slide-06.jpg" alt="La Stigmergie">
+                <figcaption>Figure 3 : La Stigmergie — Coordination sans communication directe</figcaption>
+            </figure>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Section 3: Architecture R-JEPA -->
+        <section>
+            <h2>3. Architecture R-JEPA</h2>
+
+            <h3>3.1 Du Descriptif au Prescriptif</h3>
+
+            <p>
+                R-JEPA (Reasoning Joint Embedding Predictive Architecture) est un modèle de monde
+                conçu pour le raisonnement textuel. Son principe fondamental est une transposition
+                directe de l'innovation de V-JEPA (Vision-JEPA) de Meta AI [3]. Là où V-JEPA apprend
+                à comprendre le monde physique en prédisant des caractéristiques d'images masquées
+                plutôt que des pixels bruts (<em>"predict features, not pixels"</em>), R-JEPA apprend
+                à maîtriser la logique en prédisant des concepts de raisonnement masqués plutôt que
+                des mots spécifiques (<em>"predict concepts, not tokens"</em>).
+            </p>
+
+            <table>
+                <caption>Tableau 1 : Comparaison V-JEPA / R-JEPA</caption>
+                <thead>
+                    <tr>
+                        <th>V-JEPA (Vision)</th>
+                        <th>R-JEPA (Texte)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Prédit les patchs masqués d'une séquence vidéo</td>
+                        <td>Prédit les étapes de raisonnement masquées</td>
+                    </tr>
+                    <tr>
+                        <td>Apprend la "physique visuelle" (gravité, occlusion)</td>
+                        <td>Apprend la "physique du raisonnement" (flux logique, causalité)</td>
+                    </tr>
+                    <tr>
+                        <td>Opère sur les caractéristiques latentes des images</td>
+                        <td>Opère sur les états cachés (vecteurs latents) des LLM</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                La distinction fondamentale n'est pas "World Model vs Pas World Model", mais
+                <strong>World Model Descriptif vs Prescriptif</strong> :
+            </p>
+
+            <ul>
+                <li><strong>Modèle Descriptif (Classique)</strong> : Apprend "ce qui existe". Il cartographie
+                le territoire entier : les routes sûres, mais aussi les marécages et les impasses.
+                Il peut générer une erreur car il a appris à quoi ressemble une erreur.</li>
+                <li><strong>Modèle Prescriptif (R-JEPA)</strong> : Apprend "ce qui marche". Il ne cartographie
+                que les routes viables. L'échec n'est pas "appris", il est défini par l'absence.</li>
+            </ul>
+
+            <figure>
+                <img src="assets/slides/slide-03.jpg" alt="Changement de paradigme">
+                <figcaption>Figure 4 : Changement de paradigme — Concepts vs Tokens</figcaption>
+            </figure>
+
+            <h3>3.2 Le Manifold du Vrai</h3>
+
+            <p>
+                En apprenant massivement les trajectoires de succès, R-JEPA construit une structure
+                mathématique dense appelée le <strong>"Manifold du Vrai"</strong> (Manifold of Truth).
+                Dans cet espace latent à haute dimension, les succès ne sont pas des points isolés —
+                ils forment une surface continue (un manifold).
+            </p>
+
+            <p>
+                Tout point qui s'éloigne de cette surface (une incohérence, une hallucination, une
+                erreur logique) génère une "tension" ou une distance élevée dans l'espace latent,
+                mesurée par la <strong>JEPA Loss</strong>.
+            </p>
+
+            <blockquote>
+                « Le système n'a pas besoin de voir un échec pour savoir qu'il est faux.
+                Il lui suffit de voir que la trajectoire sort de la géométrie des succès qu'il a cartographiés. »
+            </blockquote>
+
+            <p>
+                <strong>Analogie de la carte du champ de mines :</strong> Un World Model Descriptif
+                cartographie l'emplacement de chaque mine ET de chaque chemin sûr. R-JEPA cartographie
+                uniquement les chemins sûrs. Mais le résultat est le même pour la navigation : si vous
+                êtes sur la carte de R-JEPA, vous êtes en sécurité. Si vous sortez de la zone cartographiée,
+                vous savez implicitement que vous êtes en danger — même si le modèle n'a jamais "vu"
+                l'explosion d'une mine.
+            </p>
+
+            <figure>
+                <img src="assets/slides/slide-05.jpg" alt="Apprentissage Asymétrique">
+                <figcaption>Figure 5 : Le Manifold du Vrai — Géométrie du succès en haute dimension</figcaption>
+            </figure>
+
+            <h3>3.3 Spécifications Techniques</h3>
+
+            <p>
+                L'architecture technique du modèle R-JEPA (678M paramètres) est conçue pour la
+                prédiction dans l'espace latent :
+            </p>
+
+            <table>
+                <caption>Tableau 2 : Spécifications du modèle R-JEPA</caption>
+                <thead>
+                    <tr>
+                        <th>Composant</th>
+                        <th>Spécification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paramètres totaux</td>
+                        <td>678M</td>
+                    </tr>
+                    <tr>
+                        <td>Dimension des latents</td>
+                        <td>4096 (couche -2 de Qwen3-8B)</td>
+                    </tr>
+                    <tr>
+                        <td>Context Encoder</td>
+                        <td>12 couches, 1024-dim, 16 têtes attention</td>
+                    </tr>
+                    <tr>
+                        <td>Target Encoder</td>
+                        <td>Copie EMA (τ = 0.996 → 0.9999), gelé</td>
+                    </tr>
+                    <tr>
+                        <td>Predictor</td>
+                        <td>8 couches transformer</td>
+                    </tr>
+                    <tr>
+                        <td>Ratio de masquage</td>
+                        <td>Contigu, 30-70% des étapes</td>
+                    </tr>
+                    <tr>
+                        <td>Datasets</td>
+                        <td>GSM8K, MATH, HumanEval (21,456 problèmes)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.4 Modes d'Inférence</h3>
+
+            <p>Le modèle peut être exploité via trois modes d'inférence principaux :</p>
+
+            <dl>
+                <dt>RERANK (Production)</dt>
+                <dd>Génère K=4 chaînes de raisonnement candidates, calcule la JEPA-loss pour chacune,
+                sélectionne celle avec la perte la plus faible. Score combiné :
+                $\text{score} = \alpha \times \log p + \beta \times (-\mathcal{L}_{\text{JEPA}})$</dd>
+
+                <dt>NUDGE (Guidage temps réel)</dt>
+                <dd>Guide la génération du LLM token par token en projetant les latents prédits
+                vers l'espace vocabulaire via un MLP appris :
+                $\text{logits}_{\text{final}} = \text{logits}_{\text{LLM}} + \alpha \times \text{guidance\_bias}$</dd>
+
+                <dt>PLAN (Complétion)</dt>
+                <dd>Prédit les latents pour les étapes de raisonnement manquantes. Permet au système
+                de "rêver" des trajectoires logiques complètes.</dd>
+            </dl>
+
+            <figure>
+                <img src="assets/slides/slide-10.jpg" alt="Architecture technique R-JEPA">
+                <figcaption>Figure 6 : Architecture technique — Dual-encoder avec EMA</figcaption>
+            </figure>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Section 4: Formalisme Mathématique -->
+        <section>
+            <h2>4. Formalisme Mathématique</h2>
+
+            <h3>4.1 Apprentissage Asymétrique</h3>
+
+            <p>
+                Soit $T$ l'ensemble des trajectoires de raisonnement et $V: T \rightarrow \{0, 1\}$
+                une fonction de validation objective. L'ensemble d'entraînement est restreint aux
+                succès validés :
+            </p>
+
+            <div class="equation">
+                $$T^+ = \{\tau \in T \mid V(\tau) = 1\}$$
+                <span class="equation-number">(1)</span>
+            </div>
+
+            <p>La fonction de perte R-JEPA est définie sur cet ensemble :</p>
+
+            <div class="equation">
+                $$\mathcal{L}_{\text{RJEPA}}(\theta) = \mathbb{E}_{\tau \in T^+} \left[ \sum_t \| \text{Pred}_\theta(s_t, a_t) - \text{Enc}(s_{t+1}) \|^2 \right]$$
+                <span class="equation-number">(2)</span>
+            </div>
+
+            <p>
+                où $\text{Pred}_\theta$ est le prédicteur paramétré par $\theta$, $s_t$ l'état latent
+                au temps $t$, et $a_t$ l'action (ou transition) entre les états.
+            </p>
+
+            <h3>4.2 Architecture Dual-Encoder EMA</h3>
+
+            <p>L'architecture se compose de plusieurs modules :</p>
+
+            <p><strong>Encodeur de Contexte :</strong></p>
+            <div class="equation">
+                $$s_t = \text{Enc}_\theta(x_t) \in \mathbb{R}^d$$
+                <span class="equation-number">(3)</span>
+            </div>
+
+            <p><strong>Noyau Récurrent (mémoire d'état) :</strong></p>
+            <div class="equation">
+                $$h_t = f(h_{t-1}, s_t)$$
+                <span class="equation-number">(4)</span>
+            </div>
+
+            <p><strong>Prédicteur Latent (capacité de "rêve") :</strong></p>
+            <div class="equation">
+                $$\hat{s}_{t+k} = \text{Pred}_\phi(h_t, a_{t:t+k})$$
+                <span class="equation-number">(5)</span>
+            </div>
+
+            <p><strong>Fonction de perte complète :</strong></p>
+            <div class="equation">
+                $$\mathcal{L} = \mathcal{L}_1(z_{\text{pred}}, z_{\text{target}}) + \lambda_{\text{var}} \cdot \mathcal{L}_{\text{variance}} + \lambda_{\text{cont}} \cdot \mathcal{L}_{\text{contrastive}}$$
+                <span class="equation-number">(6)</span>
+            </div>
+
+            <p>
+                avec $\lambda_{\text{var}} = 0.01$, $\lambda_{\text{cont}} = 0.1$, et température
+                $\tau = 0.07$ pour le terme contrastif (InfoNCE).
+            </p>
+
+            <p><strong>Régularisation isométrique :</strong></p>
+            <div class="equation">
+                $$\mathcal{L}_{\text{iso}} = \| J_f(x)^\top J_f(x) - cI \|$$
+                <span class="equation-number">(7)</span>
+            </div>
+
+            <p>
+                où $J_f$ est la jacobienne de l'encodeur, garantissant que les distances sont
+                préservées dans l'espace latent.
+            </p>
+
+            <h3>4.3 Jeux à Champ Moyen (MFG)</h3>
+
+            <p>
+                Pour gérer la complexité de millions d'agents, le système utilise la théorie des
+                Jeux à Champ Moyen [4]. Au lieu de modéliser chaque interaction individuelle,
+                on modélise l'interaction d'un agent représentatif avec la distribution statistique
+                moyenne de la population.
+            </p>
+
+            <p>Les équations couplées HJB-Fokker-Planck sont :</p>
+
+            <p><strong>Équation Hamilton-Jacobi-Bellman (backward) :</strong></p>
+            <div class="equation">
+                $$-\partial_t u - \nu \Delta u + H(x, \nabla u) = F(x, m)$$
+                <span class="equation-number">(8)</span>
+            </div>
+
+            <p><strong>Équation Fokker-Planck (forward) :</strong></p>
+            <div class="equation">
+                $$\partial_t m - \nu \Delta m - \text{div}(m \nabla_p H(x, \nabla u)) = 0$$
+                <span class="equation-number">(9)</span>
+            </div>
+
+            <p>
+                où $u$ est la fonction valeur de l'agent, $m$ la distribution de la population,
+                $H$ l'Hamiltonien du problème de contrôle, et $F$ le terme de couplage.
+            </p>
+
+            <h3>4.4 Équité Lexicographique (SoftSort)</h3>
+
+            <p>
+                L'équité lexicographique (Leximin), inspirée de la théorie de la justice de John Rawls [5],
+                impose la règle suivante :
+            </p>
+
+            <ol>
+                <li>Maximiser l'utilité du participant le plus défavorisé</li>
+                <li>Sous cette contrainte, maximiser l'utilité du deuxième plus défavorisé</li>
+                <li>Et ainsi de suite jusqu'à allocation complète</li>
+            </ol>
+
+            <p>
+                Pour rendre cette optimisation différentiable et compatible avec le Deep Learning,
+                nous utilisons SoftSort [6], un algorithme de tri différentiable basé sur la projection
+                sur le permutaèdre.
+            </p>
+
+            <p><strong>Fonction de perte d'équité lexicographique :</strong></p>
+            <div class="equation">
+                $$\mathcal{L}_{\text{Lexi}}(\theta) = \sum_{k=1}^{N} w_k \cdot \text{SoftSort}_k(R(\theta))$$
+                <span class="equation-number">(10)</span>
+            </div>
+
+            <p>
+                où $R(\theta)$ est le vecteur des récompenses/ressources allouées, $\text{SoftSort}_k$
+                extrait la valeur douce du $k$-ième élément le plus petit, et $w_k$ sont des poids
+                strictement décroissants ($w_1 \gg w_2 \gg \cdots \gg w_N$).
+            </p>
+
+            <blockquote>
+                « Fairness by Design : l'équité n'est pas une contrainte externe, mais un objectif
+                structurel interne du modèle. »
+            </blockquote>
+
+            <figure>
+                <img src="assets/slides/slide-08.jpg" alt="Équité par le code">
+                <figcaption>Figure 7 : Équité Lexicographique — "Soulever le plancher" avant "élever le plafond"</figcaption>
+            </figure>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Section 5: Symbiose Humain-Majordome -->
+        <section>
+            <h2>5. La Symbiose Humain-Majordome</h2>
+
+            <p>
+                L'unité de base du système R-JEPA Cybernetics est le "Majordome AI". Il ne s'agit pas
+                d'un simple chatbot, mais d'une véritable extension cognitive conçue pour former un
+                couple symbiotique avec son utilisateur humain.
+            </p>
+
+            <h3>5.1 La Trinité Fonctionnelle</h3>
+
+            <table>
+                <caption>Tableau 3 : Les trois composants de la symbiose</caption>
+                <thead>
+                    <tr>
+                        <th>Composant</th>
+                        <th>Fonction</th>
+                        <th>Rôle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LLM</strong></td>
+                        <td>Langage</td>
+                        <td>Interface conversationnelle, comprend le contexte nuancé, formule des propositions claires</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R-JEPA</strong></td>
+                        <td>Sens</td>
+                        <td>Boussole prescriptive, simule des trajectoires dans le Manifold du Vrai</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Humain</strong></td>
+                        <td>Volonté</td>
+                        <td>Capteur final et acteur, fournit besoins, ressources, décision d'agir</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>5.2 Boucle de Rétroaction Principale</h3>
+
+            <ol>
+                <li><strong>Acquisition</strong> : L'humain exprime un besoin. Le Majordome, via son module LLM, contextualise cette demande.</li>
+                <li><strong>Proposition</strong> : Le R-JEPA personnel simule des trajectoires basées sur des succès validés. Le LLM traduit la meilleure trajectoire en proposition claire.</li>
+                <li><strong>Action</strong> : L'humain, en tant que décideur final, choisit d'agir ou non.</li>
+                <li><strong>Validation & Apprentissage</strong> : Le résultat est évalué objectivement. S'il s'agit d'un succès, la trajectoire est utilisée pour mettre à jour le modèle.</li>
+            </ol>
+
+            <h3>5.3 Types de Validation Objective</h3>
+
+            <ul>
+                <li><strong>Transactionnelle</strong> : Paiement effectué, contrat signé</li>
+                <li><strong>Réciprocité</strong> : Les deux parties confirment la satisfaction</li>
+                <li><strong>Outcome</strong> : Résultat mesurable (facture d'énergie baisse, code compile)</li>
+                <li><strong>Continuation</strong> : La collaboration se poursuit dans le temps</li>
+            </ul>
+
+            <p>
+                <strong>Mécanismes anti-gaming</strong> : validation croisée entre sources indépendantes,
+                délai avant propagation, détection d'anomalies statistiques, pondération par coût de l'action.
+            </p>
+
+            <figure>
+                <img src="assets/slides/slide-04.jpg" alt="Symbiose Humain-Majordome">
+                <figcaption>Figure 8 : Boucle de rétroaction Humain-Majordome</figcaption>
+            </figure>
+        </section>
+
+        <!-- Section 6: Invariance d'Échelle -->
+        <section>
+            <h2>6. Invariance d'Échelle et Modèle VSM</h2>
+
+            <p>
+                L'architecture possède une propriété fondamentale : l'<strong>invariance d'échelle</strong>
+                (Scale-Invariance). La même structure de base s'applique de manière récursive à tous
+                les niveaux de l'organisation sociale.
+            </p>
+
+            <h3>6.1 Niveaux Hiérarchiques</h3>
+
+            <table>
+                <caption>Tableau 4 : Invariance d'échelle — du Majordome à la Planète</caption>
+                <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Entité</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>L1</td><td>Individu</td><td>Majordome personnel</td></tr>
+                    <tr><td>L2</td><td>Communauté</td><td>Quartier, équipe, entreprise</td></tr>
+                    <tr><td>L3</td><td>Ville</td><td>Réseau énergétique urbain</td></tr>
+                    <tr><td>L4</td><td>Nation</td><td>Délibération démocratique</td></tr>
+                    <tr><td>L5</td><td>Planète</td><td>Coordination climatique globale</td></tr>
+                </tbody>
+            </table>
+
+            <h3>6.2 Modèle de Système Viable (VSM)</h3>
+
+            <p>
+                Le système est structuré selon le Modèle de Système Viable de Stafford Beer [7],
+                une architecture éprouvée pour la gestion d'organisations complexes :
+            </p>
+
+            <dl>
+                <dt>Système 1 — Opérations</dt>
+                <dd>Les agents locaux (couples Humain-Majordome). Chacun gère ses besoins immédiats.</dd>
+
+                <dt>Système 2 — Coordination</dt>
+                <dd>Les protocoles de stigmergie. Communication latérale pair-à-pair.</dd>
+
+                <dt>Système 3 — Optimisation</dt>
+                <dd>L'agrégateur qui analyse le Champ de Potentiel Collectif.</dd>
+
+                <dt>Système 4 — Intelligence</dt>
+                <dd>Le R-JEPA Global qui modélise l'état du système et simule des scénarios.</dd>
+
+                <dt>Système 5 — Politique</dt>
+                <dd>Les objectifs de haut niveau : équité lexicographique, durabilité, résilience.</dd>
+            </dl>
+
+            <figure>
+                <img src="assets/slides/slide-07.jpg" alt="Architecture invariante d'échelle">
+                <figcaption>Figure 9 : Architecture VSM invariante d'échelle</figcaption>
+            </figure>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Section 7: Contrat Social -->
+        <section>
+            <h2>7. Le Contrat Social Cybernétique</h2>
+
+            <h3>7.1 Module de Simulation</h3>
+
+            <p>
+                Pour que les citoyens acceptent l'optimisation, ils doivent pouvoir "voir le futur"
+                qu'elle propose. Le mode PLAN de R-JEPA permet exactement cela.
+            </p>
+
+            <p>
+                <strong>Pour le citoyen :</strong> "Si je change de métier pour devenir ébéniste,
+                que se passe-t-il dans 3 ans ?" Le système projette les flux (revenus, satisfaction,
+                demande locale) et montre une simulation basée sur des trajectoires validées ailleurs.
+            </p>
+
+            <p>
+                <strong>Pour le collectif :</strong> On peut visualiser graphiquement comment une
+                décision collective (une taxe carbone, un investissement d'infrastructure) va déplacer
+                les flux de ressources. Les citoyens ne votent plus pour des promesses, mais pour
+                des simulations validées.
+            </p>
+
+            <h3>7.2 Transition "Flux contre Flux"</h3>
+
+            <p>Le système ne confisque pas le stock (capital passé), il régule le flux (production future) :</p>
+
+            <ul>
+                <li><strong>Le Capital comme "Batterie"</strong> : Les détenteurs de capitaux gardent leurs actifs — leur "batterie" de départ.</li>
+                <li><strong>La Nouvelle Règle du Jeu</strong> : Ce qui change, c'est l'usage. Toute action doit être validée comme un "succès" (efficace ET non-destructrice) pour être apprise et propagée.</li>
+                <li><strong>L'Échange</strong> : Le riche injecte son "vieux flux" (monnaie fiat) pour acheter des "nouveaux services" (santé, énergie, sécurité). Le système convertit ces ressources en actions optimisées et redistribue la valeur selon les règles d'équité.</li>
+            </ul>
+
+            <h3>7.3 L'Argument Vital pour les Élites</h3>
+
+            <p>
+                La richesse n'a de valeur que dans un système stable. L'argument n'est pas moral,
+                il est vital :
+            </p>
+
+            <ul>
+                <li><strong>Sans R-JEPA</strong> : Le capital s'érode car le système actuel s'effondre sous l'entropie et le risque climatique/social.</li>
+                <li><strong>Avec R-JEPA</strong> : Ils gardent leur statut, mais leur capital est investi dans un système négentropique. Ils échangent un pouvoir de "destruction arbitraire" contre une garantie de "survie luxueuse et stable".</li>
+            </ul>
+
+            <blockquote>
+                « Gardez votre passé, mais jouez selon nos règles pour le futur. »
+            </blockquote>
+
+            <figure>
+                <img src="assets/slides/slide-12.jpg" alt="Contrat social cybernétique">
+                <figcaption>Figure 10 : Le Contrat Social Cybernétique</figcaption>
+            </figure>
+        </section>
+
+        <!-- Section 8: Cybersyn -->
+        <section>
+            <h2>8. Précédent Historique : Cybersyn (1971-1973)</h2>
+
+            <p>
+                Le projet Cybersyn, au Chili sous le gouvernement de Salvador Allende, constitue
+                un précédent historique crucial [8]. Stafford Beer a tenté de gérer l'économie
+                chilienne en temps réel avec la technologie de l'époque.
+            </p>
+
+            <h3>8.1 Architecture de Cybersyn</h3>
+
+            <ul>
+                <li><strong>Réseau</strong> : 500 télex reliant les usines à Santiago</li>
+                <li><strong>CYBERSTRIDE</strong> : Logiciel de détection d'anomalies statistiques</li>
+                <li><strong>OPSROOM</strong> : Salle de contrôle futuriste (style "Star Trek")</li>
+            </ul>
+
+            <h3>8.2 Le Test de la Grève de 1972</h3>
+
+            <p>
+                En octobre 1972, une grève massive des camionneurs, financée par la CIA, visait
+                à paralyser l'économie chilienne. L'approvisionnement aurait dû s'effondrer.
+            </p>
+
+            <p>
+                <strong>Résultat :</strong> Avec Cybersyn, en gérant en temps réel les quelques
+                camions qui roulaient encore et les stocks disponibles, l'équipe de Beer a réussi
+                à maintenir l'approvisionnement du pays. La grève a échoué.
+            </p>
+
+            <h3>8.3 L'Échec Politique</h3>
+
+            <p>
+                Le 11 septembre 1973, le coup d'État du général Pinochet met fin au projet.
+                La salle de contrôle est détruite. L'échec n'est pas technique — il est politique.
+            </p>
+
+            <p><strong>Leçons pour R-JEPA Cybernetics :</strong></p>
+            <ul>
+                <li>La technologie seule est insuffisante si le contexte politique la détruit</li>
+                <li>La décentralisation (stigmergie) est plus résiliente qu'un centre de contrôle unique</li>
+                <li>Les interfaces simplifiées sont essentielles pour l'adoption</li>
+            </ul>
+
+            <figure>
+                <img src="assets/slides/slide-11.jpg" alt="Leçons de Cybersyn">
+                <figcaption>Figure 11 : De Cybersyn (1973) à R-JEPA (2025) — Les leçons de l'histoire</figcaption>
+            </figure>
+        </section>
+
+        <div class="page-break"></div>
+
+        <!-- Section 9: Implémentation -->
+        <section>
+            <h2>9. Implémentation et Déploiement</h2>
+
+            <h3>9.1 Éditions Disponibles</h3>
+
+            <table>
+                <caption>Tableau 5 : Éditions R-JEPA</caption>
+                <thead>
+                    <tr>
+                        <th>Fonctionnalité</th>
+                        <th>Community Edition</th>
+                        <th>Cloud API</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Licence</td>
+                        <td>MIT (gratuit)</td>
+                        <td>Pay-per-token</td>
+                    </tr>
+                    <tr>
+                        <td>Hébergement</td>
+                        <td>Auto-hébergé (Docker)</td>
+                        <td>OVHcloud Partner 🇫🇷</td>
+                    </tr>
+                    <tr>
+                        <td>GPU requis</td>
+                        <td>Oui</td>
+                        <td>Non</td>
+                    </tr>
+                    <tr>
+                        <td>Modes d'inférence</td>
+                        <td>RERANK, NUDGE, PLAN</td>
+                        <td>RERANK, NUDGE, PLAN</td>
+                    </tr>
+                    <tr>
+                        <td>Mémoire Associative</td>
+                        <td>—</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>ValidationGate</td>
+                        <td>—</td>
+                        <td>✓</td>
+                    </tr>
+                    <tr>
+                        <td>Auto-scaling</td>
+                        <td>—</td>
+                        <td>✓</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>9.2 Infrastructure Docker (7 Services)</h3>
+
+            <ol>
+                <li><code>student-llm</code> : Qwen3-8B (ou autre LLM compatible)</li>
+                <li><code>rjepa-service</code> : Modèle R-JEPA 678M</li>
+                <li><code>teacher-orch</code> : Orchestrateur d'entraînement</li>
+                <li><code>data-pipeline</code> : Pipeline de données et validation</li>
+                <li><code>prefect-server</code> : Orchestration des workflows</li>
+                <li><code>ui-backend</code> : API REST</li>
+                <li><code>ui-frontend</code> : Interface utilisateur</li>
+            </ol>
+
+            <h3>9.3 Protocoles Expérimentaux</h3>
+
+            <p><strong>CityLearn v2</strong> : Benchmark pour la gestion de communautés énergétiques.
+            Métriques : Peak Shaving, Coût total, Équité Distributive, Robustesse aux perturbations.</p>
+
+            <p><strong>Polis</strong> : Plateforme de démocratie computationnelle.
+            Métriques : Bridging Score (consensus entre groupes opposés), Convergence Time,
+            Minority Voice Preservation.</p>
+
+            <h3>9.4 Architecture Privacy-First</h3>
+
+            <p>
+                Avec R-JEPA Cloud, le texte ne quitte jamais l'infrastructure locale. Le processus :
+            </p>
+            <ol>
+                <li>Extraction locale des vecteurs latents (4096-dim)</li>
+                <li>Seuls ces vecteurs sont envoyés à l'API — ils agissent comme pointeurs</li>
+                <li>Le texte reste dans la base de données locale</li>
+                <li>L'API retourne des indices mémoire + guidage</li>
+            </ol>
+
+            <p>
+                Les vecteurs latents sont <strong>mathématiquement irréversibles</strong> —
+                impossible de reconstruire le texte original. Compatible GDPR, HIPAA, et
+                exigences de sécurité entreprise.
+            </p>
+        </section>
+
+        <!-- Section 10: Conclusion -->
+        <section>
+            <h2>10. Conclusion</h2>
+
+            <p>
+                R-JEPA Cybernetics représente une tentative de doter l'humanité d'un
+                <strong>système nerveux planétaire</strong> capable de gérer la complexité du monde moderne.
+                En combinant les architectures prédictives latentes (JEPA), la coordination stigmergique,
+                et l'équité lexicographique encodée dans le code, nous proposons une alternative
+                à l'anti-économie actuelle.
+            </p>
+
+            <p>
+                Les innovations clés de cette architecture sont :
+            </p>
+
+            <ul>
+                <li><strong>Modèle prescriptif</strong> : Apprend uniquement les succès validés,
+                construisant un "Manifold du Vrai"</li>
+                <li><strong>Symbiose Humain-Majordome</strong> : Interface entre l'individu et
+                l'intelligence collective</li>
+                <li><strong>Stigmergie privacy-first</strong> : Coordination sans échange de données
+                personnelles, via vecteurs latents irréversibles</li>
+                <li><strong>Équité lexicographique</strong> : Justice mathématique intégrée dans
+                la fonction de perte</li>
+                <li><strong>Invariance d'échelle</strong> : Même architecture du Majordome à la Planète</li>
+            </ul>
+
+            <p>
+                Cette vision n'est pas une utopie abstraite — elle est « câblée » dans le code actuel,
+                validée par le précédent historique de Cybersyn, et rendue techniquement possible
+                par les architectures JEPA et les LLM modernes.
+            </p>
+
+            <blockquote>
+                « Il ne s'agit plus de prendre des décisions basées sur des théories abstraites,
+                mais sur des données validées en temps réel et des simulations contextuelles.
+                Que se passe-t-il lorsque la justice cesse d'être un principe abstrait pour devenir
+                une fonction mathématique optimisée en temps réel par une machine ? »
+            </blockquote>
+
+            <figure>
+                <img src="assets/slides/slide-09.jpg" alt="Homéostasie Planétaire">
+                <figcaption>Figure 12 : Vision finale — Homéostasie Planétaire</figcaption>
+            </figure>
+        </section>
+
+        <!-- References -->
+        <section class="references">
+            <h2>11. Références</h2>
+            <ol>
+                <li>Wiener, N. (1948). <em>Cybernetics: Or Control and Communication in the Animal and the Machine</em>. MIT Press.</li>
+                <li>Heylighen, F. (2016). Stigmergy as a universal coordination mechanism I: Definition and components. <em>Cognitive Systems Research</em>, 38, 4-13.</li>
+                <li>Bardes, A., Garrido, Q., Ponce, J., Chen, X., Rabbat, M., LeCun, Y., Assran, M., & Ballas, N. (2024). V-JEPA: Latent Video Prediction for Visual Representation Learning. <em>arXiv:2402.03304</em>.</li>
+                <li>Lasry, J.-M., & Lions, P.-L. (2007). Mean field games. <em>Japanese Journal of Mathematics</em>, 2(1), 229-260.</li>
+                <li>Rawls, J. (1971). <em>A Theory of Justice</em>. Harvard University Press.</li>
+                <li>Blondel, M., Teboul, O., Berthet, Q., & Djolonga, J. (2020). Fast Differentiable Sorting and Ranking. <em>ICML 2020</em>.</li>
+                <li>Beer, S. (1972). <em>Brain of the Firm: The Managerial Cybernetics of Organization</em>. Allen Lane.</li>
+                <li>Medina, E. (2011). <em>Cybernetic Revolutionaries: Technology and Politics in Allende's Chile</em>. MIT Press.</li>
+                <li>LeCun, Y. (2022). A Path Towards Autonomous Machine Intelligence. <em>OpenReview</em>.</li>
+                <li>Lévy, P. (1994). <em>L'Intelligence Collective : Pour une anthropologie du cyberespace</em>. La Découverte.</li>
+                <li>Woolley, A. W., Chabris, C. F., Pentland, A., Hashmi, N., & Malone, T. W. (2010). Evidence for a Collective Intelligence Factor in the Performance of Human Groups. <em>Science</em>, 330(6004), 686-688.</li>
+                <li>Nweye, K., et al. (2024). CityLearn v2: Energy-flexible, resilient, occupant-centric, and carbon-aware management of grid-interactive communities. <em>Energy and Buildings</em>.</li>
+            </ol>
+        </section>
+
+        <!-- Appendix -->
+        <section>
+            <h2>Annexe : Spécifications Techniques Complètes</h2>
+
+            <h3>A.1 Configuration d'Entraînement</h3>
+            <ul>
+                <li><strong>Optimiseur</strong> : AdamW, lr = 3×10⁻⁴</li>
+                <li><strong>Précision</strong> : bfloat16 AMP</li>
+                <li><strong>Gradient clipping</strong> : 1.0</li>
+                <li><strong>Batch size</strong> : 32</li>
+                <li><strong>Epochs</strong> : 100</li>
+            </ul>
+
+            <h3>A.2 Format de Données</h3>
+            <ul>
+                <li><strong>Metadata</strong> : Parquet (compression zstd)</li>
+                <li><strong>Tenseurs</strong> : SafeTensors</li>
+                <li><strong>Indexation</strong> : DuckDB</li>
+            </ul>
+
+            <h3>A.3 Stack Logicielle</h3>
+            <ul>
+                <li>Python 3.11+</li>
+                <li>PyTorch 2.1+ (CUDA 12.1+)</li>
+                <li>Docker Compose</li>
+                <li>Prefect (orchestration)</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.9rem; color: #666;">
+            <p>
+                <strong>Document de Recherche</strong> — R-JEPA Cybernetics v1.0<br>
+                © 2025 Romain Provençal / Teleadmin<br>
+                <a href="https://civilisationcyber.com" style="color: #0066cc;">civilisationcyber.com</a> |
+                <a href="https://cognition4ai.com" style="color: #0066cc;">cognition4ai.com</a> |
+                <a href="https://teleadmin.net" style="color: #0066cc;">teleadmin.net</a>
+            </p>
+        </footer>
+
+    </article>
+
+    <!-- PDF Generation Script -->
+    <script>
+        // Wait for MathJax to finish rendering
+        function waitForMathJax() {
+            return new Promise((resolve) => {
+                if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+                    MathJax.typesetPromise().then(resolve);
+                } else {
+                    setTimeout(() => waitForMathJax().then(resolve), 100);
+                }
+            });
+        }
+
+        async function generatePDF() {
+            const btn = document.getElementById('download-btn');
+            const loading = document.getElementById('loading');
+            const element = document.getElementById('paper-content');
+
+            // Show loading
+            btn.disabled = true;
+            btn.textContent = '⏳ Génération...';
+            loading.classList.add('active');
+
+            try {
+                // Wait for MathJax to render all equations
+                await waitForMathJax();
+
+                // Small delay to ensure everything is rendered
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // PDF options
+                const opt = {
+                    margin: [15, 15, 15, 15],
+                    filename: 'R-JEPA_Cybernetics_Research_Paper.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        letterRendering: true,
+                        logging: false
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    },
+                    pagebreak: {
+                        mode: ['avoid-all', 'css', 'legacy'],
+                        before: '.page-break'
+                    }
+                };
+
+                // Generate PDF
+                await html2pdf().set(opt).from(element).save();
+
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Erreur lors de la génération du PDF. Essayez d\'utiliser Ctrl+P pour imprimer en PDF.');
+            } finally {
+                // Hide loading
+                loading.classList.remove('active');
+                btn.disabled = false;
+                btn.textContent = '⬇️ Télécharger le PDF';
+            }
+        }
+
+        // Initialize MathJax rendering on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            waitForMathJax().then(() => {
+                console.log('MathJax rendering complete');
+            });
+        });
+    </script>
+</body>
+</html>
