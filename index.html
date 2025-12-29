@@ -2217,41 +2217,41 @@ flowchart TB
 
             <!-- Gouvernance S5 -->
             <div class="governance-section" style="background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(234,88,12,0.1)); border-radius: var(--radius-xl); padding: var(--space-xl); border: 1px solid rgba(245,158,11,0.2);">
-                <h3 style="color: var(--warning); margin-bottom: var(--space-lg); text-align: center;">🏛️ Gouvernance S5 Décentralisée</h3>
-                <p style="color: var(--text-muted); text-align: center; margin-bottom: var(--space-xl); max-width: 800px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: var(--warning); margin-bottom: var(--space-lg); text-align: center;" data-i18n="identity.gov.title">🏛️ Gouvernance S5 Décentralisée</h3>
+                <p style="color: var(--text-muted); text-align: center; margin-bottom: var(--space-xl); max-width: 800px; margin-left: auto; margin-right: auto;" data-i18n="identity.gov.desc">
                     Le <strong>Système 5</strong> (VSM de Stafford Beer) définit les valeurs et hyper-paramètres du système.
                     Les <strong>Gardiens</strong> (réputation ≥ 1000) votent sur les paramètres critiques.
                 </p>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-lg);">
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📝</div>
-                        <h5 style="color: var(--text);">1. Proposition</h5>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Gardien soumet + stake TRACE</p>
+                        <h5 style="color: var(--text);" data-i18n="identity.gov.step1">1. Proposition</h5>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="identity.gov.step1.desc">Gardien soumet + stake TRACE</p>
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🔮</div>
-                        <h5 style="color: var(--text);">2. Simulation</h5>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">R-JEPA mode PLAN projette l'impact</p>
+                        <h5 style="color: var(--text);" data-i18n="identity.gov.step2">2. Simulation</h5>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="identity.gov.step2.desc">R-JEPA mode PLAN projette l'impact</p>
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🗳️</div>
-                        <h5 style="color: var(--text);">3. Vote</h5>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Pondéré par réputation (7 jours)</p>
+                        <h5 style="color: var(--text);" data-i18n="identity.gov.step3">3. Vote</h5>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="identity.gov.step3.desc">Pondéré par réputation (7 jours)</p>
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: var(--space-sm);">⚡</div>
-                        <h5 style="color: var(--text);">4. Exécution</h5>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Timelock 48h puis application auto</p>
+                        <h5 style="color: var(--text);" data-i18n="identity.gov.step4">4. Exécution</h5>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="identity.gov.step4.desc">Timelock 48h puis application auto</p>
                     </div>
                 </div>
-                <p style="color: var(--text-muted); text-align: center; margin-top: var(--space-lg); font-size: 0.9rem;">
+                <p style="color: var(--text-muted); text-align: center; margin-top: var(--space-lg); font-size: 0.9rem;" data-i18n="identity.gov.anti">
                     <strong>Anti-ploutocratie</strong> : Vote quadratique (coût = n²) + Réputation ≠ Tokens + Conviction Voting
                 </p>
             </div>
             <!-- Schema Explicatif : Lien Identite Reelle - Blockchain -->
             <div class="schema-explicatif" style="background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(34,211,238,0.1)); border-radius: var(--radius-xl); padding: var(--space-xl); margin-top: var(--space-2xl); border: 1px solid rgba(139,92,246,0.3);">
-                <h3 style="color: #8b5cf6; margin-bottom: var(--space-lg); text-align: center;">🔐 Le Secret : Comment l'Identité Réelle Reste Locale</h3>
-                <p style="color: var(--text-muted); text-align: center; margin-bottom: var(--space-xl); max-width: 800px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: #8b5cf6; margin-bottom: var(--space-lg); text-align: center;" data-i18n="identity.secret.title">🔐 Le Secret : Comment l'Identité Réelle Reste Locale</h3>
+                <p style="color: var(--text-muted); text-align: center; margin-bottom: var(--space-xl); max-width: 800px; margin-left: auto; margin-right: auto;" data-i18n="identity.secret.desc">
                     La blockchain <strong>ne sait jamais</strong> qui vous êtes. Elle sait seulement que vous êtes <em>quelqu'un de vérifié</em>.
                     Le lien entre votre identité réelle et votre DID <strong>ne quitte jamais votre appareil</strong>.
                 </p>
@@ -2262,12 +2262,11 @@ flowchart TB
                     <!-- Column 1: Real Identity -->
                     <div style="background: rgba(34,197,94,0.1); padding: var(--space-lg); border-radius: var(--radius-lg) 0 0 var(--radius-lg); border: 2px solid rgba(34,197,94,0.3); text-align: center;">
                         <div style="font-size: 3rem; margin-bottom: var(--space-md);">👤</div>
-                        <h4 style="color: #22c55e; margin-bottom: var(--space-sm);">IDENTITÉ RÉELLE</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Toi, l'humain</p>
+                        <h4 style="color: #22c55e; margin-bottom: var(--space-sm);" data-i18n="identity.col1.title">IDENTITÉ RÉELLE</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="identity.col1.sub">Toi, l'humain</p>
                         <div style="margin-top: var(--space-md); padding: var(--space-sm); background: rgba(0,0,0,0.2); border-radius: var(--radius-sm);">
-                            <p style="color: var(--text); font-size: 0.8rem; margin: 0;">
-                                📍 Reste <strong>ICI</strong><br/>
-                                sur ton appareil
+                            <p style="color: var(--text); font-size: 0.8rem; margin: 0;" data-i18n="identity.col1.stays">
+                                📍 Reste <strong>ICI</strong><br/>sur ton appareil
                             </p>
                         </div>
                     </div>
@@ -2275,24 +2274,24 @@ flowchart TB
                     <!-- Column 2: Local Device (The Bridge) -->
                     <div style="background: rgba(99,102,241,0.15); padding: var(--space-lg); border-top: 2px solid rgba(99,102,241,0.3); border-bottom: 2px solid rgba(99,102,241,0.3); text-align: center;">
                         <div style="font-size: 3rem; margin-bottom: var(--space-md);">🔐</div>
-                        <h4 style="color: #6366f1; margin-bottom: var(--space-sm);">APPAREIL LOCAL</h4>
+                        <h4 style="color: #6366f1; margin-bottom: var(--space-sm);" data-i18n="identity.col2.title">APPAREIL LOCAL</h4>
                         <p style="color: var(--text-muted); font-size: 0.85rem;">Secure Enclave / HSM</p>
 
                         <div style="margin: var(--space-md) 0; padding: var(--space-md); background: rgba(0,0,0,0.3); border-radius: var(--radius-md);">
                             <p style="color: var(--text); font-size: 0.9rem; margin-bottom: var(--space-sm);">
-                                <strong>Le Lien Secret</strong>
+                                <strong data-i18n="identity.col2.link">Le Lien Secret</strong>
                             </p>
                             <div style="font-family: monospace; font-size: 0.75rem; color: var(--accent); background: rgba(0,0,0,0.2); padding: var(--space-sm); border-radius: var(--radius-sm);">
                                 Humain → 🔑 Clé Ed25519<br/>
                                 → DID:rjepa:z6Mk...
                             </div>
-                            <p style="color: #ef4444; font-size: 0.75rem; margin-top: var(--space-sm); margin-bottom: 0;">
+                            <p style="color: #ef4444; font-size: 0.75rem; margin-top: var(--space-sm); margin-bottom: 0;" data-i18n="identity.col2.never">
                                 ⚠️ Ce lien NE SORT JAMAIS
                             </p>
                         </div>
 
                         <div style="display: flex; justify-content: center; gap: var(--space-sm); margin-top: var(--space-md);">
-                            <span style="background: rgba(34,197,94,0.2); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; color: #22c55e;">✅ Biométrie</span>
+                            <span style="background: rgba(34,197,94,0.2); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; color: #22c55e;" data-i18n="identity.col2.bio">✅ Biométrie</span>
                             <span style="background: rgba(34,197,94,0.2); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); font-size: 0.75rem; color: #22c55e;">✅ PIN</span>
                         </div>
                     </div>
@@ -2301,28 +2300,28 @@ flowchart TB
                     <div style="background: rgba(34,211,238,0.1); padding: var(--space-lg); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; border: 2px solid rgba(34,211,238,0.3); text-align: center;">
                         <div style="font-size: 3rem; margin-bottom: var(--space-md);">⛓️</div>
                         <h4 style="color: #22d3ee; margin-bottom: var(--space-sm);">BLOCKCHAIN</h4>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Registre Public</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;" data-i18n="identity.col3.sub">Registre Public</p>
 
                         <div style="margin-top: var(--space-md); text-align: left;">
                             <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
                                 <span style="color: #22c55e;">✅</span>
-                                <span style="color: var(--text); font-size: 0.85rem;">DID existe</span>
+                                <span style="color: var(--text); font-size: 0.85rem;" data-i18n="identity.col3.exists">DID existe</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
                                 <span style="color: #22c55e;">✅</span>
-                                <span style="color: var(--text); font-size: 0.85rem;">Est un humain (ZK)</span>
+                                <span style="color: var(--text); font-size: 0.85rem;" data-i18n="identity.col3.human">Est un humain (ZK)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
                                 <span style="color: #22c55e;">✅</span>
-                                <span style="color: var(--text); font-size: 0.85rem;">Score réputation</span>
+                                <span style="color: var(--text); font-size: 0.85rem;" data-i18n="identity.col3.rep">Score réputation</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs);">
                                 <span style="color: #22c55e;">✅</span>
-                                <span style="color: var(--text); font-size: 0.85rem;">Hash des traces</span>
+                                <span style="color: var(--text); font-size: 0.85rem;" data-i18n="identity.col3.hash">Hash des traces</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: var(--space-sm);">
                                 <span style="color: #ef4444;">❌</span>
-                                <span style="color: #ef4444; font-size: 0.85rem;"><strong>QUI c'est</strong></span>
+                                <span style="color: #ef4444; font-size: 0.85rem;" data-i18n="identity.col3.who"><strong>QUI c'est</strong></span>
                             </div>
                         </div>
                     </div>
@@ -2336,25 +2335,25 @@ flowchart TB
 
                 <!-- ZK Proof Explanation -->
                 <div style="background: rgba(139,92,246,0.1); padding: var(--space-lg); border-radius: var(--radius-lg); border: 1px dashed rgba(139,92,246,0.3);">
-                    <h4 style="color: #8b5cf6; margin-bottom: var(--space-md); text-align: center;">🔮 La Magie du Zero-Knowledge Proof</h4>
+                    <h4 style="color: #8b5cf6; margin-bottom: var(--space-md); text-align: center;" data-i18n="identity.zk.title">🔮 La Magie du Zero-Knowledge Proof</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
                         <div style="text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: var(--space-sm);">📜</div>
-                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;">
+                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;" data-i18n="identity.zk.prove">
                                 <strong>Ce que tu prouves</strong><br/>
                                 <span style="color: var(--text-muted); font-size: 0.85rem;">"Je suis un humain unique vérifié"</span>
                             </p>
                         </div>
                         <div style="text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: var(--space-sm);">🙈</div>
-                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;">
+                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;" data-i18n="identity.zk.hide">
                                 <strong>Ce que tu ne révèles PAS</strong><br/>
                                 <span style="color: var(--text-muted); font-size: 0.85rem;">Ton nom, ta photo, ton email, ta localisation</span>
                             </p>
                         </div>
                         <div style="text-align: center;">
                             <div style="font-size: 2rem; margin-bottom: var(--space-sm);">✨</div>
-                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;">
+                            <p style="color: var(--text); font-size: 0.9rem; margin: 0;" data-i18n="identity.zk.result">
                                 <strong>Le Résultat</strong><br/>
                                 <span style="color: var(--text-muted); font-size: 0.85rem;">Accountability sans surveillance</span>
                             </p>
@@ -2364,7 +2363,7 @@ flowchart TB
 
                 <!-- Key Insight -->
                 <div style="margin-top: var(--space-lg); text-align: center; padding: var(--space-md); background: rgba(0,0,0,0.2); border-radius: var(--radius-md);">
-                    <p style="color: var(--text); font-size: 1.1rem; margin: 0;">
+                    <p style="color: var(--text); font-size: 1.1rem; margin: 0;" data-i18n="identity.insight">
                         💡 <strong>L'insight clé</strong> : La blockchain garantit qu'un DID = 1 humain unique,<br/>
                         <span style="color: var(--text-muted);">mais elle ne saura <em>jamais</em> lequel. C'est la <strong>Privacy by Design</strong>.</span>
                     </p>
@@ -2799,6 +2798,40 @@ flowchart TB
                 'identity.chain.name': 'Blockchain L2/zkEVM',
                 'identity.chain.sub': 'Registre Décentralisé',
                 'identity.chain.desc': 'Pas tout sur la blockchain — seulement ce qui nécessite transparence et immuabilité. Les latents restent off-chain pour scalabilité et confidentialité.',
+                // Identity Governance S5
+                'identity.gov.title': '🏛️ Gouvernance S5 Décentralisée',
+                'identity.gov.desc': 'Le <strong>Système 5</strong> (VSM de Stafford Beer) définit les valeurs et hyper-paramètres du système. Les <strong>Gardiens</strong> (réputation ≥ 1000) votent sur les paramètres critiques.',
+                'identity.gov.step1': '1. Proposition',
+                'identity.gov.step1.desc': 'Gardien soumet + stake TRACE',
+                'identity.gov.step2': '2. Simulation',
+                'identity.gov.step2.desc': 'R-JEPA mode PLAN projette l\'impact',
+                'identity.gov.step3': '3. Vote',
+                'identity.gov.step3.desc': 'Pondéré par réputation (7 jours)',
+                'identity.gov.step4': '4. Exécution',
+                'identity.gov.step4.desc': 'Timelock 48h puis application auto',
+                'identity.gov.anti': '<strong>Anti-ploutocratie</strong> : Vote quadratique (coût = n²) + Réputation ≠ Tokens + Conviction Voting',
+                // Identity Secret Section
+                'identity.secret.title': '🔐 Le Secret : Comment l\'Identité Réelle Reste Locale',
+                'identity.secret.desc': 'La blockchain <strong>ne sait jamais</strong> qui vous êtes. Elle sait seulement que vous êtes <em>quelqu\'un de vérifié</em>. Le lien entre votre identité réelle et votre DID <strong>ne quitte jamais votre appareil</strong>.',
+                'identity.col1.title': 'IDENTITÉ RÉELLE',
+                'identity.col1.sub': 'Toi, l\'humain',
+                'identity.col1.stays': '📍 Reste <strong>ICI</strong><br/>sur ton appareil',
+                'identity.col2.title': 'APPAREIL LOCAL',
+                'identity.col2.link': 'Le Lien Secret',
+                'identity.col2.never': '⚠️ Ce lien NE SORT JAMAIS',
+                'identity.col2.bio': '✅ Biométrie',
+                'identity.col3.sub': 'Registre Public',
+                'identity.col3.exists': 'DID existe',
+                'identity.col3.human': 'Est un humain (ZK)',
+                'identity.col3.rep': 'Score réputation',
+                'identity.col3.hash': 'Hash des traces',
+                'identity.col3.who': '<strong>QUI c\'est</strong>',
+                // Identity ZK Magic
+                'identity.zk.title': '🔮 La Magie du Zero-Knowledge Proof',
+                'identity.zk.prove': '<strong>Ce que tu prouves</strong><br/><span style="color: var(--text-muted); font-size: 0.85rem;">"Je suis un humain unique vérifié"</span>',
+                'identity.zk.hide': '<strong>Ce que tu ne révèles PAS</strong><br/><span style="color: var(--text-muted); font-size: 0.85rem;">Ton nom, ta photo, ton email, ta localisation</span>',
+                'identity.zk.result': '<strong>Le Résultat</strong><br/><span style="color: var(--text-muted); font-size: 0.85rem;">Accountability sans surveillance</span>',
+                'identity.insight': '💡 <strong>L\'insight clé</strong> : La blockchain garantit qu\'un DID = 1 humain unique,<br/><span style="color: var(--text-muted);">mais elle ne saura <em>jamais</em> lequel. C\'est la <strong>Privacy by Design</strong>.</span>',
                 // Media
                 'media.title': 'Média',
                 'media.subtitle': 'Vidéo explicative et podcast complet pour approfondir la vision.',
@@ -3035,6 +3068,40 @@ flowchart TB
                 'identity.chain.name': 'Blockchain L2/zkEVM',
                 'identity.chain.sub': 'Decentralized Registry',
                 'identity.chain.desc': 'Not everything on blockchain — only what requires transparency and immutability. Latents stay off-chain for scalability and privacy.',
+                // Identity Governance S5
+                'identity.gov.title': '🏛️ Decentralized S5 Governance',
+                'identity.gov.desc': '<strong>System 5</strong> (Stafford Beer\'s VSM) defines values and hyper-parameters of the system. <strong>Guardians</strong> (reputation ≥ 1000) vote on critical parameters.',
+                'identity.gov.step1': '1. Proposal',
+                'identity.gov.step1.desc': 'Guardian submits + stakes TRACE',
+                'identity.gov.step2': '2. Simulation',
+                'identity.gov.step2.desc': 'R-JEPA PLAN mode projects impact',
+                'identity.gov.step3': '3. Vote',
+                'identity.gov.step3.desc': 'Weighted by reputation (7 days)',
+                'identity.gov.step4': '4. Execution',
+                'identity.gov.step4.desc': '48h timelock then auto-apply',
+                'identity.gov.anti': '<strong>Anti-plutocracy</strong>: Quadratic voting (cost = n²) + Reputation ≠ Tokens + Conviction Voting',
+                // Identity Secret Section
+                'identity.secret.title': '🔐 The Secret: How Real Identity Stays Local',
+                'identity.secret.desc': 'The blockchain <strong>never knows</strong> who you are. It only knows you are <em>someone verified</em>. The link between your real identity and your DID <strong>never leaves your device</strong>.',
+                'identity.col1.title': 'REAL IDENTITY',
+                'identity.col1.sub': 'You, the human',
+                'identity.col1.stays': '📍 Stays <strong>HERE</strong><br/>on your device',
+                'identity.col2.title': 'LOCAL DEVICE',
+                'identity.col2.link': 'The Secret Link',
+                'identity.col2.never': '⚠️ This link NEVER LEAVES',
+                'identity.col2.bio': '✅ Biometrics',
+                'identity.col3.sub': 'Public Registry',
+                'identity.col3.exists': 'DID exists',
+                'identity.col3.human': 'Is a human (ZK)',
+                'identity.col3.rep': 'Reputation score',
+                'identity.col3.hash': 'Trace hashes',
+                'identity.col3.who': '<strong>WHO it is</strong>',
+                // Identity ZK Magic
+                'identity.zk.title': '🔮 The Magic of Zero-Knowledge Proof',
+                'identity.zk.prove': '<strong>What you prove</strong><br/><span style="color: var(--text-muted); font-size: 0.85rem;">"I am a unique verified human"</span>',
+                'identity.zk.hide': '<strong>What you DON\'T reveal</strong><br/><span style="color: var(--text-muted); font-size: 0.85rem;">Your name, photo, email, location</span>',
+                'identity.zk.result': '<strong>The Result</strong><br/><span style="color: var(--text-muted); font-size: 0.85rem;">Accountability without surveillance</span>',
+                'identity.insight': '💡 <strong>The key insight</strong>: The blockchain guarantees that one DID = 1 unique human,<br/><span style="color: var(--text-muted);">but it will <em>never</em> know which one. This is <strong>Privacy by Design</strong>.</span>',
                 // Media
                 'media.title': 'Media',
                 'media.subtitle': 'Explanatory video and complete podcast to deepen the vision.',
