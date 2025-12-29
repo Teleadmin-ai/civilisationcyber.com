@@ -1289,9 +1289,221 @@
             </p>
         </section>
 
-        <!-- Section 10: Conclusion -->
+        
+        <!-- Section 10: Identity Layer & Trace Economy -->
         <section>
-            <h2>10. Conclusion</h2>
+            <h2>10. Couche Identité & Économie des Traces</h2>
+
+            <p>
+                La stigmergie résout le problème de la coordination, mais pose un nouveau défi :
+                <strong>comment garantir la légitimité des traces sans compromettre l'anonymat ?</strong>
+                Comment distinguer 1000 traces légitimes de 1000 traces spam émises par un seul acteur malveillant ?
+            </p>
+
+            <h3>10.1 Le Paradoxe Identité/Confidentialité</h3>
+
+            <p>
+                Le système R-JEPA fait face à une tension fondamentale :
+            </p>
+
+            <ul>
+                <li><strong>Exigence de Confidentialité</strong> : Le texte ne quitte jamais l'appareil.
+                Seuls les vecteurs latents 4096-dim (mathématiquement irréversibles) sont transmis.</li>
+                <li><strong>Exigence d'Accountability</strong> : Il faut pouvoir construire une réputation,
+                identifier les mauvais acteurs, et prévenir les attaques Sybil.</li>
+            </ul>
+
+            <p>
+                La solution repose sur trois concepts distincts :
+            </p>
+
+            <ol>
+                <li><strong>Identité Réelle</strong> : Ne sort jamais de l'appareil local</li>
+                <li><strong>Identité Pseudonyme (DID)</strong> : Persistante, réputation traçable, mais non liée à l'identité réelle</li>
+                <li><strong>Trace Anonyme</strong> : Le contenu est invisible, seul le hash est enregistré</li>
+            </ol>
+
+            <h3>10.2 Architecture DID (Decentralized Identifier)</h3>
+
+            <p>
+                Chaque utilisateur génère localement une paire de clés Ed25519 (256 bits). La clé publique
+                dérive un DID unique selon le standard W3C DID v1.0 :
+            </p>
+
+            <pre><code>did:rjepa:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK</code></pre>
+
+            <p>
+                Le lien entre l'identité réelle et le DID <strong>ne quitte jamais l'appareil local</strong>.
+                La clé privée est stockée dans le Secure Enclave ou HSM si disponible.
+            </p>
+
+            <h3>10.3 Système de Réputation On-Chain</h3>
+
+            <p>
+                Le score de réputation est calculé par un smart contract transparent et immuable :
+            </p>
+
+            $$R_{did} = \sum_{t \in T_{did}^{+}} w_t - \sum_{t \in T_{did}^{-}} p_t + lpha \cdot 	ext{ancienneté}$$
+
+            <p>où :</p>
+            <ul>
+                <li>$T_{did}^{+}$ : traces validées par consensus</li>
+                <li>$T_{did}^{-}$ : traces rejetées (faux positifs, spam)</li>
+                <li>$w_t$ : poids de la trace (selon domaine, impact)</li>
+                <li>$p_t$ : pénalité de rejet</li>
+                <li>$lpha$ : bonus d'ancienneté (anti-Sybil naturel)</li>
+            </ul>
+
+            <p>
+                Niveaux de réputation :
+            </p>
+
+            <table>
+                <tr><th>Niveau</th><th>Score</th><th>Droits</th></tr>
+                <tr><td>Nouveau</td><td>0-99</td><td>Émettre des traces (limité)</td></tr>
+                <tr><td>Contributeur</td><td>100-499</td><td>Émettre sans limite</td></tr>
+                <tr><td>Validateur</td><td>500-999</td><td>Participer à la validation</td></tr>
+                <tr><td>Gardien</td><td>1000+</td><td>Voter dans la gouvernance S5</td></tr>
+            </table>
+
+            <h3>10.4 Protection Anti-Sybil</h3>
+
+            <p>
+                L'attaque Sybil consiste à créer des milliers de faux agents pour polluer le Manifold.
+                La défense repose sur quatre mécanismes complémentaires :
+            </p>
+
+            <ol>
+                <li><strong>Proof of Humanity (ZK)</strong> : Vérification cryptographique qu'un DID correspond
+                à un humain unique, sans révéler l'identité. Utilise des circuits ZK-SNARK (Circom/PLONK).</li>
+                <li><strong>Staking</strong> : Les validateurs mettent en jeu des tokens TRACE.
+                Une validation incorrecte entraîne un slashing (perte de stake).</li>
+                <li><strong>Analyse de Graphe Social</strong> : Détection de clusters suspects, corrélation
+                temporelle des émissions, analyse des patterns comportementaux.</li>
+                <li><strong>Délai de Maturation</strong> : Les traces restent en "pending" pendant une
+                période d'observation avant d'être intégrées au Manifold.</li>
+            </ol>
+
+            <h3>10.5 Zero-Knowledge Proofs</h3>
+
+            <p>
+                Les preuves à divulgation nulle (ZK Proofs) permettent de prouver une propriété
+                <strong>sans révéler l'information sous-jacente</strong>. Trois circuits principaux :
+            </p>
+
+            <table>
+                <tr><th>Circuit</th><th>Ce qu'on prouve</th><th>Ce qu'on ne révèle pas</th></tr>
+                <tr>
+                    <td>ProofOfHumanity</td>
+                    <td>"Je suis un humain vérifié"</td>
+                    <td>Mon identité réelle</td>
+                </tr>
+                <tr>
+                    <td>ProofOfReputation</td>
+                    <td>"Ma réputation ≥ seuil X"</td>
+                    <td>Mon score exact</td>
+                </tr>
+                <tr>
+                    <td>ProofOfContribution</td>
+                    <td>"J'ai contribué au domaine Y"</td>
+                    <td>Quelles traces précisément</td>
+                </tr>
+            </table>
+
+            <p>
+                Implémentation technique : Circom 2.0 pour la définition des circuits,
+                SnarkJS pour la génération des preuves, vérificateurs Groth16/PLONK on-chain.
+            </p>
+
+            <h3>10.6 Token TRACE : Économie Alignée</h3>
+
+            <p>
+                Le token natif TRACE aligne les incitations économiques avec le bien commun.
+                <strong>100% émis par contribution</strong> — pas de pre-mine, pas de VC.
+            </p>
+
+            <p>
+                Distribution par trace validée :
+            </p>
+            <ul>
+                <li><strong>70%</strong> → Contributeur (émetteur de la trace)</li>
+                <li><strong>20%</strong> → Validateurs (consensus)</li>
+                <li><strong>10%</strong> → Trésorerie S5 (gouvernance)</li>
+            </ul>
+
+            <p>
+                Utilité du token :
+            </p>
+            <ul>
+                <li>Gouvernance S5 : Droit de vote sur les paramètres du système</li>
+                <li>Staking validateur : Mise en jeu pour participer à la validation</li>
+                <li>Accès premium : Services avancés (plus de contexte, priorité)</li>
+                <li>Anti-spam : Coût minimal pour émettre (filtrage économique)</li>
+            </ul>
+
+            <h3>10.7 Blockchain L2/zkEVM</h3>
+
+            <p>
+                Seules les données nécessitant transparence et immuabilité sont enregistrées on-chain :
+            </p>
+
+            <table>
+                <tr><th>On-Chain</th><th>Off-Chain</th></tr>
+                <tr>
+                    <td>Hash des traces (32 bytes)</td>
+                    <td>Latents 4096-dim (16 KB)</td>
+                </tr>
+                <tr>
+                    <td>Scores réputation</td>
+                    <td>Contenu des traces</td>
+                </tr>
+                <tr>
+                    <td>Token TRACE (ERC-20)</td>
+                    <td>Texte original</td>
+                </tr>
+                <tr>
+                    <td>DIDs & ZK Verifiers</td>
+                    <td>Données personnelles</td>
+                </tr>
+            </table>
+
+            <p>
+                Blockchain recommandée : Polygon zkEVM ou Arbitrum (L2 Ethereum), pour les frais bas
+                et la compatibilité EVM.
+            </p>
+
+            <h3>10.8 Gouvernance S5 Décentralisée</h3>
+
+            <p>
+                Le Système 5 (VSM de Stafford Beer) définit les valeurs et hyper-paramètres du système.
+                Les Gardiens (réputation ≥ 1000) votent sur les paramètres critiques :
+            </p>
+
+            <ol>
+                <li><strong>Proposition</strong> : Un Gardien soumet une modification + stake TRACE</li>
+                <li><strong>Simulation</strong> : R-JEPA mode PLAN projette l'impact sur 30 jours</li>
+                <li><strong>Vote</strong> : Pondéré par réputation, durée 7 jours</li>
+                <li><strong>Exécution</strong> : Timelock 48h puis application automatique</li>
+            </ol>
+
+            <p>
+                Mesures anti-ploutocratie :
+            </p>
+            <ul>
+                <li><strong>Vote quadratique</strong> : coût = n² (empêche domination par les gros détenteurs)</li>
+                <li><strong>Réputation ≠ Tokens</strong> : La réputation se gagne, ne s'achète pas</li>
+                <li><strong>Conviction Voting</strong> : Les votes gagnent en poids avec le temps de lock</li>
+            </ul>
+
+            <blockquote>
+                <strong>L'insight clé</strong> : La blockchain garantit qu'un DID = 1 humain unique,
+                mais elle ne saura jamais lequel. C'est la <em>Privacy by Design</em>.
+            </blockquote>
+        </section>
+
+        <!-- Section 11: Conclusion -->
+        <section>
+            <h2>11. Conclusion</h2>
 
             <p>
                 R-JEPA Cybernetics représente une tentative de doter l'humanité d'un
@@ -1332,13 +1544,13 @@
 
             <figure>
                 <img src="assets/slides/slide-09.jpg" alt="Homéostasie Planétaire">
-                <figcaption>Figure 12 : Vision finale — Homéostasie Planétaire</figcaption>
+                <figcaption>Figure 13 : Vision finale — Homéostasie Planétaire</figcaption>
             </figure>
         </section>
 
         <!-- References -->
         <section class="references">
-            <h2>11. Références</h2>
+            <h2>12. Références</h2>
             <ol>
                 <li>Wiener, N. (1948). <em>Cybernetics: Or Control and Communication in the Animal and the Machine</em>. MIT Press.</li>
                 <li>Heylighen, F. (2016). Stigmergy as a universal coordination mechanism I: Definition and components. <em>Cognitive Systems Research</em>, 38, 4-13.</li>
